@@ -129,7 +129,7 @@ export const CONTENT = {
       },
       {
         title: "Full-Stack Solutions",
-        description: "Designing reliable backend architecture and APIs to ensure your application can handle data effortlessly."
+        description: "Designing reliable backend architecture and data systems to ensure your application can handle data effortlessly."
       },
       {
         title: "Responsive Design",

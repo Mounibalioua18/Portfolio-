@@ -44,16 +44,44 @@ const ContactForm: React.FC<ContactFormProps> = ({ content }) => {
     setStatus('submitting');
 
     try {
-      console.log("Simulating message send...");
-      await new Promise(resolve => setTimeout(resolve, 1500));
-
-      console.log("Message simulation successful!");
-      setStatus('success');
-      setFormData({ name: '', email: '', referral: '', message: '' });
+      const accessKey = import.meta.env.VITE_WEB3FORMS_KEY || "767afaa6-4f85-4667-a0f0-bbc0b2cf22d1";
       
-      setTimeout(() => setStatus('idle'), 5000);
+      if (!accessKey) {
+        console.warn("VITE_WEB3FORMS_KEY is missing. Simulating success for preview.");
+        await new Promise(resolve => setTimeout(resolve, 1500));
+        setStatus('success');
+        setFormData({ name: '', email: '', referral: '', message: '' });
+        setTimeout(() => setStatus('idle'), 5000);
+        return;
+      }
+
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json'
+        },
+        body: JSON.stringify({
+          access_key: accessKey,
+          name: formData.name,
+          email: formData.email,
+          subject: formData.referral,
+          message: formData.message,
+        })
+      });
+
+      const result = await response.json();
+      
+      if (result.success) {
+        setStatus('success');
+        setFormData({ name: '', email: '', referral: '', message: '' });
+        setTimeout(() => setStatus('idle'), 5000);
+      } else {
+        console.error("Web3Forms submission failed:", result.message);
+        setStatus('error');
+      }
     } catch (error: any) {
-      console.error("Form submission failed.");
+      console.error("Form submission failed.", error);
       setStatus('error');
     }
   };

@@ -28,11 +28,11 @@ const ContactForm: React.FC<ContactFormProps> = ({ content }) => {
     message: '',
     botcheck: false
   });
-  const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error' | 'rate_limited'>('idle');
+  const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error' | 'rate_limited' | 'invalid_email'>('idle');
   const containerRef = useRef<HTMLDivElement>(null);
 
   useGSAP(() => {
-    if (status === 'success' || status === 'error' || status === 'rate_limited') {
+    if (status === 'success' || status === 'error' || status === 'rate_limited' || status === 'invalid_email') {
       gsap.fromTo('.status-message', 
         { opacity: 0, y: 10 }, 
         { opacity: 1, y: 0, duration: 0.3 }
@@ -42,6 +42,14 @@ const ContactForm: React.FC<ContactFormProps> = ({ content }) => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    // Strict Email Validation
+    const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    if (!emailPattern.test(formData.email)) {
+      setStatus('invalid_email');
+      setTimeout(() => setStatus('idle'), 4000);
+      return;
+    }
     
     // Honeypot check
     if (formData.botcheck) {
@@ -98,6 +106,7 @@ const ContactForm: React.FC<ContactFormProps> = ({ content }) => {
         },
         body: JSON.stringify({
           access_key: accessKey,
+          from_name: "mounib.dev",
           name: formData.name,
           email: formData.email,
           subject: "mounib.dev",
@@ -204,8 +213,8 @@ const ContactForm: React.FC<ContactFormProps> = ({ content }) => {
         <div className="flex flex-col items-center pt-2">
           <LiquidButton 
             type="submit" 
-            className={`w-full min-w-[200px] h-12 text-sm ${status === 'submitting' || status === 'success' || status === 'rate_limited' ? 'opacity-70 pointer-events-none' : ''}`}
-            disabled={status === 'submitting' || status === 'success' || status === 'rate_limited'}
+            className={`w-full min-w-[200px] h-12 text-sm ${status === 'submitting' || status === 'success' || status === 'rate_limited' || status === 'invalid_email' ? 'opacity-70 pointer-events-none' : ''}`}
+            disabled={status === 'submitting' || status === 'success' || status === 'rate_limited' || status === 'invalid_email'}
           >
             {status === 'submitting' ? (
               <span className="flex items-center gap-2">
@@ -222,6 +231,10 @@ const ContactForm: React.FC<ContactFormProps> = ({ content }) => {
             ) : status === 'rate_limited' ? (
                <span className="flex items-center gap-2">
                 <AlertCircle size={18} /> Limited
+              </span>
+            ) : status === 'invalid_email' ? (
+               <span className="flex items-center gap-2">
+                <AlertCircle size={18} /> Invalid Email
               </span>
             ) : (
               <span className="flex items-center gap-2">
@@ -243,6 +256,11 @@ const ContactForm: React.FC<ContactFormProps> = ({ content }) => {
           {status === 'rate_limited' && (
             <p className="status-message mt-4 text-amber-500 text-xs font-medium text-center">
               You've reached the message limit. <br/>Please try again later.
+            </p>
+          )}
+          {status === 'invalid_email' && (
+            <p className="status-message mt-4 text-red-500 text-xs font-medium text-center">
+              Please enter a valid email address <br/>(e.g. name@gmail.com).
             </p>
           )}
         </div>

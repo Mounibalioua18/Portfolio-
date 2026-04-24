@@ -11,7 +11,7 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({ onComplete }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const logoRef = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLParagraphElement>(null);
-  const [statusText, setStatusText] = useState("INITIALIZING SYSTEM...");
+  const [statusText, setStatusText] = useState("WELCOME");
 
   useEffect(() => {
     document.body.style.overflow = 'hidden';
@@ -35,26 +35,22 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({ onComplete }) => {
     tl.to(logoRef.current, {
       scale: 1.3,
       opacity: 1,
-      duration: 0.8,
+      duration: 0.4,
       ease: "power2.out"
     })
     // Show text container
     .to(textRef.current, {
       y: 0,
       opacity: 1,
-      duration: 0.4,
+      duration: 0.3,
       ease: "power2.out"
-    }, "-=0.4")
-    // Change text sequence
-    .call(() => setStatusText("ESTABLISHING TCP HANDSHAKE..."), [], "+=0.6")
-    .call(() => setStatusText("NEGOTIATING SECURE TUNNEL..."), [], "+=0.7")
-    .call(() => setStatusText("ACCESS GRANTED."), [], "+=0.6")
+    }, "-=0.2")
     // Hold for a moment to read the final state
-    .to({}, { duration: 0.8 })
+    .to({}, { duration: 0.3 })
     // Slide / fade out the container
     .to(containerRef.current, {
       yPercent: -100,
-      duration: 0.8,
+      duration: 0.5,
       ease: "power3.inOut"
     });
 

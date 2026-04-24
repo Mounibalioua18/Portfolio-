@@ -9,8 +9,7 @@ export default defineConfig({
     rollupOptions: {
       output: {
         manualChunks: {
-          'vendor': ['react', 'react-dom', 'framer-motion', 'lucide-react'],
-          'firebase-bundle': ['firebase/app', 'firebase/database']
+          'vendor': ['react', 'react-dom', 'framer-motion', 'lucide-react']
         }
       }
     },

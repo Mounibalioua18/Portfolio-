@@ -46,11 +46,11 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({ onComplete }) => {
       ease: "power2.out"
     }, "-=0.4")
     // Change text sequence
-    .call(() => setStatusText("ESTABLISHING TCP HANDSHAKE..."), [], "+=0.2")
-    .call(() => setStatusText("NEGOTIATING SECURE TUNNEL..."), [], "+=0.25")
-    .call(() => setStatusText("ACCESS GRANTED."), [], "+=0.25")
+    .call(() => setStatusText("ESTABLISHING TCP HANDSHAKE..."), [], "+=0.6")
+    .call(() => setStatusText("NEGOTIATING SECURE TUNNEL..."), [], "+=0.7")
+    .call(() => setStatusText("ACCESS GRANTED."), [], "+=0.6")
     // Hold for a moment to read the final state
-    .to({}, { duration: 0.4 })
+    .to({}, { duration: 0.8 })
     // Slide / fade out the container
     .to(containerRef.current, {
       yPercent: -100,
@@ -76,7 +76,7 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({ onComplete }) => {
       
       <p 
         ref={textRef}
-        className="text-emerald-500/70 font-mono text-[10px] sm:text-xs tracking-[0.25em] uppercase h-4"
+        className="text-white/70 font-mono text-[10px] sm:text-xs tracking-[0.25em] uppercase h-4"
       >
         {statusText}
       </p>

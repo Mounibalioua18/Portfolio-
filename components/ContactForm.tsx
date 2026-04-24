@@ -25,13 +25,14 @@ const ContactForm: React.FC<ContactFormProps> = ({ content }) => {
     name: '',
     email: '',
     referral: '',
-    message: ''
+    message: '',
+    botcheck: false
   });
-  const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
+  const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error' | 'rate_limited'>('idle');
   const containerRef = useRef<HTMLDivElement>(null);
 
   useGSAP(() => {
-    if (status === 'success' || status === 'error') {
+    if (status === 'success' || status === 'error' || status === 'rate_limited') {
       gsap.fromTo('.status-message', 
         { opacity: 0, y: 10 }, 
         { opacity: 1, y: 0, duration: 0.3 }
@@ -41,6 +42,40 @@ const ContactForm: React.FC<ContactFormProps> = ({ content }) => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Honeypot check
+    if (formData.botcheck) {
+      console.warn("Bot detected. Silently rejecting.");
+      setStatus('success');
+      setFormData({ name: '', email: '', referral: '', message: '', botcheck: false });
+      setTimeout(() => setStatus('idle'), 5000);
+      return;
+    }
+
+    // Rate limiting check
+    const now = Date.now();
+    const lastSentStr = localStorage.getItem('portfolio_last_sent_time');
+    const sentCountStr = localStorage.getItem('portfolio_sent_count_today');
+    const lastSentTime = lastSentStr ? parseInt(lastSentStr, 10) : 0;
+    let sentCount = sentCountStr ? parseInt(sentCountStr, 10) : 0;
+
+    // Reset daily count if more than 24 hours have passed
+    if (now - lastSentTime > 24 * 60 * 60 * 1000) {
+      sentCount = 0;
+    }
+
+    if (sentCount >= 3) {
+      console.error("Rate limit exceeded. Maximum 3 messages per day.");
+      setStatus('rate_limited');
+      return;
+    }
+
+    if (now - lastSentTime < 60000) {
+      console.error("Please wait at least 60 seconds before sending another message.");
+      setStatus('rate_limited');
+      return;
+    }
+
     setStatus('submitting');
 
     try {
@@ -50,7 +85,7 @@ const ContactForm: React.FC<ContactFormProps> = ({ content }) => {
         console.warn("VITE_WEB3FORMS_KEY is missing. Simulating success for preview.");
         await new Promise(resolve => setTimeout(resolve, 1500));
         setStatus('success');
-        setFormData({ name: '', email: '', referral: '', message: '' });
+        setFormData({ name: '', email: '', referral: '', message: '', botcheck: false });
         setTimeout(() => setStatus('idle'), 5000);
         return;
       }
@@ -65,16 +100,22 @@ const ContactForm: React.FC<ContactFormProps> = ({ content }) => {
           access_key: accessKey,
           name: formData.name,
           email: formData.email,
-          subject: formData.referral,
+          subject: "mounib.dev",
+          "How did you hear about me": formData.referral,
           message: formData.message,
+          botcheck: formData.botcheck
         })
       });
 
       const result = await response.json();
       
       if (result.success) {
+        // Update limits upon successful submission
+        localStorage.setItem('portfolio_last_sent_time', now.toString());
+        localStorage.setItem('portfolio_sent_count_today', (sentCount + 1).toString());
+        
         setStatus('success');
-        setFormData({ name: '', email: '', referral: '', message: '' });
+        setFormData({ name: '', email: '', referral: '', message: '', botcheck: false });
         setTimeout(() => setStatus('idle'), 5000);
       } else {
         console.error("Web3Forms submission failed:", result.message);
@@ -87,7 +128,8 @@ const ContactForm: React.FC<ContactFormProps> = ({ content }) => {
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const value = e.target.type === 'checkbox' ? (e.target as HTMLInputElement).checked : e.target.value;
+    setFormData({ ...formData, [e.target.name]: value });
   };
 
   return (
@@ -150,11 +192,20 @@ const ContactForm: React.FC<ContactFormProps> = ({ content }) => {
           />
         </div>
 
+        <input 
+          type="checkbox" 
+          name="botcheck" 
+          checked={formData.botcheck} 
+          onChange={handleChange} 
+          className="hidden" 
+          style={{ display: 'none' }} 
+        />
+
         <div className="flex flex-col items-center pt-2">
           <LiquidButton 
             type="submit" 
-            className={`w-full min-w-[200px] h-12 text-sm ${status === 'submitting' || status === 'success' ? 'opacity-70 pointer-events-none' : ''}`}
-            disabled={status === 'submitting' || status === 'success'}
+            className={`w-full min-w-[200px] h-12 text-sm ${status === 'submitting' || status === 'success' || status === 'rate_limited' ? 'opacity-70 pointer-events-none' : ''}`}
+            disabled={status === 'submitting' || status === 'success' || status === 'rate_limited'}
           >
             {status === 'submitting' ? (
               <span className="flex items-center gap-2">
@@ -167,6 +218,10 @@ const ContactForm: React.FC<ContactFormProps> = ({ content }) => {
             ) : status === 'error' ? (
                <span className="flex items-center gap-2">
                 <AlertCircle size={18} /> DB Error
+              </span>
+            ) : status === 'rate_limited' ? (
+               <span className="flex items-center gap-2">
+                <AlertCircle size={18} /> Limited
               </span>
             ) : (
               <span className="flex items-center gap-2">
@@ -183,6 +238,11 @@ const ContactForm: React.FC<ContactFormProps> = ({ content }) => {
           {status === 'error' && (
             <p className="status-message mt-4 text-red-500 text-xs font-medium">
               Please check your browser console (F12) for error details.
+            </p>
+          )}
+          {status === 'rate_limited' && (
+            <p className="status-message mt-4 text-amber-500 text-xs font-medium text-center">
+              You've reached the message limit. <br/>Please try again later.
             </p>
           )}
         </div>

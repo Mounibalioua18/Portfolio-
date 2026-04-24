@@ -258,8 +258,8 @@ export const CONTENT = {
     ]
   },
   contact: {
-    title: "Let's build something",
-    titleHighlight: "great together.",
+    title: "Ready to engineer",
+    titleHighlight: "the extraordinary?",
     description: "Leave me a message below to discuss your ideas or collaboration opportunities.",
     form: {
       name: "Name",

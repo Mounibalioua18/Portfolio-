@@ -70,8 +70,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, visitBtnText,
       
       {/* Image Container */}
       <div 
-        className="relative aspect-[4/3] sm:aspect-auto sm:w-2/5 sm:shrink-0 overflow-hidden p-6 z-10 flex items-center justify-center bg-brand-50/50 group-hover:bg-brand-50 transition-colors rounded-t-[1.5rem] sm:rounded-t-none sm:rounded-l-[1.5rem]"
-        style={{ transform: "translateZ(30px)" }}
+        className="relative aspect-[4/3] sm:aspect-auto sm:w-2/5 sm:shrink-0 overflow-hidden p-6 z-10 flex items-center justify-center bg-brand-50/50 group-hover:bg-brand-50 transition-colors rounded-t-[1.5rem] sm:rounded-tr-none sm:rounded-bl-[1.5rem]"
       >
         <motion.img 
           src={project.imageUrl} 
@@ -93,31 +92,32 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, visitBtnText,
       </div>
 
       <div 
-        className="p-6 sm:p-8 flex flex-col flex-grow z-10 bg-white rounded-b-[1.5rem] sm:rounded-b-none sm:rounded-r-[1.5rem] justify-center"
-        style={{ transform: "translateZ(20px)" }}
+        className="p-6 sm:p-8 flex flex-col flex-grow z-10 sm:rounded-bl-none sm:rounded-tr-[1.5rem] justify-center"
       >
-        <div className="flex flex-wrap gap-2 mb-4">
+        <div className="flex flex-wrap gap-2 mb-4" style={{ transform: "translateZ(20px)" }}>
           {project.tags.map(tag => (
-            <span key={tag} className="px-3 py-1 text-[9px] uppercase tracking-[0.2em] bg-brand-50 text-brand-600 border border-brand-100 rounded-full">
+            <span key={tag} className="px-3 py-1 text-[9px] font-bold uppercase tracking-[0.2em] bg-slate-100 text-black border border-slate-200 rounded-full">
               {tag}
             </span>
           ))}
         </div>
         
-        <h3 className="text-2xl font-display mb-3 text-brand-900 group-hover:text-brand-600 transition-colors duration-300 tracking-tight">
+        <h3 className="text-2xl font-display mb-3 text-brand-900 group-hover:text-brand-600 transition-colors duration-300 tracking-tight" style={{ transform: "translateZ(30px)" }}>
           {project.title}
         </h3>
         
-        <p className="text-brand-700/80 text-sm font-medium leading-relaxed mb-6 flex-grow">
+        <p className="text-brand-700/80 text-sm font-medium leading-relaxed mb-6 flex-grow" style={{ transform: "translateZ(20px)" }}>
           {project.description}
         </p>
 
-        <LiquidButton 
-          className="w-full sm:w-auto sm:self-start py-3 px-8 text-xs shadow-none border border-brand-200" 
-          onClick={handleClick}
-        >
-          {isTopology ? "Launch Simulation" : visitBtnText}
-        </LiquidButton>
+        <div style={{ transform: "translateZ(30px)" }}>
+          <LiquidButton 
+            className="w-full sm:w-auto py-3 px-8 text-xs shadow-none border border-brand-200" 
+            onClick={handleClick}
+          >
+            {isTopology ? "Launch Simulation" : visitBtnText}
+          </LiquidButton>
+        </div>
       </div>
     </motion.div>
   );

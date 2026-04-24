@@ -2,7 +2,8 @@ import React from 'react';
 import { Project, Skill, Experience, Node } from './types';
 import { 
   Github,
-  Linkedin
+  Linkedin,
+  Instagram
 } from 'lucide-react';
 
 // --- Network Topology Constants ---
@@ -48,7 +49,8 @@ export const SKILLS: Skill[] = [
 
 export const SOCIALS = [
   { name: 'GitHub', icon: <Github size={20} />, url: 'https://github.com/Mounibalioua18' },
-  { name: 'LinkedIn', icon: <Linkedin size={20} />, url: 'https://www.linkedin.com/in/mounib-alioua-2968b5303/' }
+  { name: 'LinkedIn', icon: <Linkedin size={20} />, url: 'https://www.linkedin.com/in/mounib-alioua-2968b5303/' },
+  { name: 'Instagram', icon: <Instagram size={20} />, url: 'https://instagram.com/mounib_alioua' }
 ];
 
 export const CONTENT = {
@@ -57,25 +59,26 @@ export const CONTENT = {
     about: 'About',
     projects: 'Projects',
     experience: 'Experience',
+    services: 'Services',
     contact: 'Contact',
   },
   hero: {
-    role: "Network & Distributed Systems Engineer",
-    subtitlePrefix: "Architecture",
-    subtitleSuffix: "Security",
-    infra: "Next-Gen Infrastructure",
-    system: "System Ready"
+    role: "Full-Stack Web Developer",
+    subtitlePrefix: "Front-End",
+    subtitleSuffix: "Back-End",
+    infra: "Modern Web",
+    system: "Ready for Production"
   },
   about: {
     badge: "Expertise",
-    title: "Crafting Scalable",
-    titleHighlight: "Digital Solutions.",
-    description: "Currently a Master's student in Networks and Distributed Systems, I combine my passion for web development with a deep understanding of complex infrastructures.",
+    title: "Building Modern",
+    titleHighlight: "Web Applications.",
+    description: "I am a passionate Web Developer with a strong focus on crafting responsive, scalable, and highly performant web applications using the latest JavaScript frameworks and tools.",
     cards: {
-      systems: "Systems",
-      systemsDesc: "Network & Distributed",
-      web: "Web Dev",
-      webDesc: "React & Next.js"
+      systems: "Front-End",
+      systemsDesc: "React, Tailwind, UI/UX",
+      web: "Back-End",
+      webDesc: "Node.js, Databases, APIs"
     }
   },
   projects: {
@@ -86,12 +89,21 @@ export const CONTENT = {
     visitBtn: "Visit Website",
     list: [
       {
+        id: '4',
+        title: 'Interactive Network Topology',
+        description: 'An interactive packet tracer and visual networking sandbox. Experience how packets route and navigate through switches and routers in real time.',
+        tags: ['Networks', 'React', 'Simulation', 'GSAP'],
+        imageUrl: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=800&auto=format&fit=crop',
+        link: '#topology',
+        github: '#'
+      },
+      {
         id: '1',
         title: 'MemGrid Engine',
         description: 'A dark-themed focus challenge where players must memorize patterns on a 4x4 grid and initialize the engine to test their cognitive limits.',
         tags: ['Memory Game', 'JavaScript', 'Logic', 'UI/UX'],
         imageUrl: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=800&auto=format&fit=crop',
-        link: 'https://memgrid.appwrite.network/',
+        link: '#',
         github: 'https://github.com/Mounibalioua18/Memory-Grid'
       },
       {
@@ -100,7 +112,7 @@ export const CONTENT = {
         description: 'A programmable logic puzzle game featuring command palettes, execution history, and conditional logic slots to navigate a 5x5 grid.',
         tags: ['React', 'JavaScript', 'Game Dev', 'Logic'],
         imageUrl: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=800&auto=format&fit=crop',
-        link: 'https://421337.appwrite.network/',
+        link: '#',
         github: 'https://github.com/Mounibalioua18/1337-logic-game'
       },
       {
@@ -109,8 +121,32 @@ export const CONTENT = {
         description: 'A specialized academic dashboard for Master RSD students to calculate semester averages based on specific module coefficients and exam weights.',
         tags: ['Dashboard', 'React', 'Academic Tool', 'Tailwind'],
         imageUrl: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800&auto=format&fit=crop',
-        link: 'https://rsd1.appwrite.network/',
+        link: '#',
         github: 'https://github.com/Mounibalioua18/moyenne'
+      }
+    ]
+  },
+  services: {
+    badge: "What I Do",
+    title: "Website",
+    titleHighlight: "Development",
+    description: "I specialize in building high-performance, responsive, and visually stunning web applications tailored to your business needs. Explore my projects below to see my work in action, or let's connect to discuss your vision.",
+    items: [
+      {
+        title: "Frontend Engineering",
+        description: "Crafting beautiful, interactive user interfaces using React, Next.js, and modern CSS frameworks like Tailwind."
+      },
+      {
+        title: "Full-Stack Solutions",
+        description: "Designing reliable backend architecture and APIs to ensure your application can handle data effortlessly."
+      },
+      {
+        title: "Responsive Design",
+        description: "Building pixel-perfect layouts that look and work flawlessly across desktop, tablet, and mobile devices."
+      },
+      {
+        title: "Performance Optimization",
+        description: "Refactoring and optimizing code architectures for lightning-fast load times and smooth user experiences."
       }
     ]
   },
@@ -197,27 +233,27 @@ export const CONTENT = {
     list: [
       {
         tempId: 0,
-        testimonial: "Mounib works 5x faster than anyone else we've hired. He's a creative force.",
-        by: "Alex, CEO at TechCorp",
-        imgSrc: "https://i.pravatar.cc/150?img=1"
+        testimonial: "Mounib delivered our project ahead of schedule. The quality of the React architecture was exactly what our team needed and the design felt extremely polished.",
+        by: "David C., Lead Engineer @ TechFlow",
+        imgSrc: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=150&h=150"
       },
       {
         tempId: 1,
-        testimonial: "The attention to detail in his animations is surgical. It transformed our user engagement.",
-        by: "Sarah, Design Lead @ Nova",
-        imgSrc: "https://i.pravatar.cc/150?img=2"
+        testimonial: "His ability to bridge the gap between complex backend logic and smooth frontend experiences is rare. The new dashboard he built increased our team's efficiency.",
+        by: "Sarah M., Product Manager",
+        imgSrc: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=150&h=150"
       },
       {
         tempId: 2,
-        testimonial: "I've searched for years for a dev who gets 'feeling'. Mounib gets it instantly.",
-        by: "Stephanie, COO at InnovateCo",
-        imgSrc: "https://i.pravatar.cc/150?img=3"
+        testimonial: "Working with him was seamless. He communicated effectively, understood our technical constraints, and provided a highly reliable solution.",
+        by: "James L., CTO @ Innovate",
+        imgSrc: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=150&h=150"
       },
       {
         tempId: 3,
-        testimonial: "The ROI on the Solaris project was immediate. Engineering excellence at its peak.",
-        by: "Victor, CTO @ CloudMasters",
-        imgSrc: "https://i.pravatar.cc/150?img=18"
+        testimonial: "The animations and interactive elements he added to our landing page significantly boosted our conversion rates. Highly recommended for any frontend work.",
+        by: "Emily R., Marketing Director",
+        imgSrc: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&q=80&w=150&h=150"
       }
     ]
   },

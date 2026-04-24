@@ -1,76 +1,122 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { ExternalLink, Github } from 'lucide-react';
+import React, { useRef } from 'react';
+import { ExternalLink, Github, Play } from 'lucide-react';
 import { Project } from '../types';
 import { LiquidButton } from './ui/LiquidButton';
-import { Spotlight } from './ui/spotlight';
+import { motion, useMotionTemplate, useMotionValue, useSpring, useTransform } from 'framer-motion';
 
 interface ProjectCardProps {
   project: Project;
   index: number;
   visitBtnText: string;
+  onOpenTopology?: () => void;
 }
 
-const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, visitBtnText }) => {
+const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, visitBtnText, onOpenTopology }) => {
+  const isTopology = project.link === '#topology';
+  const boundingRef = useRef<HTMLDivElement>(null);
+
+  // 3D Tilt logic
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+
+  const rotateX = useSpring(useTransform(mouseY, [-0.5, 0.5], [10, -10]), { damping: 30, stiffness: 400 });
+  const rotateY = useSpring(useTransform(mouseX, [-0.5, 0.5], [-10, 10]), { damping: 30, stiffness: 400 });
+  const mouseXSpring = useSpring(mouseX, { damping: 30, stiffness: 400 });
+  const mouseYSpring = useSpring(mouseY, { damping: 30, stiffness: 400 });
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!boundingRef.current) return;
+    const rect = boundingRef.current.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const xPct = x / rect.width - 0.5;
+    const yPct = y / rect.height - 0.5;
+    mouseX.set(xPct);
+    mouseY.set(yPct);
+  };
+
+  const handleMouseLeave = () => {
+    mouseX.set(0);
+    mouseY.set(0);
+  };
+
+  const handleClick = (e?: React.MouseEvent) => {
+    if (e) e.preventDefault();
+    if (isTopology && onOpenTopology) {
+      onOpenTopology();
+    } else {
+      window.open(project.link, '_blank');
+    }
+  };
+
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ delay: index * 0.1 }}
-      viewport={{ once: true }}
-      className="group relative bg-gray-900/40 rounded-[2.5rem] overflow-hidden border border-white/5 hover:border-transparent transition-all duration-500 flex flex-col h-full"
+      ref={boundingRef}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      style={{
+        rotateX,
+        rotateY,
+        transformStyle: "preserve-3d",
+      }}
+      className="project-card group relative bg-white rounded-[2.5rem] border border-brand-100 shadow-[0_10px_40px_-15px_rgba(0,0,0,0.05)] hover:border-brand-500 hover:shadow-2xl hover:shadow-brand-500/20 transition-colors flex flex-col h-full"
     >
-      {/* Spotlight Effect */}
-      <Spotlight className="-top-40 -left-40 md:-top-20 md:-left-20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" fill="#10b981" />
+      <motion.div 
+        className="absolute inset-0 pointer-events-none rounded-[2.5rem] z-20"
+        style={{
+          background: useMotionTemplate`radial-gradient(400px circle at ${useTransform(mouseXSpring, [-0.5, 0.5], [0, 100])}% ${useTransform(mouseYSpring, [-0.5, 0.5], [0, 100])}%, rgba(200, 150, 100, 0.08), transparent 80%)`,
+        }}
+      />
       
-      {/* Gradient Border Animation on Hover */}
-      <div className="absolute inset-0 rounded-[2.5rem] bg-gradient-to-r from-emerald-500/0 via-emerald-500/20 to-teal-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
-      
-      {/* Moving Border Glow */}
-      <div className="absolute inset-0 -z-10 bg-gradient-to-r from-emerald-500 via-teal-500 to-emerald-500 opacity-0 group-hover:opacity-30 blur-xl transition-opacity duration-500" />
-
-      {/* Image Container: Square aspect ratio, centered image with object-contain to show full content */}
-      <div className="relative aspect-square overflow-hidden p-8 z-10 flex items-center justify-center bg-black/20">
-        <img 
+      {/* Image Container */}
+      <div 
+        className="relative aspect-square overflow-hidden p-8 z-10 flex items-center justify-center bg-brand-50/50 group-hover:bg-brand-50 transition-colors rounded-t-[2.5rem]"
+        style={{ transform: "translateZ(30px)" }}
+      >
+        <motion.img 
           src={project.imageUrl} 
           alt={project.title} 
-          className="max-w-full max-h-full w-auto h-auto object-contain rounded-2xl shadow-2xl transition-transform duration-700 group-hover:scale-105"
+          style={{ transform: "translateZ(50px)" }}
+          className="max-w-full max-h-full w-auto h-auto object-contain rounded-2xl shadow-[0_10px_30px_rgba(0,0,0,0.1)] transition-transform duration-700 group-hover:scale-105"
         />
         {/* Full overlay on hover */}
-        <div className="absolute inset-0 bg-gray-950/60 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center space-x-4">
+        <div className="absolute inset-0 bg-white/80 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center space-x-4">
            {project.github && project.github !== '#' && (
-             <a href={project.github} target="_blank" rel="noopener noreferrer" className="p-4 bg-white/10 hover:bg-white/20 backdrop-blur-md rounded-full text-white transition-all transform hover:-translate-y-1 hover:scale-110">
+             <a href={project.github} target="_blank" rel="noopener noreferrer" className="p-4 bg-slate-900 hover:bg-brand-800 rounded-full text-white shadow-xl transition-all transform hover:-translate-y-1 hover:scale-110">
                <Github size={20} />
              </a>
            )}
-           <a href={project.link} target="_blank" rel="noopener noreferrer" className="p-4 bg-brand-600 hover:bg-brand-500 rounded-full text-white transition-all transform hover:-translate-y-1 hover:scale-110">
-             <ExternalLink size={20} />
-           </a>
+           <button onClick={handleClick} className="p-4 bg-brand-500 hover:bg-amber-400 rounded-full text-white shadow-xl transition-all transform hover:-translate-y-1 hover:scale-110">
+             {isTopology ? <Play size={20} /> : <ExternalLink size={20} />}
+           </button>
         </div>
       </div>
 
-      <div className="p-8 pt-2 flex flex-col flex-grow z-10">
+      <div 
+        className="p-8 pt-6 flex flex-col flex-grow z-10 bg-white rounded-b-[2.5rem]"
+        style={{ transform: "translateZ(20px)" }}
+      >
         <div className="flex flex-wrap gap-2 mb-4">
           {project.tags.map(tag => (
-            <span key={tag} className="px-3 py-1 text-[10px] font-bold uppercase tracking-widest bg-brand-500/10 text-brand-400 rounded-full border border-brand-500/10 shadow-[0_0_10px_rgba(16,185,129,0.1)]">
+            <span key={tag} className="px-3 py-1 text-[9px] uppercase tracking-[0.2em] bg-brand-50 text-brand-600 border border-brand-100 rounded-full">
               {tag}
             </span>
           ))}
         </div>
         
-        <h3 className="text-2xl font-display font-bold mb-3 text-white group-hover:text-brand-400 transition-colors duration-300">
+        <h3 className="text-2xl font-display mb-3 text-brand-900 group-hover:text-brand-600 transition-colors duration-300 tracking-tight">
           {project.title}
         </h3>
         
-        <p className="text-gray-400 text-sm leading-relaxed mb-6 flex-grow">
+        <p className="text-brand-700/80 text-sm font-medium leading-relaxed mb-6 flex-grow">
           {project.description}
         </p>
 
         <LiquidButton 
-          className="w-full py-3 text-xs" 
-          onClick={() => window.open(project.link, '_blank')}
+          className="w-full py-3 text-xs shadow-none border border-brand-200" 
+          onClick={handleClick}
         >
-          {visitBtnText}
+          {isTopology ? "Launch Simulation" : visitBtnText}
         </LiquidButton>
       </div>
     </motion.div>

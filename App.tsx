@@ -1,308 +1,322 @@
 
-import React, { useState } from 'react';
-import { motion, useScroll, useSpring } from 'framer-motion';
+import React, { useState, useRef } from 'react';
 import { 
   BrainCircuit, 
   Code2, 
   ChevronRight,
   Mail,
-  Terminal,
   Home,
   User,
   Briefcase,
   Layers,
-  GraduationCap
+  GraduationCap,
+  Layout,
+  Globe,
+  Zap,
+  Server,
+  X
 } from 'lucide-react';
+import { useGSAP } from '@gsap/react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { motion } from 'framer-motion';
 
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import ProjectCard from './components/ProjectCard';
 import Testimonials from './components/Testimonials';
 import ContactForm from './components/ContactForm';
-import CircuitBackground from './components/CircuitBackground';
-import ConnectedSpaceBackground from './components/ConnectedSpaceBackground';
-import AdminDashboard from './components/AdminDashboard';
+import Expertise from './components/Expertise';
+import Topology from './components/Topology';
 import { SKILLS, CONTENT, SOCIALS } from './constants';
 
-const GlassFilter = () => (
-  <svg className="hidden">
-    <defs>
-      <filter
-        id="container-glass"
-        x="-50%"
-        y="-50%"
-        width="200%"
-        height="200%"
-        colorInterpolationFilters="sRGB"
-      >
-        <feTurbulence
-          type="fractalNoise"
-          baseFrequency="0.05 0.05"
-          numOctaves="1"
-          seed="1"
-          result="turbulence"
-        />
-        <feGaussianBlur in="turbulence" stdDeviation="2" result="blurredNoise" />
-        <feDisplacementMap
-          in="SourceGraphic"
-          in2="blurredNoise"
-          scale="40"
-          xChannelSelector="R"
-          yChannelSelector="B"
-          result="displaced"
-        />
-        <feGaussianBlur in="displaced" stdDeviation="4" result="finalBlur" />
-        <feComposite in="finalBlur" in2="finalBlur" operator="over" />
-      </filter>
-    </defs>
-  </svg>
-);
+gsap.registerPlugin(ScrollTrigger);
 
 const App: React.FC = () => {
-  const [showAdmin, setShowAdmin] = useState(false);
+  const [isTopologyOpen, setIsTopologyOpen] = useState(false);
   const content = CONTENT;
+  const containerRef = useRef<HTMLDivElement>(null);
 
-  const { scrollYProgress } = useScroll();
-  const scaleX = useSpring(scrollYProgress, {
-    stiffness: 100,
-    damping: 30,
-    restDelta: 0.001
-  });
+  useGSAP(() => {
+    // Timeline animations
+    const timelineItems = gsap.utils.toArray('.timeline-item');
+    timelineItems.forEach((item: any) => {
+      gsap.from(item, {
+        opacity: 0,
+        x: -20,
+        duration: 0.6,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: item,
+          start: "top 85%",
+          toggleActions: "play none none reverse"
+        }
+      });
+    });
+
+    // Project Cards animation
+    const projectCards = gsap.utils.toArray('.project-card');
+    gsap.fromTo(projectCards, 
+      { opacity: 0, y: 50 },
+      {
+        opacity: 1,
+        y: 0,
+        stagger: 0.15,
+        duration: 0.8,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: '#projects',
+          start: "top 70%",
+          toggleActions: "play none none reverse"
+        }
+      }
+    );
+
+    // Services animation
+    const serviceItems = gsap.utils.toArray('.service-item');
+    gsap.from(serviceItems, {
+      opacity: 0,
+      scale: 0.8,
+      rotationX: -20,
+      y: 40,
+      stagger: 0.15,
+      duration: 0.8,
+      ease: "back.out(1.5)",
+      scrollTrigger: {
+        trigger: '#services',
+        start: "top 75%",
+        toggleActions: "play none none reverse"
+      }
+    });
+
+    // Contact animation
+    gsap.from('.contact-animate', {
+      opacity: 0,
+      y: 40,
+      duration: 0.8,
+      ease: "power3.out",
+      scrollTrigger: {
+        trigger: '#contact',
+        start: "top 80%",
+        toggleActions: "play none none reverse"
+      }
+    });
+
+  }, { scope: containerRef });
 
   const navItems = [
     { name: content.nav.home, url: '#home', icon: Home },
     { name: content.nav.about, url: '#about', icon: User },
     { name: content.nav.projects, url: '#projects', icon: Layers },
     { name: content.nav.experience, url: '#experience', icon: Briefcase },
+    { name: content.nav.services, url: '#services', icon: Globe },
     { name: content.nav.contact, url: '#contact', icon: Mail },
   ];
 
-  const handleLogoDoubleClick = () => {
-    setShowAdmin(true);
-    window.scrollTo(0, 0);
-  };
-
   const TimelineSection = ({ title, items, icon: Icon }: { title: string, items: any[], icon: any }) => (
     <div className="mb-20">
-      <div className="flex items-center gap-6 mb-12">
-        <div className="w-16 h-16 rounded-2xl bg-brand-500/10 flex items-center justify-center text-brand-500">
+      <div className="flex flex-col md:flex-row items-center md:items-start gap-4 md:gap-6 mb-12 text-center md:text-left">
+        <div className="w-16 h-16 rounded-2xl bg-brand-50 shadow-sm border border-brand-100 flex items-center justify-center text-brand-500 shrink-0 mx-auto md:mx-0">
           <Icon size={32} />
         </div>
-        <h4 className="text-3xl md:text-4xl font-display font-bold text-white tracking-tight">{title}</h4>
+        <h4 className="text-3xl md:text-4xl font-display font-bold text-slate-900 tracking-tight">{title}</h4>
       </div>
-      <div className="space-y-16">
+      <div className="space-y-12 md:space-y-16 max-w-3xl mx-auto">
         {items.map((exp, i) => (
-          <motion.div 
+          <div 
             key={`${exp.company}-${i}`}
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: i * 0.1 }}
-            className="relative pl-16 before:absolute before:left-0 before:top-0 before:bottom-0 before:w-px before:bg-gradient-to-b before:from-brand-500 before:via-brand-500/20 before:to-transparent"
+            className="timeline-item relative pl-10 md:pl-16 before:absolute before:left-0 before:top-0 before:bottom-0 before:w-px before:bg-brand-200"
           >
-            <div className="absolute left-[-6px] top-2 w-3 h-3 rounded-full bg-brand-500 shadow-[0_0_15px_rgba(16,185,129,0.8)]" />
-            <div className="grid lg:grid-cols-12 gap-10">
-              <div className="lg:col-span-4">
+            <div className="absolute left-[-6px] top-2 w-3 h-3 rounded-full bg-brand-500 ring-4 ring-brand-50" />
+            <div className="grid md:grid-cols-12 gap-4 md:gap-10">
+              <div className="md:col-span-5 lg:col-span-4 lg:pr-4">
                 <p className="text-brand-500 font-bold mb-2 tracking-widest uppercase text-xs">{exp.period}</p>
-                <h4 className="text-2xl font-display font-bold text-white mb-2">{exp.role}</h4>
-                <p className="text-gray-400 font-medium text-lg">{exp.company}</p>
+                <h4 className="text-xl md:text-2xl font-display font-black text-slate-900 mb-1 md:mb-2">{exp.role}</h4>
+                <p className="text-slate-500 font-medium text-base md:text-lg">{exp.company}</p>
               </div>
-              <div className="lg:col-span-8">
-                <ul className="space-y-4">
+              <div className="md:col-span-7 lg:col-span-8">
+                <ul className="space-y-3 md:space-y-4">
                   {exp.description.map((item: string, idx: number) => (
-                    <li key={idx} className="flex items-start space-x-4 text-gray-400 text-lg leading-relaxed">
-                      <ChevronRight size={18} className="text-brand-500 mt-1.5 flex-shrink-0" />
+                    <li key={idx} className="flex items-start space-x-3 md:space-x-4 text-slate-600 font-medium text-sm md:text-base lg:text-lg leading-relaxed">
+                      <ChevronRight size={18} className="text-brand-500 mt-0.5 md:mt-1.5 flex-shrink-0" />
                       <span>{item}</span>
                     </li>
                   ))}
                 </ul>
               </div>
             </div>
-          </motion.div>
+          </div>
         ))}
       </div>
     </div>
   );
 
-  if (showAdmin) {
-    return <AdminDashboard onClose={() => setShowAdmin(false)} />;
-  }
-
   return (
-    <div className="min-h-screen bg-gray-950 text-gray-100 font-sans selection:bg-brand-500/30">
-      <motion.div className="fixed top-0 left-0 right-0 h-1 bg-brand-500 origin-left z-[110]" style={{ scaleX }} />
-
+    <div className="min-h-screen bg-slate-50 text-slate-800 font-sans selection:bg-brand-500/30" ref={containerRef}>
       <Navbar items={navItems} />
       
       <main>
         <Hero content={content.hero} />
 
-        <div className="relative w-full h-px bg-[#030712] z-20">
-          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-emerald-500/50 to-transparent shadow-[0_0_20px_rgba(16,185,129,0.5)]" />
-        </div>
+        <div className="w-full h-px border-b border-brand-100" />
 
-        <section id="about" className="py-32 relative overflow-hidden bg-[#030712] z-0">
-          <CircuitBackground />
-          <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-[#030712] to-transparent z-10 pointer-events-none" />
+                <Expertise />
 
-          <div className="max-w-7xl mx-auto px-6 relative z-10">
-            <div className="grid lg:grid-cols-12 gap-20 items-center">
-              <div className="lg:col-span-5">
-                <h2 className="text-sm font-bold tracking-[0.3em] uppercase text-brand-500 mb-6">{content.about.badge}</h2>
-                <h3 className="font-display text-5xl md:text-6xl font-bold mb-8 leading-tight tracking-tighter">
-                  {content.about.title} <br /> <span className="text-rose-400 drop-shadow-[0_0_10px_rgba(251,113,133,0.3)]">{content.about.titleHighlight}</span>
-                </h3>
-                <p className="text-gray-400 text-lg leading-relaxed mb-12">
-                  {content.about.description}
-                </p>
-                <div className="grid grid-cols-2 gap-6">
-                  <div className="p-8 glass rounded-[2rem] border border-white/5 group hover:border-brand-500/30 transition-all">
-                    <BrainCircuit className="text-brand-400 mb-4 group-hover:scale-110 transition-transform" size={40} />
-                    <h4 className="font-bold text-white mb-2">{content.about.cards.systems}</h4>
-                    <p className="text-[10px] text-gray-500 uppercase tracking-widest font-bold">{content.about.cards.systemsDesc}</p>
-                  </div>
-                  <div className="p-8 glass rounded-[2rem] border border-white/5 group hover:border-brand-500/30 transition-all">
-                    <Code2 className="text-brand-400 mb-4 group-hover:scale-110 transition-transform" size={40} />
-                    <h4 className="font-bold text-white mb-2">{content.about.cards.web}</h4>
-                    <p className="text-[10px] text-gray-500 uppercase tracking-widest font-bold">{content.about.cards.webDesc}</p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="lg:col-span-7 space-y-8">
-                <div className="grid sm:grid-cols-2 gap-8">
-                  {SKILLS.map((skill) => (
-                    <motion.div 
-                      key={skill.name}
-                      initial={{ opacity: 0, scale: 0.95 }}
-                      whileInView={{ opacity: 1, scale: 1 }}
-                      viewport={{ once: true }}
-                      className="p-8 bg-white/5 rounded-[2.5rem] border border-white/5 hover:border-brand-500/20 transition-all group backdrop-blur-sm"
-                    >
-                      <div className="flex justify-between items-center mb-6">
-                        <span className="font-bold text-white text-lg group-hover:text-brand-400 transition-colors">{skill.name}</span>
-                        <span className="text-xs font-mono text-brand-500 bg-brand-500/10 px-3 py-1 rounded-full">{skill.level}%</span>
-                      </div>
-                      <div className="w-full h-1 bg-white/5 rounded-full overflow-hidden">
-                        <motion.div 
-                          className="h-full bg-brand-500"
-                          initial={{ width: 0 }}
-                          whileInView={{ width: `${skill.level}%` }}
-                          transition={{ duration: 1.5, delay: 0.2, ease: "circOut" }}
-                          viewport={{ once: true }}
-                        />
-                      </div>
-                    </motion.div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section id="projects" className="relative py-32 -mt-12 overflow-visible z-10">
-          <div className="absolute inset-0 bg-gradient-to-b from-[#030712] to-[#020617] -z-20" />
-          <ConnectedSpaceBackground />
-          <div className="max-w-7xl mx-auto px-6 relative z-20 pt-32">
+        <section id="projects" className="relative py-32 overflow-visible bg-slate-50 z-10 border-t border-brand-100">
+          <div className="max-w-7xl mx-auto px-6 relative z-20">
             <div className="flex flex-col md:flex-row md:items-end justify-between mb-20 gap-8">
               <div className="max-w-xl">
                 <h2 className="text-sm font-bold tracking-[0.3em] uppercase text-brand-500 mb-6">{content.projects.badge}</h2>
-                <h3 className="font-display text-5xl md:text-6xl font-bold tracking-tighter">
-                  {content.projects.title} <span className="text-rose-400 drop-shadow-[0_0_10px_rgba(251,113,133,0.3)]">{content.projects.titleHighlight}</span>
+                <h3 className="font-display text-5xl md:text-6xl text-brand-900 tracking-tight">
+                  {content.projects.title} <span className="text-brand-600 italic">{content.projects.titleHighlight}</span>
                 </h3>
               </div>
-              <p className="text-gray-400 text-lg leading-relaxed max-w-sm">
+              <p className="text-brand-700/80 text-lg leading-relaxed max-w-sm font-medium">
                 {content.projects.description}
               </p>
             </div>
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
+            <div className="grid md:grid-cols-2 lg:grid-cols-2 gap-10">
               {content.projects.list.map((project, i) => (
-                <ProjectCard key={project.id} project={project} index={i} visitBtnText={content.projects.visitBtn} />
+                <ProjectCard 
+                  key={project.id} 
+                  project={project} 
+                  index={i} 
+                  visitBtnText={content.projects.visitBtn} 
+                  onOpenTopology={() => setIsTopologyOpen(true)}
+                />
               ))}
             </div>
           </div>
         </section>
 
-        <div className="relative w-full h-px bg-[#030712] z-20">
-          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-emerald-500/50 to-transparent shadow-[0_0_20px_rgba(16,185,129,0.5)]" />
-        </div>
-
         <Testimonials content={content.testimonials} />
 
-        <section id="experience" className="py-32">
-          <div className="max-w-7xl mx-auto px-6">
-            <div className="max-w-3xl mb-20">
+        <section id="experience" className="py-32 bg-white">
+          <div className="max-w-4xl mx-auto px-6 md:px-12 lg:px-8">
+            <div className="max-w-3xl mb-20 text-center md:text-left">
               <h2 className="text-sm font-bold tracking-[0.3em] uppercase text-brand-500 mb-6">{content.experience.badge}</h2>
-              <h3 className="font-display text-5xl md:text-6xl font-bold tracking-tighter">
-                {content.experience.title} <span className="text-rose-400 drop-shadow-[0_0_10px_rgba(251,113,133,0.3)]">{content.experience.titleHighlight}</span>
+              <h3 className="font-display text-4xl md:text-5xl lg:text-6xl text-brand-900 tracking-tight">
+                {content.experience.title} <span className="text-brand-600 italic">{content.experience.titleHighlight}</span>
               </h3>
             </div>
+            {/* Updating timeline design colors inside TimelineSection (which needs to be updated but it's defined above) */}
             <TimelineSection title={content.experience.educationTitle} items={content.experience.education} icon={GraduationCap} />
             <TimelineSection title={content.experience.workTitle} items={content.experience.work} icon={Briefcase} />
           </div>
         </section>
 
-        <section id="contact" className="py-32 px-6">
-          <div className="max-w-5xl mx-auto">
-            <div className="glass rounded-[4rem] p-12 md:p-24 text-center relative overflow-hidden group">
-              <div className="absolute inset-0 bg-brand-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-1000" />
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                className="relative z-10"
-              >
-                <h3 className="font-display text-5xl md:text-7xl font-bold mb-6 tracking-tighter leading-tight text-white">
-                  {content.contact.title} <br /> <span className="text-rose-400 drop-shadow-[0_0_10px_rgba(251,113,133,0.3)]">{content.contact.titleHighlight}</span>
+        <section id="services" className="py-20 bg-brand-50/50 border-t border-brand-100 perspective-1000">
+          <div className="max-w-3xl mx-auto px-4 md:px-6 relative z-10">
+            <div className="text-center max-w-2xl mx-auto mb-16">
+              <h2 className="text-sm font-bold tracking-[0.3em] uppercase text-brand-500 mb-6">{content.services.badge}</h2>
+              <h3 className="font-display text-4xl text-brand-900 mb-6 tracking-tight">
+                {content.services.title} <span className="text-brand-600 italic">{content.services.titleHighlight}</span>
+              </h3>
+              <p className="text-brand-700/80 font-medium md:text-lg leading-relaxed">
+                {content.services.description}
+              </p>
+            </div>
+
+            <div className="flex flex-col border-t border-brand-200">
+              {content.services.items.map((service, index) => {
+                const icons = [Layout, Server, Globe, Zap];
+                const Icon = icons[index % icons.length];
+                return (
+                  <div
+                    key={index}
+                    className="service-item group border-b border-brand-200 py-6 md:py-8 flex flex-col md:flex-row md:items-start md:items-center justify-between gap-4 md:gap-8 hover:bg-brand-50 transition-colors px-4 md:px-8 rounded-[2rem]"
+                  >
+                    <div className="flex items-center gap-4 md:gap-6 md:w-1/2">
+                      <div className="w-12 h-12 rounded-full bg-white shadow-sm border border-brand-100 flex items-center justify-center group-hover:scale-110 transition-transform shrink-0">
+                        <Icon className="text-brand-500" size={24} />
+                      </div>
+                      <h4 className="text-xl md:text-2xl lg:text-3xl font-display text-brand-800/50 group-hover:text-brand-900 transition-colors">{service.title}</h4>
+                    </div>
+                    <p className="text-brand-700/80 font-medium text-sm md:text-base leading-relaxed md:w-1/2">{service.description}</p>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+
+        {/* Topology Modal */}
+        {isTopologyOpen && (
+          <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-md p-4 sm:p-8">
+            <div className="relative w-full max-w-[1400px] h-[90vh] bg-slate-950 rounded-[2rem] sm:rounded-[3rem] shadow-2xl border-4 border-slate-800 overflow-hidden flex flex-col">
+              {/* Modal Header */}
+              <div className="absolute top-0 left-0 right-0 z-50 flex justify-between items-center px-6 py-4 bg-slate-900/50 backdrop-blur-sm border-b border-white/5">
+                <div className="flex gap-2">
+                  <button onClick={() => setIsTopologyOpen(false)} className="w-3.5 h-3.5 rounded-full bg-red-500 hover:bg-red-600 transition-colors" />
+                  <div className="w-3.5 h-3.5 rounded-full bg-yellow-500" />
+                  <div className="w-3.5 h-3.5 rounded-full bg-green-500" />
+                </div>
+                <div className="text-white/50 text-xs font-mono tracking-widest uppercase">Interactive Topology Simulation</div>
+                <button onClick={() => setIsTopologyOpen(false)} className="text-white/50 hover:text-white transition-colors">
+                  <X size={20} />
+                </button>
+              </div>
+              
+              {/* Topology Sandbox */}
+              <div className="flex-1 mt-14 relative bg-slate-950">
+                <Topology />
+              </div>
+            </div>
+          </div>
+        )}
+
+        <section id="contact" className="py-20 md:py-24 px-4 sm:px-6 bg-brand-50 border-t border-brand-100">
+          <div className="max-w-2xl mx-auto">
+            <div className="bg-white rounded-[2rem] md:rounded-[2.5rem] p-6 sm:p-10 md:p-14 text-center relative overflow-hidden border border-brand-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)]">
+              <div className="contact-animate relative z-10">
+                <h3 className="font-display text-3xl sm:text-4xl md:text-5xl mb-4 md:mb-6 tracking-tight leading-tight text-brand-900">
+                  {content.contact.title} <br /> <span className="text-brand-600 italic">{content.contact.titleHighlight}</span>
                 </h3>
-                <p className="text-gray-400 text-lg md:text-xl mb-14 max-w-2xl mx-auto leading-relaxed">
+                <p className="text-brand-700/80 font-medium text-sm sm:text-base md:text-lg mb-8 max-w-xl mx-auto leading-relaxed">
                   {content.contact.description}
                 </p>
                 <ContactForm content={content.contact.form} />
-                <div className="flex justify-center space-x-6 mt-16">
-                  {SOCIALS.map((social) => (
-                    <a 
-                      key={social.name}
-                      href={social.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="w-16 h-16 glass flex items-center justify-center rounded-[1.5rem] text-gray-500 hover:text-white hover:bg-white/10 hover:scale-110 transition-all active:scale-95"
-                    >
-                      {social.icon}
-                    </a>
-                  ))}
-                </div>
-              </motion.div>
+              </div>
             </div>
           </div>
         </section>
       </main>
 
-      <footer className="py-16 border-t border-white/5">
-        <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-10">
+      <footer className="py-12 bg-slate-950 text-slate-400 border-t border-white/5">
+        <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 items-center gap-8">
+          
           <div 
-            className="flex items-center space-x-3 cursor-pointer select-none group"
-            onDoubleClick={handleLogoDoubleClick}
-            title="Double click for secret entry"
+            className="flex items-center justify-center md:justify-start gap-3 cursor-pointer select-none group"
           >
-            <div className="w-10 h-10 rounded-xl bg-brand-600 flex items-center justify-center text-white shadow-lg shadow-brand-600/20 group-hover:scale-110 transition-transform">
-              <Terminal size={22} />
-            </div>
-            <span className="font-display font-bold tracking-tight text-xl">MOUNIB<span className="text-brand-500">.</span>DEV</span>
+             <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-500/20 to-brand-600/5 flex items-center justify-center text-brand-500 group-hover:bg-brand-500 group-hover:text-white transition-all duration-300 shadow-[0_0_15px_-3px_rgba(20,184,166,0.2)] border border-brand-500/20 group-hover:border-brand-500 relative overflow-hidden">
+               <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" className="transform group-hover:scale-110 transition-transform duration-300 relative z-10">
+                 <path d="M4 21V4L12 14L20 4V21H16V9.5L12 14.5L8 9.5V21H4Z" />
+               </svg>
+             </div>
+             <span className="font-display font-semibold tracking-tight text-xl text-white lowercase">mounib.dev</span>
           </div>
-          
-          <p className="text-gray-500 text-sm font-medium">
-            &copy; {new Date().getFullYear()} {content.footer.rights}
-            <span className="opacity-20 ml-2 text-xs">v1.0.5</span>
+
+          <p className="text-[10px] text-slate-500 font-medium tracking-wide text-center">
+            &copy; {new Date().getFullYear()} All rights reserved.
           </p>
-          
-          <div className="flex space-x-10">
-            <a href="#" className="text-xs font-bold uppercase tracking-widest text-gray-500 hover:text-brand-400 transition-colors">{content.footer.stack}</a>
-            <a href="#" className="text-xs font-bold uppercase tracking-widest text-gray-500 hover:text-brand-400 transition-colors">{content.footer.privacy}</a>
+
+          <div className="flex items-center justify-center md:justify-end gap-4">
+            {SOCIALS.map((social) => (
+              <a 
+                key={social.name}
+                href={social.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-brand-400 transition-colors p-2 hover:bg-brand-500/10 rounded-full"
+                aria-label={social.name}
+              >
+                {React.cloneElement(social.icon as React.ReactElement, { size: 16 })}
+              </a>
+            ))}
           </div>
+          
         </div>
       </footer>
-      <GlassFilter />
     </div>
   );
 };

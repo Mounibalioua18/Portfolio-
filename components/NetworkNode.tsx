@@ -74,7 +74,7 @@ const NetworkNode: React.FC<NetworkNodeProps> = ({ node, isHovered, onHover, onC
           return (
               <div className="absolute inset-0 flex justify-center items-center">
                   <motion.div 
-                      className="w-16 h-16 bg-teal-500/10 rounded-lg blur-sm"
+                      className="w-16 h-16 bg-teal-500/10 rounded-lg"
                       animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.6, 0.3] }}
                       transition={{ duration: 2, repeat: Infinity }}
                   />
@@ -107,8 +107,8 @@ const NetworkNode: React.FC<NetworkNodeProps> = ({ node, isHovered, onHover, onC
         
         <motion.div
           className={`relative z-10 p-5 rounded-2xl transition-all duration-500 ${
-            isActive ? 'bg-emerald-500/20 scale-125 shadow-[0_0_40px_rgba(16,185,129,0.6)]' :
-            isSelected ? 'bg-red-500/20 scale-110 shadow-[0_0_30px_rgba(239,68,68,0.5)]' : 
+            isActive ? 'bg-emerald-500/20 scale-125' :
+            isSelected ? 'bg-red-500/20 scale-110' : 
             isHovered ? 'bg-teal-500/10 scale-110 border-teal-500/50' : 'bg-white/5 border-white/5'
           } border`}
           whileHover={{ scale: 1.15 }}

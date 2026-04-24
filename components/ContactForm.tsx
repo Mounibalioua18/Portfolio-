@@ -1,9 +1,9 @@
 
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+import React, { useState, useRef } from 'react';
 import { Send, CheckCircle2, Loader2, AlertCircle } from 'lucide-react';
 import { LiquidButton } from './ui/LiquidButton';
-import { CloudDB } from '../lib/db';
+import { useGSAP } from '@gsap/react';
+import gsap from 'gsap';
 
 interface ContactFormProps {
   content: {
@@ -28,30 +28,32 @@ const ContactForm: React.FC<ContactFormProps> = ({ content }) => {
     message: ''
   });
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useGSAP(() => {
+    if (status === 'success' || status === 'error') {
+      gsap.fromTo('.status-message', 
+        { opacity: 0, y: 10 }, 
+        { opacity: 1, y: 0, duration: 0.3 }
+      );
+    }
+  }, [status]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setStatus('submitting');
 
     try {
-      console.log("Attempting to send message to Firebase...");
-      await CloudDB.saveMessage({
-        name: formData.name,
-        email: formData.email,
-        referral: formData.referral,
-        message: formData.message,
-      });
+      console.log("Simulating message send...");
+      await new Promise(resolve => setTimeout(resolve, 1500));
 
-      console.log("Message saved successfully!");
+      console.log("Message simulation successful!");
       setStatus('success');
       setFormData({ name: '', email: '', referral: '', message: '' });
       
       setTimeout(() => setStatus('idle'), 5000);
     } catch (error: any) {
-      console.error("CRITICAL: Database submission failed.");
-      console.error("Error Code:", error.code);
-      console.error("Error Message:", error.message);
-      console.log("Tip: Check if your Firebase Realtime Database rules allow public writes ('.write': true)");
+      console.error("Form submission failed.");
       setStatus('error');
     }
   };
@@ -61,11 +63,11 @@ const ContactForm: React.FC<ContactFormProps> = ({ content }) => {
   };
 
   return (
-    <div className="w-full max-w-2xl mx-auto">
-      <form onSubmit={handleSubmit} className="space-y-6 text-left">
-        <div className="grid md:grid-cols-2 gap-6">
-          <div className="space-y-2">
-            <label className="text-xs font-bold uppercase tracking-widest text-gray-500 ml-2">{content.name}</label>
+    <div className="w-full max-w-md mx-auto" ref={containerRef}>
+      <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-4 text-left">
+        <div className="grid md:grid-cols-2 gap-3 sm:gap-4">
+          <div className="space-y-1">
+            <label className="text-[10px] font-bold uppercase tracking-widest text-slate-500 ml-1">{content.name}</label>
             <input
               required
               type="text"
@@ -74,11 +76,11 @@ const ContactForm: React.FC<ContactFormProps> = ({ content }) => {
               onChange={handleChange}
               placeholder={content.namePlaceholder}
               disabled={status === 'submitting' || status === 'success'}
-              className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white focus:outline-none focus:border-brand-500/50 focus:ring-1 focus:ring-brand-500/20 transition-all placeholder:text-gray-600 disabled:opacity-50"
+              className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 sm:py-3 text-slate-900 text-sm font-medium focus:outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 transition-all placeholder:text-slate-400 disabled:opacity-50"
             />
           </div>
-          <div className="space-y-2">
-            <label className="text-xs font-bold uppercase tracking-widest text-gray-500 ml-2">{content.email}</label>
+          <div className="space-y-1">
+            <label className="text-[10px] font-bold uppercase tracking-widest text-slate-500 ml-1">{content.email}</label>
             <input
               required
               type="email"
@@ -87,13 +89,13 @@ const ContactForm: React.FC<ContactFormProps> = ({ content }) => {
               onChange={handleChange}
               placeholder={content.emailPlaceholder}
               disabled={status === 'submitting' || status === 'success'}
-              className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white focus:outline-none focus:border-brand-500/50 focus:ring-1 focus:ring-brand-500/20 transition-all placeholder:text-gray-600 disabled:opacity-50"
+              className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 sm:py-3 text-slate-900 text-sm font-medium focus:outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 transition-all placeholder:text-slate-400 disabled:opacity-50"
             />
           </div>
         </div>
         
-        <div className="space-y-2">
-          <label className="text-xs font-bold uppercase tracking-widest text-gray-500 ml-2">{content.subject}</label>
+        <div className="space-y-1">
+          <label className="text-[10px] font-bold uppercase tracking-widest text-slate-500 ml-1">{content.subject}</label>
           <input
             required
             type="text"
@@ -102,28 +104,28 @@ const ContactForm: React.FC<ContactFormProps> = ({ content }) => {
             onChange={handleChange}
             placeholder={content.subjectPlaceholder}
             disabled={status === 'submitting' || status === 'success'}
-            className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white focus:outline-none focus:border-brand-500/50 focus:ring-1 focus:ring-brand-500/20 transition-all placeholder:text-gray-600 disabled:opacity-50"
+            className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 sm:py-3 text-slate-900 text-sm font-medium focus:outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 transition-all placeholder:text-slate-400 disabled:opacity-50"
           />
         </div>
 
-        <div className="space-y-2">
-          <label className="text-xs font-bold uppercase tracking-widest text-gray-500 ml-2">{content.message}</label>
+        <div className="space-y-1">
+          <label className="text-[10px] font-bold uppercase tracking-widest text-slate-500 ml-1">{content.message}</label>
           <textarea
             required
             name="message"
-            rows={5}
+            rows={3}
             value={formData.message}
             onChange={handleChange}
             placeholder={content.messagePlaceholder}
             disabled={status === 'submitting' || status === 'success'}
-            className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white focus:outline-none focus:border-brand-500/50 focus:ring-1 focus:ring-brand-500/20 transition-all placeholder:text-gray-600 resize-none disabled:opacity-50"
+            className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-slate-900 text-sm font-medium focus:outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 transition-all placeholder:text-slate-400 resize-none disabled:opacity-50"
           />
         </div>
 
-        <div className="flex flex-col items-center pt-4">
+        <div className="flex flex-col items-center pt-2">
           <LiquidButton 
             type="submit" 
-            className={`w-full md:w-auto min-w-[200px] ${status === 'submitting' || status === 'success' ? 'opacity-70 pointer-events-none' : ''}`}
+            className={`w-full min-w-[200px] h-12 text-sm ${status === 'submitting' || status === 'success' ? 'opacity-70 pointer-events-none' : ''}`}
             disabled={status === 'submitting' || status === 'success'}
           >
             {status === 'submitting' ? (
@@ -146,16 +148,12 @@ const ContactForm: React.FC<ContactFormProps> = ({ content }) => {
           </LiquidButton>
           
           {status === 'success' && (
-            <motion.p
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="mt-4 text-brand-400 text-sm font-medium"
-            >
+            <p className="status-message mt-4 text-brand-500 text-sm font-medium">
               {content.success}
-            </motion.p>
+            </p>
           )}
           {status === 'error' && (
-            <p className="mt-4 text-red-400 text-xs font-medium">
+            <p className="status-message mt-4 text-red-500 text-xs font-medium">
               Please check your browser console (F12) for error details.
             </p>
           )}

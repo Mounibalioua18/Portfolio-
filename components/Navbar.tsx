@@ -56,11 +56,26 @@ const Navbar: React.FC<NavBarProps> = ({ items, className }) => {
   return (
     <div
       className={cn(
-        "fixed bottom-6 sm:bottom-auto sm:top-0 left-1/2 -translate-x-1/2 z-[100] sm:pt-6 w-fit",
+        "fixed top-4 sm:top-0 left-1/2 -translate-x-1/2 z-[100] sm:pt-6 w-[96vw] max-w-fit",
         className
       )}
     >
-      <div className="flex items-center gap-1 sm:gap-3 bg-gray-900/40 border border-white/10 backdrop-blur-xl py-1.5 px-2 rounded-full shadow-2xl">
+      <div className="flex items-center justify-center gap-1 sm:gap-3 bg-white/80 backdrop-blur-lg border border-brand-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] py-1.5 px-1.5 sm:px-2 rounded-full overflow-x-auto no-scrollbar">
+        
+        {/* Logo */}
+        <a 
+          href="#home"
+          onClick={() => setActiveTab(items[0].name)}
+          className="w-8 h-8 sm:w-10 sm:h-10 ml-1 rounded-full bg-gradient-to-br from-brand-500/20 to-brand-600/5 flex items-center justify-center text-brand-600 border border-brand-500/20 shadow-[0_0_10px_-3px_rgba(20,184,166,0.2)] hover:border-brand-500 relative overflow-hidden group"
+        >
+           <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" className="transform group-hover:scale-110 transition-transform duration-300 relative z-10">
+             <path d="M4 21V4L12 14L20 4V21H16V9.5L12 14.5L8 9.5V21H4Z" />
+           </svg>
+        </a>
+        
+        {/* Divider */}
+        <div className="w-[1px] h-6 bg-brand-200/50 mx-1 hidden sm:block"></div>
+
         {items.map((item) => {
           const Icon = item.icon;
           const isActive = activeTab === item.name;
@@ -71,20 +86,20 @@ const Navbar: React.FC<NavBarProps> = ({ items, className }) => {
               href={item.url}
               onClick={() => setActiveTab(item.name)}
               className={cn(
-                "relative cursor-pointer text-xs sm:text-sm font-bold px-4 sm:px-6 py-2 rounded-full transition-all duration-300",
-                "text-gray-400 hover:text-brand-400",
-                isActive && "text-brand-400"
+                "relative cursor-pointer text-xs sm:text-sm font-bold px-2.5 sm:px-6 py-2 sm:py-2 rounded-full transition-all duration-300 flex items-center justify-center min-w-[2.5rem]",
+                "text-slate-500 hover:text-brand-600",
+                isActive && "text-brand-600"
               )}
             >
               <span className="hidden md:inline">{item.name}</span>
-              <span className="md:hidden">
-                <Icon size={20} strokeWidth={2.5} />
+              <span className="md:hidden flex items-center justify-center">
+                <Icon size={18} strokeWidth={2.5} />
               </span>
               
               {isActive && (
                 <motion.div
                   layoutId="lamp"
-                  className="absolute inset-0 w-full bg-brand-500/10 rounded-full -z-10"
+                  className="absolute inset-0 w-full bg-brand-50 rounded-full -z-10"
                   initial={false}
                   transition={{
                     type: "spring",
@@ -92,12 +107,8 @@ const Navbar: React.FC<NavBarProps> = ({ items, className }) => {
                     damping: 30,
                   }}
                 >
-                  {/* Lamp Glow Effect */}
-                  <div className="absolute -top-1 sm:-top-2 left-1/2 -translate-x-1/2 w-8 h-1 bg-brand-500 rounded-t-full">
-                    <div className="absolute w-12 h-6 bg-brand-500/30 rounded-full blur-md -top-2 -left-2" />
-                    <div className="absolute w-8 h-6 bg-brand-500/20 rounded-full blur-md -top-1" />
-                    <div className="absolute w-4 h-4 bg-brand-500/40 rounded-full blur-sm top-0 left-2" />
-                  </div>
+                  {/* Clean flat top border */}
+                  <div className="absolute -top-1 sm:-top-2 left-1/2 -translate-x-1/2 w-6 sm:w-8 h-1 bg-brand-500 rounded-full shadow-[0_2px_8px_rgba(20,184,166,0.3)]" />
                 </motion.div>
               )}
             </a>

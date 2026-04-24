@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
-import { cn } from '../lib/utils';
+import React, { useRef } from 'react';
+import { useGSAP } from '@gsap/react';
+import gsap from 'gsap';
+import { Quote } from 'lucide-react';
 
 interface TestimonialsProps {
   content: {
@@ -16,144 +17,94 @@ interface TestimonialsProps {
   }
 }
 
-interface TestimonialCardProps {
-  position: number;
-  testimonial: {
-      tempId: number;
-      testimonial: string;
-      by: string;
-      imgSrc: string;
-    };
-  handleMove: (steps: number) => void;
-  cardSize: number;
-}
-
-const TestimonialCard: React.FC<TestimonialCardProps> = ({ 
-  position, 
-  testimonial, 
-  handleMove, 
-  cardSize 
-}) => {
-  const isCenter = position === 0;
-
-  return (
-    <div
-      onClick={() => handleMove(position)}
-      className={cn(
-        "absolute left-1/2 top-1/2 cursor-pointer border-2 p-10 transition-all duration-700 ease-in-out",
-        isCenter 
-          ? "z-10 bg-brand-600 text-white border-brand-400" 
-          : "z-0 bg-gray-900 text-gray-400 border-white/5 hover:border-brand-500/50"
-      )}
-      style={{
-        width: cardSize,
-        height: cardSize,
-        clipPath: `polygon(40px 0%, calc(100% - 40px) 0%, 100% 40px, 100% 100%, calc(100% - 40px) 100%, 40px 100%, 0 100%, 0 0)`,
-        transform: `
-          translate(-50%, -50%) 
-          translateX(${(cardSize / 1.3) * position}px)
-          translateY(${isCenter ? -30 : position % 2 ? 10 : -10}px)
-          rotate(${isCenter ? 0 : position % 2 ? 3 : -3}deg)
-          scale(${isCenter ? 1 : 0.85})
-        `,
-        boxShadow: isCenter ? "0px 20px 50px rgba(16, 185, 129, 0.3)" : "none"
-      }}
-    >
-      <img
-        src={testimonial.imgSrc}
-        alt={testimonial.by}
-        className="mb-6 h-14 w-14 rounded-xl object-cover border-2 border-white/10"
-      />
-      <h3 className={cn(
-        "text-lg md:text-xl font-display font-bold leading-snug",
-        isCenter ? "text-white" : "text-gray-300"
-      )}>
-        "{testimonial.testimonial}"
-      </h3>
-      <p className={cn(
-        "absolute bottom-10 left-10 right-10 text-xs font-bold uppercase tracking-widest",
-        isCenter ? "text-white/60" : "text-gray-500"
-      )}>
-        — {testimonial.by}
-      </p>
-    </div>
-  );
-};
-
 export default function Testimonials({ content }: TestimonialsProps) {
-  const [cardSize, setCardSize] = useState(380);
-  const [testimonialsList, setTestimonialsList] = useState(content.list);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const trackRef = useRef<HTMLDivElement>(null);
+  const tweenRef = useRef<gsap.core.Tween | null>(null);
 
-  // Update list when content changes (language switch)
-  useEffect(() => {
-    setTestimonialsList(content.list);
-  }, [content]);
-
-  const handleMove = (steps: number) => {
-    const newList = [...testimonialsList];
-    if (steps > 0) {
-      for (let i = steps; i > 0; i--) {
-        const item = newList.shift();
-        if (!item) return;
-        newList.push({ ...item, tempId: Math.random() });
+  useGSAP(() => {
+    // Reveal animation for section header
+    gsap.from('.testimonial-header', {
+      opacity: 0,
+      y: 30,
+      duration: 0.8,
+      ease: 'power3.out',
+      scrollTrigger: {
+        trigger: containerRef.current,
+        start: 'top 80%',
       }
-    } else {
-      for (let i = steps; i < 0; i++) {
-        const item = newList.pop();
-        if (!item) return;
-        newList.unshift({ ...item, tempId: Math.random() });
-      }
-    }
-    setTestimonialsList(newList);
-  };
+    });
 
-  useEffect(() => {
-    const updateSize = () => {
-      setCardSize(window.innerWidth < 640 ? 300 : 380);
-    };
-    updateSize();
-    window.addEventListener("resize", updateSize);
-    return () => window.removeEventListener("resize", updateSize);
-  }, []);
+    if (!trackRef.current) return;
+    
+    // We scroll exactly 50% since we duplicate the list once perfectly
+    tweenRef.current = gsap.to(trackRef.current, {
+      xPercent: -50,
+      duration: 35,
+      ease: "none",
+      repeat: -1,
+    });
+  }, { scope: containerRef });
+
+  const handleMouseEnter = () => tweenRef.current?.pause();
+  const handleMouseLeave = () => tweenRef.current?.play();
+
+  // Duplicate list once to allow smooth infinite scrolling
+  const duplicatedList = [...content.list, ...content.list];
 
   return (
-    <section className="relative w-full h-[700px] overflow-hidden bg-gray-950/50 py-24">
-      {/* Top Fade Overlay */}
-      <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-[#030712] to-transparent z-10 pointer-events-none" />
+    <section ref={containerRef} className="relative w-full py-32 bg-slate-50 overflow-hidden border-t border-brand-100">
+      
+      {/* Fancy Background element for soft elegant feel */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-brand-200/30 rounded-full blur-[120px] pointer-events-none" />
 
-      <div className="absolute top-12 left-1/2 -translate-x-1/2 text-center z-20">
+      <div className="max-w-7xl mx-auto px-6 relative z-10 mb-16 testimonial-header text-center">
         <h2 className="text-sm font-bold tracking-[0.3em] uppercase text-brand-500 mb-4">{content.badge}</h2>
-        <h3 className="font-display text-4xl font-bold">{content.title} <span className="text-rose-400 drop-shadow-[0_0_10px_rgba(251,113,133,0.3)]">{content.titleHighlight}</span></h3>
+        <h3 className="font-display text-4xl md:text-5xl lg:text-6xl font-black tracking-tight text-slate-900">
+          {content.title} <br className="md:hidden" /><span className="text-brand-600">{content.titleHighlight}</span>
+        </h3>
       </div>
 
-      <div className="relative h-full flex items-center justify-center">
-        {testimonialsList.map((testimonial, index) => {
-          const position = index - Math.floor(testimonialsList.length / 2);
-          return (
-            <TestimonialCard
-              key={testimonial.tempId}
-              testimonial={testimonial}
-              handleMove={handleMove}
-              position={position}
-              cardSize={cardSize}
-            />
-          );
-        })}
-      </div>
-
-      <div className="absolute bottom-12 left-1/2 -translate-x-1/2 flex gap-4 z-30">
-        <button
-          onClick={() => handleMove(-1)}
-          className="w-14 h-14 glass rounded-full flex items-center justify-center hover:bg-brand-500 hover:text-white transition-all"
+      <div className="relative flex overflow-x-hidden group mt-10 z-20">
+        <div 
+          ref={trackRef}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+          className="flex whitespace-nowrap items-stretch gap-6 pl-6 cursor-grab active:cursor-grabbing"
+          style={{ width: "max-content" }}
         >
-          <ChevronLeft />
-        </button>
-        <button
-          onClick={() => handleMove(1)}
-          className="w-14 h-14 glass rounded-full flex items-center justify-center hover:bg-brand-500 hover:text-white transition-all"
-        >
-          <ChevronRight />
-        </button>
+          {duplicatedList.map((item, index) => (
+            <div 
+              key={`${item.tempId}-${index}`}
+              className="w-[280px] md:w-[380px] shrink-0 bg-white/80 backdrop-blur-xl border border-white shadow-[0_8px_30px_rgb(0,0,0,0.04)] rounded-[1.5rem] md:rounded-[2rem] p-6 md:p-8 hover:shadow-[0_20px_40px_rgb(16,185,129,0.08)] hover:border-brand-200 transition-all duration-500 flex flex-col justify-between whitespace-normal group/card"
+            >
+              <div>
+                <Quote className="text-brand-200 mb-4 group-hover/card:text-brand-400 group-hover/card:scale-110 transition-all duration-300 transform origin-left w-6 h-6 md:w-8 md:h-8" />
+                <p className="text-slate-600 text-sm md:text-base font-medium leading-relaxed mb-6 italic">
+                  "{item.testimonial}"
+                </p>
+              </div>
+              <div className="flex items-center gap-4 mt-auto pt-5 border-t border-slate-100">
+                <img 
+                  src={item.imgSrc} 
+                  alt={item.by.split(',')[0]}
+                  className="w-10 h-10 md:w-12 md:h-12 rounded-full object-cover ring-2 ring-brand-100"
+                  loading="lazy"
+                />
+                <div className="flex flex-col">
+                  <h4 className="font-display font-bold text-slate-900 text-sm md:text-base leading-snug">
+                    {item.by.split(',')[0]}
+                  </h4>
+                  {item.by.includes(',') && (
+                    <span className="text-[10px] md:text-xs font-bold text-brand-500 uppercase tracking-wider mt-0.5">
+                      {item.by.split(',')[1].trim()}
+                    </span>
+                  )}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );

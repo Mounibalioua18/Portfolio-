@@ -208,11 +208,11 @@ const Topology: React.FC = () => {
         style={{ transform: 'translate(-50%, -50%)' }}
       >
         <div className="relative flex items-center justify-center">
-          <div className="w-6 h-6 rounded-full bg-emerald-400 shadow-[0_0_30px_rgba(52,211,153,0.9)] blur-[1px]" />
+          <div className="w-6 h-6 rounded-full bg-brand-400" />
           <motion.div 
             initial={{ opacity: 0, scale: 0.5 }}
             animate={{ opacity: 1, scale: 1 }}
-            className="absolute -top-14 px-3 py-1 rounded text-[10px] font-bold border border-emerald-500/50 text-emerald-400 bg-slate-900/95 backdrop-blur-md whitespace-nowrap tracking-widest uppercase shadow-2xl"
+            className="absolute -top-14 px-3 py-1 rounded text-[10px] font-bold border border-brand-500/50 text-brand-400 bg-zinc-900 whitespace-nowrap tracking-widest uppercase"
           >
             {isAck ? 'ACK RECEIVED' : 'DATA SIGNAL'}
           </motion.div>
@@ -228,19 +228,6 @@ const Topology: React.FC = () => {
       className="relative w-full h-full bg-transparent rounded-none outline-none border-none"
     >
       <svg className="absolute inset-0 w-full h-full z-10 pointer-events-none">
-        <defs>
-          <filter id="greenGlow">
-            <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
-            <feMerge>
-              <feMergeNode in="coloredBlur"/>
-              <feMergeNode in="SourceGraphic"/>
-            </feMerge>
-          </filter>
-          <linearGradient id="targetingGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-             <stop offset="0%" stopColor="#10b981" />
-             <stop offset="100%" stopColor="rgba(16, 185, 129, 0)" />
-          </linearGradient>
-        </defs>
         
         {nodes.map(node => 
           node.connections.map(connId => {
@@ -269,7 +256,7 @@ const Topology: React.FC = () => {
                 y1={sourceNode.y}
                 x2={mousePos.x}
                 y2={mousePos.y}
-                stroke="url(#targetingGradient)"
+                stroke="#10b981"
                 strokeWidth={2 * scale}
                 strokeDasharray="4,4"
                 animate={{ strokeDashoffset: [0, -20] }}
@@ -285,7 +272,6 @@ const Topology: React.FC = () => {
             y2={activeLink.to.y}
             stroke="#10b981"
             strokeWidth={4 * scale}
-            filter="url(#greenGlow)"
             initial={{ pathLength: 0, opacity: 0 }}
             animate={{ pathLength: 1, opacity: [0, 1, 0.5] }}
             exit={{ opacity: 0 }}
@@ -325,7 +311,7 @@ const Topology: React.FC = () => {
           }}
           dragMomentum={false}
           dragElastic={0.1}
-          className="relative group pointer-events-auto shadow-2xl cursor-move"
+          className="relative group pointer-events-auto cursor-move"
         >
           {/* Terminal Corners */}
           <div className="absolute -top-1 -left-1 w-3 h-3 border-t-2 border-l-2 border-emerald-500 rounded-tl-sm z-50" />
@@ -333,7 +319,7 @@ const Topology: React.FC = () => {
           <div className="absolute -bottom-1 -left-1 w-3 h-3 border-b-2 border-l-2 border-emerald-500 rounded-bl-sm z-50" />
           <div className="absolute -bottom-1 -right-1 w-3 h-3 border-b-2 border-r-2 border-emerald-500 rounded-br-sm z-50" />
 
-          <div className="bg-slate-950/95 border border-emerald-500/20 rounded-lg backdrop-blur-3xl overflow-hidden flex flex-col h-[280px] md:h-[320px] transition-all duration-300 hover:border-emerald-500/40">
+          <div className="bg-zinc-950 border border-brand-500/20 rounded-lg overflow-hidden flex flex-col h-[280px] md:h-[320px] transition-colors duration-300 hover:border-brand-500/40">
             {/* Terminal Header */}
             <div 
               className="flex items-center justify-between px-4 py-3 border-b border-emerald-500/10 bg-emerald-950/20"
@@ -349,8 +335,8 @@ const Topology: React.FC = () => {
                 </div>
               </div>
               <div className="flex items-center gap-2">
-                <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse shadow-[0_0_10px_#10b981]" />
-                <span className="text-[10px] text-emerald-500/60 font-mono">LIVE</span>
+                <div className="w-2 h-2 rounded-full bg-brand-500" />
+                <span className="text-[10px] text-brand-500/60 font-mono">LIVE</span>
               </div>
             </div>
 

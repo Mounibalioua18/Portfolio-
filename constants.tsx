@@ -26,12 +26,12 @@ export const INITIAL_NODES: Node[] = [
 ];
 
 export const COLORS = {
-  pc: '#ffffff', // white
-  switch: '#e5e7eb', // gray-200
-  router: '#d1d5db', // gray-300
-  packet: '#ffffff', // white
-  ack: '#f3f4f6', // gray-100
-  link: 'rgba(255, 255, 255, 0.15)',
+  pc: '#67e8f9', // cyan-300
+  switch: '#a5f3fc', // cyan-200
+  router: '#2dd4bf', // teal-400
+  packet: '#fb7185', // rose-400
+  ack: '#34d399', // emerald-400
+  link: 'rgba(45, 212, 191, 0.2)',
 };
 
 // --- Content ---

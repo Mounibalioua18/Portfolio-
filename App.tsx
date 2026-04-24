@@ -28,12 +28,14 @@ import Testimonials from './components/Testimonials';
 import ContactForm from './components/ContactForm';
 import Expertise from './components/Expertise';
 import Topology from './components/Topology';
+import { LoadingScreen } from './components/LoadingScreen';
 import { SKILLS, CONTENT, SOCIALS } from './constants';
 
 gsap.registerPlugin(ScrollTrigger);
 
 const App: React.FC = () => {
   const [isTopologyOpen, setIsTopologyOpen] = useState(false);
+  const [isReady, setIsReady] = useState(false);
   const content = CONTENT;
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -164,10 +166,11 @@ const App: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-slate-50 text-slate-800 font-sans selection:bg-brand-500/30" ref={containerRef}>
+      {!isReady && <LoadingScreen onComplete={() => setIsReady(true)} />}
       <Navbar items={navItems} />
       
       <main>
-        <Hero content={content.hero} />
+        <Hero content={content.hero} isReady={isReady} />
 
         <div className="w-full h-px border-b border-brand-100" />
 
@@ -258,9 +261,9 @@ const App: React.FC = () => {
               {/* Modal Header */}
               <div className="absolute top-0 left-0 right-0 z-50 flex justify-between items-center px-6 py-4 bg-slate-900/50 backdrop-blur-sm border-b border-white/5">
                 <div className="flex gap-2">
-                  <button onClick={() => setIsTopologyOpen(false)} className="w-3.5 h-3.5 rounded-full bg-zinc-600 hover:bg-zinc-400 transition-colors" />
-                  <div className="w-3.5 h-3.5 rounded-full bg-zinc-700" />
-                  <div className="w-3.5 h-3.5 rounded-full bg-zinc-800" />
+                  <button onClick={() => setIsTopologyOpen(false)} className="w-3.5 h-3.5 rounded-full bg-red-500 hover:bg-red-600 transition-colors" />
+                  <div className="w-3.5 h-3.5 rounded-full bg-yellow-500" />
+                  <div className="w-3.5 h-3.5 rounded-full bg-green-500" />
                 </div>
                 <div className="text-white/50 text-xs font-mono tracking-widest uppercase">Interactive Topology Simulation</div>
                 <button onClick={() => setIsTopologyOpen(false)} className="text-white/50 hover:text-white transition-colors">

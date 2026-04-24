@@ -211,11 +211,11 @@ const Topology: React.FC = () => {
         style={{ transform: 'translate(-50%, -50%)' }}
       >
         <div className="relative flex items-center justify-center">
-          <div className="w-6 h-6 rounded-full bg-zinc-300" />
+          <div className="w-6 h-6 rounded-full bg-brand-400" />
           <motion.div 
             initial={{ opacity: 0, scale: 0.5 }}
             animate={{ opacity: 1, scale: 1 }}
-            className="absolute -top-14 px-3 py-1 rounded text-[10px] font-bold border border-zinc-500/50 text-zinc-300 bg-zinc-900 whitespace-nowrap tracking-widest uppercase"
+            className="absolute -top-14 px-3 py-1 rounded text-[10px] font-bold border border-brand-500/50 text-brand-400 bg-zinc-900 whitespace-nowrap tracking-widest uppercase"
           >
             {isAck ? 'ACK RECEIVED' : 'DATA SIGNAL'}
           </motion.div>
@@ -245,7 +245,7 @@ const Topology: React.FC = () => {
                 key={`${node.id}-${connId}`}
                 x1={n1.x} y1={n1.y}
                 x2={n2.x} y2={n2.y}
-                stroke="rgba(255, 255, 255, 0.15)"
+                stroke="rgba(56, 189, 248, 0.1)"
                 strokeWidth={2 * scale}
                 strokeDasharray={node.type === 'ROUTER' && target.type === 'ROUTER' ? '12,6' : 'none'}
               />
@@ -259,7 +259,7 @@ const Topology: React.FC = () => {
                 y1={sourceNode.y}
                 x2={mousePos.x}
                 y2={mousePos.y}
-                stroke="#d1d5db"
+                stroke="#10b981"
                 strokeWidth={2 * scale}
                 strokeDasharray="4,4"
                 animate={{ strokeDashoffset: [0, -20] }}
@@ -273,7 +273,7 @@ const Topology: React.FC = () => {
             y1={activeLink.from.y}
             x2={activeLink.to.x}
             y2={activeLink.to.y}
-            stroke="#ffffff"
+            stroke="#10b981"
             strokeWidth={4 * scale}
             initial={{ pathLength: 0, opacity: 0 }}
             animate={{ pathLength: 1, opacity: [0, 1, 0.5] }}
@@ -317,29 +317,29 @@ const Topology: React.FC = () => {
           className="relative group pointer-events-auto cursor-move"
         >
           {/* Terminal Corners */}
-          <div className="absolute -top-1 -left-1 w-3 h-3 border-t-2 border-l-2 border-zinc-500 rounded-tl-sm z-50" />
-          <div className="absolute -top-1 -right-1 w-3 h-3 border-t-2 border-r-2 border-zinc-500 rounded-tr-sm z-50" />
-          <div className="absolute -bottom-1 -left-1 w-3 h-3 border-b-2 border-l-2 border-zinc-500 rounded-bl-sm z-50" />
-          <div className="absolute -bottom-1 -right-1 w-3 h-3 border-b-2 border-r-2 border-zinc-500 rounded-br-sm z-50" />
+          <div className="absolute -top-1 -left-1 w-3 h-3 border-t-2 border-l-2 border-emerald-500 rounded-tl-sm z-50" />
+          <div className="absolute -top-1 -right-1 w-3 h-3 border-t-2 border-r-2 border-emerald-500 rounded-tr-sm z-50" />
+          <div className="absolute -bottom-1 -left-1 w-3 h-3 border-b-2 border-l-2 border-emerald-500 rounded-bl-sm z-50" />
+          <div className="absolute -bottom-1 -right-1 w-3 h-3 border-b-2 border-r-2 border-emerald-500 rounded-br-sm z-50" />
 
-          <div className="bg-zinc-950/90 backdrop-blur-md border border-zinc-500/20 rounded-lg overflow-hidden flex flex-col h-[200px] md:h-[240px] transition-colors duration-300 hover:border-zinc-500/40">
+          <div className="bg-zinc-950/90 backdrop-blur-md border border-brand-500/20 rounded-lg overflow-hidden flex flex-col h-[200px] md:h-[240px] transition-colors duration-300 hover:border-brand-500/40">
             {/* Terminal Header */}
             <div 
-              className="flex items-center justify-between px-4 py-3 border-b border-zinc-500/10 bg-zinc-900/50"
+              className="flex items-center justify-between px-4 py-3 border-b border-emerald-500/10 bg-emerald-950/20"
             >
               <div className="flex items-center gap-3">
                 <div className="flex gap-1.5">
-                  <div className="w-2.5 h-2.5 rounded-full bg-zinc-600/20 border border-zinc-500/50" />
-                  <div className="w-2.5 h-2.5 rounded-full bg-zinc-600/20 border border-zinc-500/50" />
-                  <div className="w-2.5 h-2.5 rounded-full bg-zinc-600/20 border border-zinc-500/50" />
+                  <div className="w-2.5 h-2.5 rounded-full bg-red-500/20 border border-red-500/50" />
+                  <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/20 border border-yellow-500/50" />
+                  <div className="w-2.5 h-2.5 rounded-full bg-emerald-500/20 border border-emerald-500/50" />
                 </div>
                 <div className="flex flex-col">
-                  <span className="text-[11px] font-bold text-zinc-300 uppercase tracking-widest leading-none">Net-Watcher</span>
+                  <span className="text-[11px] font-bold text-emerald-400 uppercase tracking-widest leading-none">Net-Watcher</span>
                 </div>
               </div>
               <div className="flex items-center gap-2">
-                <div className="w-2 h-2 rounded-full bg-zinc-300" />
-                <span className="text-[10px] text-zinc-400 font-mono">LIVE</span>
+                <div className="w-2 h-2 rounded-full bg-brand-500" />
+                <span className="text-[10px] text-brand-500/60 font-mono">LIVE</span>
               </div>
             </div>
 
@@ -355,8 +355,8 @@ const Topology: React.FC = () => {
                   key={i} 
                   className="flex gap-2 text-[11px] md:text-[12px] leading-tight"
                 >
-                  <span className="text-zinc-600 select-none">{'>'}</span>
-                  <span className={`${i === 0 ? 'text-zinc-300 font-bold' : 'text-zinc-500'}`}>
+                  <span className="text-emerald-500/40 select-none">{'>'}</span>
+                  <span className={`${i === 0 ? 'text-emerald-300 font-bold' : 'text-emerald-500/70'}`}>
                     {log}
                   </span>
                 </motion.div>
@@ -365,7 +365,7 @@ const Topology: React.FC = () => {
             </div>
 
             {/* Terminal Footer */}
-            <div className="px-4 py-2 border-t border-zinc-500/10 bg-zinc-900/50 flex justify-between items-center text-[10px] text-zinc-500 font-mono uppercase">
+            <div className="px-4 py-2 border-t border-emerald-500/10 bg-emerald-950/30 flex justify-between items-center text-[10px] text-emerald-600/50 font-mono uppercase">
               <span>root@portfolio:~#</span>
               <span className="animate-pulse">_</span>
             </div>

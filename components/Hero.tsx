@@ -14,27 +14,29 @@ interface HeroProps {
   };
 }
 
-export default function Hero({ content }: HeroProps) {
+export default function Hero({ content, isReady }: HeroProps & { isReady: boolean }) {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useGSAP(() => {
+    if (!isReady) return;
+
     const tl = gsap.timeline();
 
     tl.to('.hero-overlay', {
       opacity: 0,
-      duration: 0.6,
-      ease: 'power3.inOut'
+      duration: 0.3,
+      ease: 'power2.inOut'
     })
     .fromTo('.hero-bento', {
-      y: 60,
+      y: 20,
       opacity: 0,
     }, {
       y: 0,
       opacity: 1,
-      duration: 1,
-      stagger: 0.1,
-      ease: 'power3.out',
-    }, "-=0.3")
+      duration: 0.4,
+      stagger: 0.03,
+      ease: 'power2.out',
+    }, "-=0.2")
     .fromTo('.hero-badge', {
       scale: 0.95,
       y: 10,
@@ -43,22 +45,22 @@ export default function Hero({ content }: HeroProps) {
       scale: 1,
       y: 0,
       opacity: 1,
-      duration: 0.8,
-      ease: 'power3.out',
-      stagger: 0.1
-    }, "-=0.8")
+      duration: 0.4,
+      ease: 'power2.out',
+      stagger: 0.03
+    }, "-=0.3")
     .fromTo('.hero-title-word', {
-      y: 40,
+      y: 15,
       opacity: 0,
     }, {
       y: 0,
       opacity: 1,
-      duration: 1,
-      stagger: 0.1,
-      ease: 'power3.out',
-    }, "-=0.6");
+      duration: 0.4,
+      stagger: 0.02,
+      ease: 'power2.out',
+    }, "-=0.3");
 
-  }, { scope: containerRef });
+  }, { scope: containerRef, dependencies: [isReady] });
 
   return (
     <section id="home" className="relative w-full min-h-screen bg-brand-50 flex flex-col items-center justify-center text-brand-900 selection:bg-brand-200/50 perspective-1000" ref={containerRef}>

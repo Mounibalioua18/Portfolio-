@@ -213,7 +213,7 @@ const ContactForm: React.FC<ContactFormProps> = ({ content }) => {
         <div className="flex flex-col items-center pt-2">
           <LiquidButton 
             type="submit" 
-            className={`w-full min-w-[200px] h-12 text-sm ${status === 'submitting' || status === 'success' || status === 'rate_limited' || status === 'invalid_email' ? 'opacity-70 pointer-events-none' : ''}`}
+            className={`w-full min-w-[200px] h-12 text-sm ${status === 'submitting' || status === 'rate_limited' || status === 'invalid_email' ? 'opacity-70 pointer-events-none' : ''} ${status === 'success' ? '!bg-emerald-500 !text-white opacity-100 pointer-events-none ring-4 ring-emerald-500/30 scale-105 transition-all' : ''}`}
             disabled={status === 'submitting' || status === 'success' || status === 'rate_limited' || status === 'invalid_email'}
           >
             {status === 'submitting' ? (

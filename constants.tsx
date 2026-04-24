@@ -108,11 +108,11 @@ export const CONTENT = {
       },
       {
         id: '3',
-        title: 'RSD Average Calculator',
+        title: 'RSD S1 Average Calculator',
         description: 'A specialized academic dashboard for Master RSD students to calculate semester averages based on specific module coefficients and exam weights.',
         tags: ['Dashboard', 'React', 'Academic Tool', 'Tailwind'],
-        imageUrl: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800&auto=format&fit=crop',
-        link: '#',
+        imageUrl: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=800&auto=format&fit=crop',
+        link: 'https://rsds1.vercel.app/',
         github: 'https://github.com/Mounibalioua18/moyenne'
       }
     ]

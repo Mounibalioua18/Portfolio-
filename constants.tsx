@@ -98,15 +98,6 @@ export const CONTENT = {
         github: '#'
       },
       {
-        id: '1',
-        title: 'MemGrid Engine',
-        description: 'A dark-themed focus challenge where players must memorize patterns on a 4x4 grid and initialize the engine to test their cognitive limits.',
-        tags: ['Memory Game', 'JavaScript', 'Logic', 'UI/UX'],
-        imageUrl: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=800&auto=format&fit=crop',
-        link: '#',
-        github: 'https://github.com/Mounibalioua18/Memory-Grid'
-      },
-      {
         id: '2',
         title: 'Logic Engine 421337',
         description: 'A programmable logic puzzle game featuring command palettes, execution history, and conditional logic slots to navigate a 5x5 grid.',

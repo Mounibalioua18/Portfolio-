@@ -59,10 +59,10 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, visitBtnText,
         rotateY,
         transformStyle: "preserve-3d",
       }}
-      className="project-card group relative bg-white rounded-[2.5rem] border border-brand-100 shadow-[0_10px_40px_-15px_rgba(0,0,0,0.05)] hover:border-brand-500 hover:shadow-2xl hover:shadow-brand-500/20 transition-colors flex flex-col h-full"
+      className="project-card group relative bg-white rounded-[1.5rem] border border-brand-100 shadow-[0_10px_40px_-15px_rgba(0,0,0,0.05)] hover:border-brand-500 hover:shadow-2xl hover:shadow-brand-500/20 transition-colors flex flex-col h-full max-w-[340px] mx-auto w-full"
     >
       <motion.div 
-        className="absolute inset-0 pointer-events-none rounded-[2.5rem] z-20"
+        className="absolute inset-0 pointer-events-none rounded-[1.5rem] z-20"
         style={{
           background: useMotionTemplate`radial-gradient(400px circle at ${useTransform(mouseXSpring, [-0.5, 0.5], [0, 100])}% ${useTransform(mouseYSpring, [-0.5, 0.5], [0, 100])}%, rgba(200, 150, 100, 0.08), transparent 80%)`,
         }}
@@ -70,7 +70,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, visitBtnText,
       
       {/* Image Container */}
       <div 
-        className="relative aspect-square overflow-hidden p-8 z-10 flex items-center justify-center bg-brand-50/50 group-hover:bg-brand-50 transition-colors rounded-t-[2.5rem]"
+        className="relative aspect-[4/3] overflow-hidden p-6 z-10 flex items-center justify-center bg-brand-50/50 group-hover:bg-brand-50 transition-colors rounded-t-[1.5rem]"
         style={{ transform: "translateZ(30px)" }}
       >
         <motion.img 
@@ -93,7 +93,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, visitBtnText,
       </div>
 
       <div 
-        className="p-8 pt-6 flex flex-col flex-grow z-10 bg-white rounded-b-[2.5rem]"
+        className="p-6 pt-5 flex flex-col flex-grow z-10 bg-white rounded-b-[1.5rem]"
         style={{ transform: "translateZ(20px)" }}
       >
         <div className="flex flex-wrap gap-2 mb-4">

@@ -59,7 +59,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, visitBtnText,
         rotateY,
         transformStyle: "preserve-3d",
       }}
-      className="project-card group relative bg-white rounded-[1.5rem] border border-brand-100 shadow-[0_10px_40px_-15px_rgba(0,0,0,0.05)] hover:border-brand-500 hover:shadow-2xl hover:shadow-brand-500/20 transition-colors flex flex-col h-full max-w-[340px] mx-auto w-full"
+      className="project-card group relative bg-white rounded-[1.5rem] border border-brand-100 shadow-[0_10px_40px_-15px_rgba(0,0,0,0.05)] hover:border-brand-500 hover:shadow-2xl hover:shadow-brand-500/20 transition-colors flex flex-col sm:flex-row h-full w-full"
     >
       <motion.div 
         className="absolute inset-0 pointer-events-none rounded-[1.5rem] z-20"
@@ -70,7 +70,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, visitBtnText,
       
       {/* Image Container */}
       <div 
-        className="relative aspect-[4/3] overflow-hidden p-6 z-10 flex items-center justify-center bg-brand-50/50 group-hover:bg-brand-50 transition-colors rounded-t-[1.5rem]"
+        className="relative aspect-[4/3] sm:aspect-auto sm:w-2/5 sm:shrink-0 overflow-hidden p-6 z-10 flex items-center justify-center bg-brand-50/50 group-hover:bg-brand-50 transition-colors rounded-t-[1.5rem] sm:rounded-t-none sm:rounded-l-[1.5rem]"
         style={{ transform: "translateZ(30px)" }}
       >
         <motion.img 
@@ -93,7 +93,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, visitBtnText,
       </div>
 
       <div 
-        className="p-6 pt-5 flex flex-col flex-grow z-10 bg-white rounded-b-[1.5rem]"
+        className="p-6 sm:p-8 flex flex-col flex-grow z-10 bg-white rounded-b-[1.5rem] sm:rounded-b-none sm:rounded-r-[1.5rem] justify-center"
         style={{ transform: "translateZ(20px)" }}
       >
         <div className="flex flex-wrap gap-2 mb-4">
@@ -113,7 +113,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, visitBtnText,
         </p>
 
         <LiquidButton 
-          className="w-full py-3 text-xs shadow-none border border-brand-200" 
+          className="w-full sm:w-auto sm:self-start py-3 px-8 text-xs shadow-none border border-brand-200" 
           onClick={handleClick}
         >
           {isTopology ? "Launch Simulation" : visitBtnText}

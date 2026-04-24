@@ -1,5 +1,5 @@
 
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { 
   BrainCircuit, 
   Code2, 
@@ -36,6 +36,17 @@ const App: React.FC = () => {
   const [isTopologyOpen, setIsTopologyOpen] = useState(false);
   const content = CONTENT;
   const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (isTopologyOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'auto';
+    }
+    return () => {
+      document.body.style.overflow = 'auto';
+    };
+  }, [isTopologyOpen]);
 
   useGSAP(() => {
     // Timeline animations
@@ -247,9 +258,9 @@ const App: React.FC = () => {
               {/* Modal Header */}
               <div className="absolute top-0 left-0 right-0 z-50 flex justify-between items-center px-6 py-4 bg-slate-900/50 backdrop-blur-sm border-b border-white/5">
                 <div className="flex gap-2">
-                  <button onClick={() => setIsTopologyOpen(false)} className="w-3.5 h-3.5 rounded-full bg-red-500 hover:bg-red-600 transition-colors" />
-                  <div className="w-3.5 h-3.5 rounded-full bg-yellow-500" />
-                  <div className="w-3.5 h-3.5 rounded-full bg-green-500" />
+                  <button onClick={() => setIsTopologyOpen(false)} className="w-3.5 h-3.5 rounded-full bg-zinc-600 hover:bg-zinc-400 transition-colors" />
+                  <div className="w-3.5 h-3.5 rounded-full bg-zinc-700" />
+                  <div className="w-3.5 h-3.5 rounded-full bg-zinc-800" />
                 </div>
                 <div className="text-white/50 text-xs font-mono tracking-widest uppercase">Interactive Topology Simulation</div>
                 <button onClick={() => setIsTopologyOpen(false)} className="text-white/50 hover:text-white transition-colors">

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
@@ -10,8 +10,8 @@ interface LoadingScreenProps {
 export const LoadingScreen: React.FC<LoadingScreenProps> = ({ onComplete }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const logoRef = useRef<HTMLDivElement>(null);
-  const progressRef = useRef<HTMLDivElement>(null);
-  const barWrapperRef = useRef<HTMLDivElement>(null);
+  const textRef = useRef<HTMLParagraphElement>(null);
+  const [statusText, setStatusText] = useState("INITIALIZING SYSTEM...");
 
   useEffect(() => {
     document.body.style.overflow = 'hidden';
@@ -29,8 +29,7 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({ onComplete }) => {
 
     // Initial state
     gsap.set(logoRef.current, { scale: 0.8, opacity: 0 });
-    gsap.set(barWrapperRef.current, { opacity: 0, y: 10 });
-    gsap.set(progressRef.current, { scaleX: 0, transformOrigin: 'left center' });
+    gsap.set(textRef.current, { opacity: 0, y: 10 });
 
     // Logo fades in and zooms
     tl.to(logoRef.current, {
@@ -39,21 +38,19 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({ onComplete }) => {
       duration: 0.8,
       ease: "power2.out"
     })
-    // Show progress bar container
-    .to(barWrapperRef.current, {
+    // Show text container
+    .to(textRef.current, {
       y: 0,
       opacity: 1,
       duration: 0.4,
       ease: "power2.out"
     }, "-=0.4")
-    // Fill progress bar
-    .to(progressRef.current, {
-      scaleX: 1,
-      duration: 0.6,
-      ease: "power2.inOut"
-    }, "-=0.2")
-    // Hold for a moment
-    .to({}, { duration: 0.2 })
+    // Change text sequence
+    .call(() => setStatusText("ESTABLISHING TCP HANDSHAKE..."), [], "+=0.2")
+    .call(() => setStatusText("NEGOTIATING SECURE TUNNEL..."), [], "+=0.25")
+    .call(() => setStatusText("ACCESS GRANTED."), [], "+=0.25")
+    // Hold for a moment to read the final state
+    .to({}, { duration: 0.4 })
     // Slide / fade out the container
     .to(containerRef.current, {
       yPercent: -100,
@@ -77,15 +74,12 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({ onComplete }) => {
         </svg>
       </div>
       
-      <div 
-        ref={barWrapperRef}
-        className="w-24 h-[2px] bg-emerald-950/50 rounded-full overflow-hidden"
+      <p 
+        ref={textRef}
+        className="text-emerald-500/70 font-mono text-[10px] sm:text-xs tracking-[0.25em] uppercase h-4"
       >
-        <div 
-          ref={progressRef}
-          className="h-full w-full bg-emerald-500 rounded-full"
-        />
-      </div>
+        {statusText}
+      </p>
     </div>
   );
 };

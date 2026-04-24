@@ -22,12 +22,13 @@ const Topology: React.FC = () => {
     const wScale = dimensions.w / 1400;
     const hScale = dimensions.h / 650; 
     
-    // Use the smallest scale to ensure both width and height fit
-    return Math.min(Math.max(Math.min(wScale, hScale), 0.3), 1.2);
+    // Scale down a bit more to make room for UI
+    return Math.min(Math.max(Math.min(wScale, hScale), 0.2), 0.7);
   }, [dimensions]);
 
-  const xOffset = (dimensions.w - 1400 * scale) / 2;
-  const yOffset = (dimensions.h - 600 * scale) / 2;
+  // Push topology towards bottom-right by altering offsets
+  const xOffset = ((dimensions.w - 1400 * scale) / 2) + (dimensions.w > 768 ? 250 : 0);
+  const yOffset = ((dimensions.h - 600 * scale) / 2) + 50 * scale;
 
   // Helper to get scaled coordinates
   const getScaledNode = (node: Node) => ({
@@ -302,15 +303,36 @@ const Topology: React.FC = () => {
         {renderPacket()}
       </AnimatePresence>
 
+      {/* INSTRUCTIONS CARD */}
+      <div className="absolute top-1/2 -translate-y-1/2 left-6 z-40 w-[280px] md:w-[320px] pointer-events-auto hidden md:block">
+        <div className="bg-zinc-950/80 backdrop-blur-md border border-white/5 rounded-2xl p-6 shadow-2xl">
+           <h3 className="text-white/80 font-bold mb-4 font-mono tracking-widest text-sm uppercase">Quick Start</h3>
+           <ul className="space-y-4 text-xs md:text-sm text-slate-400">
+             <li className="flex gap-3 items-start">
+               <span className="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0 border border-emerald-500/30 font-mono text-[10px] mt-0.5">1</span>
+               <p>Click on the <strong className="text-emerald-400 font-normal">PC</strong> you want to send a message from.</p>
+             </li>
+             <li className="flex gap-3 items-start">
+               <span className="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0 border border-emerald-500/30 font-mono text-[10px] mt-0.5">2</span>
+               <p>Click on the destination <strong className="text-emerald-400 font-normal">PC</strong> to send the message.</p>
+             </li>
+             <li className="flex gap-3 items-start">
+               <span className="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0 border border-emerald-500/30 font-mono text-[10px] mt-0.5">3</span>
+               <p>Watch the terminal to see the packets travel through switches and routers.</p>
+             </li>
+           </ul>
+        </div>
+      </div>
+
       {/* DRAGGABLE TERMINAL */}
-      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-50 w-full max-w-[280px] md:max-w-[340px] pointer-events-none">
+      <div className="absolute top-20 right-6 z-50 w-[280px] md:w-[340px] pointer-events-none">
         <motion.div 
           drag
           dragConstraints={{
-            top: -dimensions.h + 200, 
-            left: -dimensions.w / 2,
-            right: dimensions.w / 2,
-            bottom: 0
+            top: -200, 
+            left: -dimensions.w + 100,
+            right: 200,
+            bottom: dimensions.h - 100
           }}
           dragMomentum={false}
           dragElastic={0.1}

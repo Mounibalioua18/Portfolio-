@@ -254,27 +254,21 @@ const App: React.FC = () => {
           </div>
         </section>
 
-        {/* Topology Modal */}
+        {/* Topology Sandbox Full Screen */}
         {isTopologyOpen && (
-          <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-md p-4 sm:p-8">
-            <div className="relative w-full max-w-[1400px] h-[90vh] bg-slate-950 rounded-[2rem] sm:rounded-[3rem] shadow-2xl border-4 border-slate-800 overflow-hidden flex flex-col">
-              {/* Modal Header */}
-              <div className="absolute top-0 left-0 right-0 z-50 flex justify-between items-center px-6 py-4 bg-slate-900/50 backdrop-blur-sm border-b border-white/5">
-                <div className="flex gap-2">
-                  <button onClick={() => setIsTopologyOpen(false)} className="w-3.5 h-3.5 rounded-full bg-red-500 hover:bg-red-600 transition-colors" />
-                  <div className="w-3.5 h-3.5 rounded-full bg-yellow-500" />
-                  <div className="w-3.5 h-3.5 rounded-full bg-green-500" />
-                </div>
-                <div className="text-white/50 text-xs font-mono tracking-widest uppercase">Interactive Topology Simulation</div>
-                <button onClick={() => setIsTopologyOpen(false)} className="text-white/50 hover:text-white transition-colors">
-                  <X size={20} />
-                </button>
-              </div>
-              
-              {/* Topology Sandbox */}
-              <div className="flex-1 mt-14 relative bg-slate-950">
-                <Topology />
-              </div>
+          <div className="fixed inset-0 z-[100] flex flex-col bg-black overflow-hidden">
+            {/* Header */}
+            <div className="absolute top-0 left-0 right-0 z-50 flex justify-between items-center px-6 py-4 bg-black/80 backdrop-blur-sm border-b border-white/10">
+              <div className="text-white/60 font-mono tracking-widest uppercase text-xs sm:text-sm">Interactive Topology Simulation</div>
+              <button onClick={() => setIsTopologyOpen(false)} className="flex items-center gap-2 px-5 py-2.5 bg-white/10 hover:bg-white/20 text-white hover:text-white rounded-full transition-all font-bold uppercase tracking-widest text-xs border border-white/20">
+                <span>Exit</span>
+                <X size={18} />
+              </button>
+            </div>
+            
+            {/* Topology Sandbox */}
+            <div className="flex-1 mt-16 relative bg-black">
+              <Topology />
             </div>
           </div>
         )}

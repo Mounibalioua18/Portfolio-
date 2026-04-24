@@ -70,13 +70,13 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, visitBtnText,
       
       {/* Image Container */}
       <div 
-        className="relative aspect-[4/3] sm:aspect-auto sm:w-2/5 sm:shrink-0 overflow-hidden p-6 z-10 flex items-center justify-center bg-brand-50/50 group-hover:bg-brand-50 transition-colors rounded-t-[1.5rem] sm:rounded-tr-none sm:rounded-bl-[1.5rem]"
+        className="relative aspect-[4/3] sm:aspect-auto sm:w-2/5 sm:shrink-0 overflow-hidden z-10 bg-brand-50/50 group-hover:bg-brand-50 transition-colors rounded-t-[1.5rem] sm:rounded-tr-none sm:rounded-bl-[1.5rem]"
       >
         <motion.img 
           src={project.imageUrl} 
           alt={project.title} 
           style={{ transform: "translateZ(50px)" }}
-          className="max-w-full max-h-full w-auto h-auto object-contain rounded-2xl shadow-[0_10px_30px_rgba(0,0,0,0.1)] transition-transform duration-700 group-hover:scale-105"
+          className="absolute inset-0 w-full h-full object-cover shadow-[0_10px_30px_rgba(0,0,0,0.1)] transition-transform duration-700 group-hover:scale-105"
         />
         {/* Full overlay on hover */}
         <div className="absolute inset-0 bg-white/80 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center space-x-4">

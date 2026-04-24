@@ -99,12 +99,12 @@ export const CONTENT = {
       },
       {
         id: '2',
-        title: 'Logic Engine 421337',
-        description: 'A programmable logic puzzle game featuring command palettes, execution history, and conditional logic slots to navigate a 5x5 grid.',
-        tags: ['React', 'JavaScript', 'Game Dev', 'Logic'],
-        imageUrl: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=800&auto=format&fit=crop',
-        link: '#',
-        github: 'https://github.com/Mounibalioua18/1337-logic-game'
+        title: 'ImmoElite',
+        description: 'A modern real estate platform showcasing high-end properties with a sleek, responsive design and intuitive user experience.',
+        tags: ['Real Estate', 'React', 'Tailwind CSS', 'Web Design'],
+        imageUrl: 'https://i.imgur.com/R9UQcV1.jpg',
+        link: 'https://immoelites.vercel.app/',
+        github: 'https://github.com/Mounibalioua18/IMMOELITE'
       },
       {
         id: '3',

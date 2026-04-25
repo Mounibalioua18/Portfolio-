@@ -63,7 +63,7 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({ onComplete }) => {
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(16,185,129,0.03)_0%,transparent_100%)] pointer-events-none" />
       <div className="absolute inset-0 opacity-[0.02] bg-[url('https://grainy-gradients.vercel.app/noise.svg')] pointer-events-none"></div>
 
-      <div ref={logoRef} className="relative text-emerald-500 mb-14 -mt-12 w-24 h-24 flex items-center justify-center">
+      <div ref={logoRef} className="relative text-emerald-500 mb-14 -mt-24 w-24 h-24 flex items-center justify-center">
         <svg width="100" height="100" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" className="relative z-10">
           <path d="M4 21V4L12 14L20 4V21H16V9.5L12 14.5L8 9.5V21H4Z" />
         </svg>

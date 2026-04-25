@@ -90,17 +90,17 @@ export default function Hero({ content, isReady }: HeroProps & { isReady: boolea
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-8 items-center w-full">
           
           {/* Left Side: Dramatic Typography */}
-          <div className="lg:col-span-7 flex flex-col items-start relative z-20">
-            <div className="hero-badge flex items-center gap-4 mb-8 md:mb-12">
-               <div className="w-16 h-[2px] bg-accent-500"></div>
+          <div className="lg:col-span-7 flex flex-col items-start md:items-center lg:items-start relative z-20 text-left md:text-center lg:text-left">
+            <div className="hero-badge flex items-center justify-start md:justify-center lg:justify-start gap-4 mb-8 md:mb-12">
+               <div className="w-16 h-[2px] bg-accent-500 hidden sm:block"></div>
                <span className="text-xs font-bold uppercase tracking-[0.3em] text-accent-600">{content.role}</span>
             </div>
 
-            <h1 className="flex flex-col leading-[0.85] mb-8 w-full relative">
-              <span className="hero-title-word font-serif italic text-[5.5rem] md:text-[8rem] lg:text-[10rem] xl:text-[11rem] tracking-tight text-accent-600 drop-shadow-sm self-start z-10">
+            <h1 className="flex flex-col leading-[0.85] mb-8 w-full relative items-start md:items-center lg:items-start">
+              <span className="hero-title-word font-serif italic text-[5.5rem] md:text-[8rem] lg:text-[10rem] xl:text-[11rem] tracking-tight text-accent-600 drop-shadow-sm self-start md:self-auto lg:self-start z-10">
                 Mounib
               </span>
-              <span className="hero-title-word font-display font-bold text-[5.5rem] md:text-[8rem] lg:text-[10rem] xl:text-[11.5rem] tracking-tighter text-brand-950 -mt-1 md:-mt-2 lg:-mt-3 drop-shadow-sm self-start md:ml-12 z-0">
+              <span className="hero-title-word font-display font-bold text-[5.5rem] md:text-[8rem] lg:text-[10rem] xl:text-[11.5rem] tracking-tighter text-brand-950 -mt-1 md:-mt-2 lg:-mt-3 drop-shadow-sm self-start md:self-auto lg:self-start lg:ml-12 md:mr-2 z-0">
                 Alioua
               </span>
             </h1>

@@ -81,11 +81,11 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, visitBtnText,
         {/* Full overlay on hover */}
         <div className="absolute inset-0 bg-white/80 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center space-x-4">
            {project.github && project.github !== '#' && (
-             <a href={project.github} target="_blank" rel="noopener noreferrer" className="p-4 bg-slate-900 hover:bg-brand-800 rounded-full text-white shadow-xl transition-all transform hover:-translate-y-1 hover:scale-110">
+             <a href={project.github} target="_blank" rel="noopener noreferrer" className="p-4 bg-slate-900 hover:bg-slate-800 rounded-full text-white shadow-xl transition-all transform hover:-translate-y-1 hover:scale-110">
                <Github size={20} />
              </a>
            )}
-           <button onClick={handleClick} className="p-4 bg-brand-500 hover:bg-brand-400 rounded-full text-white shadow-xl transition-all transform hover:-translate-y-1 hover:scale-110">
+           <button onClick={handleClick} className="p-4 bg-slate-900 hover:bg-brand-400 rounded-full text-white shadow-xl transition-all transform hover:-translate-y-1 hover:scale-110">
              {isTopology ? <Play size={20} /> : <ExternalLink size={20} />}
            </button>
         </div>
@@ -102,11 +102,11 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, visitBtnText,
           ))}
         </div>
         
-        <h3 className="text-2xl font-display mb-3 text-brand-900 group-hover:text-brand-600 transition-colors duration-300 tracking-tight" style={{ transform: "translateZ(30px)" }}>
+        <h3 className="text-2xl font-display mb-3 text-brand-900 group-hover:text-slate-800 transition-colors duration-300 tracking-tight" style={{ transform: "translateZ(30px)" }}>
           {project.title}
         </h3>
         
-        <p className="text-brand-700/80 text-sm font-medium leading-relaxed mb-6 flex-grow" style={{ transform: "translateZ(20px)" }}>
+        <p className="text-slate-800 text-sm font-medium leading-relaxed mb-6 flex-grow" style={{ transform: "translateZ(20px)" }}>
           {project.description}
         </p>
 

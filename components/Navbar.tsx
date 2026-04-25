@@ -66,7 +66,7 @@ const Navbar: React.FC<NavBarProps> = ({ items, className }) => {
         <a 
           href="#home"
           onClick={() => setActiveTab(items[0].name)}
-          className="w-8 h-8 sm:w-10 sm:h-10 ml-1 rounded-full bg-gradient-to-br from-brand-500/20 to-brand-600/5 flex items-center justify-center text-brand-600 border border-brand-500/20 shadow-[0_0_10px_-3px_rgba(20,184,166,0.2)] hover:border-brand-500 relative overflow-hidden group"
+          className="w-8 h-8 sm:w-10 sm:h-10 ml-1 rounded-full bg-gradient-to-br from-brand-500/20 to-brand-600/5 flex items-center justify-center text-slate-950 border border-brand-500/20 shadow-[0_0_10px_-3px_rgba(20,184,166,0.2)] hover:border-brand-500 relative overflow-hidden group"
         >
            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" className="transform group-hover:scale-110 transition-transform duration-300 relative z-10">
              <path d="M4 21V4L12 14L20 4V21H16V9.5L12 14.5L8 9.5V21H4Z" />
@@ -87,8 +87,8 @@ const Navbar: React.FC<NavBarProps> = ({ items, className }) => {
               onClick={() => setActiveTab(item.name)}
               className={cn(
                 "relative cursor-pointer text-xs sm:text-sm font-bold px-2.5 sm:px-6 py-2 sm:py-2 rounded-full transition-all duration-300 flex items-center justify-center min-w-[2.5rem]",
-                "text-slate-500 hover:text-brand-600",
-                isActive && "text-brand-600"
+                "text-slate-800 hover:text-slate-950",
+                isActive && "text-slate-950"
               )}
             >
               <span className="hidden md:inline">{item.name}</span>

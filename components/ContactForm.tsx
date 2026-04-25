@@ -146,7 +146,7 @@ const ContactForm: React.FC<ContactFormProps> = ({ content }) => {
       <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-4 text-left">
         <div className="grid md:grid-cols-2 gap-3 sm:gap-4">
           <div className="space-y-1">
-            <label className="text-[10px] font-bold uppercase tracking-widest text-slate-500 ml-1">{content.name}</label>
+            <label className="text-[10px] font-bold uppercase tracking-widest text-slate-800 ml-1">{content.name}</label>
             <input
               required
               type="text"
@@ -155,11 +155,11 @@ const ContactForm: React.FC<ContactFormProps> = ({ content }) => {
               onChange={handleChange}
               placeholder={content.namePlaceholder}
               disabled={status === 'submitting' || status === 'success'}
-              className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 sm:py-3 text-slate-900 text-sm font-medium focus:outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 transition-all placeholder:text-slate-400 disabled:opacity-50"
+              className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 sm:py-3 text-slate-900 text-sm font-medium focus:outline-none focus:border-slate-900 focus:ring-2 focus:ring-slate-900/20 transition-all placeholder:text-slate-400 disabled:opacity-50"
             />
           </div>
           <div className="space-y-1">
-            <label className="text-[10px] font-bold uppercase tracking-widest text-slate-500 ml-1">{content.email}</label>
+            <label className="text-[10px] font-bold uppercase tracking-widest text-slate-800 ml-1">{content.email}</label>
             <input
               required
               type="email"
@@ -168,13 +168,13 @@ const ContactForm: React.FC<ContactFormProps> = ({ content }) => {
               onChange={handleChange}
               placeholder={content.emailPlaceholder}
               disabled={status === 'submitting' || status === 'success'}
-              className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 sm:py-3 text-slate-900 text-sm font-medium focus:outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 transition-all placeholder:text-slate-400 disabled:opacity-50"
+              className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 sm:py-3 text-slate-900 text-sm font-medium focus:outline-none focus:border-slate-900 focus:ring-2 focus:ring-slate-900/20 transition-all placeholder:text-slate-400 disabled:opacity-50"
             />
           </div>
         </div>
         
         <div className="space-y-1">
-          <label className="text-[10px] font-bold uppercase tracking-widest text-slate-500 ml-1">{content.subject}</label>
+          <label className="text-[10px] font-bold uppercase tracking-widest text-slate-800 ml-1">{content.subject}</label>
           <input
             required
             type="text"
@@ -183,12 +183,12 @@ const ContactForm: React.FC<ContactFormProps> = ({ content }) => {
             onChange={handleChange}
             placeholder={content.subjectPlaceholder}
             disabled={status === 'submitting' || status === 'success'}
-            className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 sm:py-3 text-slate-900 text-sm font-medium focus:outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 transition-all placeholder:text-slate-400 disabled:opacity-50"
+            className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 sm:py-3 text-slate-900 text-sm font-medium focus:outline-none focus:border-slate-900 focus:ring-2 focus:ring-slate-900/20 transition-all placeholder:text-slate-400 disabled:opacity-50"
           />
         </div>
 
         <div className="space-y-1">
-          <label className="text-[10px] font-bold uppercase tracking-widest text-slate-500 ml-1">{content.message}</label>
+          <label className="text-[10px] font-bold uppercase tracking-widest text-slate-800 ml-1">{content.message}</label>
           <textarea
             required
             name="message"
@@ -197,7 +197,7 @@ const ContactForm: React.FC<ContactFormProps> = ({ content }) => {
             onChange={handleChange}
             placeholder={content.messagePlaceholder}
             disabled={status === 'submitting' || status === 'success'}
-            className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-slate-900 text-sm font-medium focus:outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 transition-all placeholder:text-slate-400 resize-none disabled:opacity-50"
+            className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-slate-900 text-sm font-medium focus:outline-none focus:border-slate-900 focus:ring-2 focus:ring-slate-900/20 transition-all placeholder:text-slate-400 resize-none disabled:opacity-50"
           />
         </div>
 
@@ -244,7 +244,7 @@ const ContactForm: React.FC<ContactFormProps> = ({ content }) => {
           </LiquidButton>
           
           {status === 'success' && (
-            <p className="status-message mt-4 text-brand-500 text-sm font-medium">
+            <p className="status-message mt-4 text-slate-950 text-sm font-medium">
               {content.success}
             </p>
           )}

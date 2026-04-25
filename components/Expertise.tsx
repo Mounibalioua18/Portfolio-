@@ -67,9 +67,9 @@ export default function Expertise() {
           
           {/* Main Title Area */}
           <div className="lg:w-1/2 space-y-6" ref={textRef}>
-            <h2 className="expertise-title text-sm font-bold tracking-[0.3em] uppercase text-brand-500">Innovation & Logic</h2>
+            <h2 className="expertise-title text-sm font-bold tracking-[0.3em] uppercase text-slate-300">Innovation & Logic</h2>
             <h3 className="expertise-title font-display text-5xl lg:text-7xl font-bold leading-tight tracking-tight text-white">
-              Crafting <span className="text-brand-500 underline decoration-8 underline-offset-8">Intelligent</span> Experiences
+              Crafting <span className="text-slate-300 underline decoration-8 underline-offset-8">Intelligent</span> Experiences
             </h3>
             <p className="expertise-title text-slate-400 text-lg md:text-xl leading-relaxed max-w-lg font-medium mt-8">
               Moving beyond just writing code, I architect digital solutions that breathe life into ideas. From complex state logic down to buttery smooth animations.
@@ -80,14 +80,14 @@ export default function Expertise() {
                 className="border-l-4 border-brand-500 pl-6 cursor-default"
               >
                 <h4 className="text-5xl font-black text-white drop-shadow-lg">4+</h4>
-                <p className="text-sm text-slate-500 uppercase tracking-widest mt-2 font-bold">Years Coding</p>
+                <p className="text-sm text-slate-400 uppercase tracking-widest mt-2 font-bold">Years Coding</p>
               </motion.div>
               <motion.div 
                 whileHover={{ scale: 1.05, x: 10 }}
                 className="border-l-4 border-brand-500 pl-6 cursor-default"
               >
                 <h4 className="text-5xl font-black text-white drop-shadow-lg">20+</h4>
-                <p className="text-sm text-slate-500 uppercase tracking-widest mt-2 font-bold">Projects Built</p>
+                <p className="text-sm text-slate-400 uppercase tracking-widest mt-2 font-bold">Projects Built</p>
               </motion.div>
             </div>
           </div>

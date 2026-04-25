@@ -216,7 +216,7 @@ const Topology: React.FC = () => {
           <motion.div 
             initial={{ opacity: 0, scale: 0.5 }}
             animate={{ opacity: 1, scale: 1 }}
-            className="absolute -top-14 px-3 py-1 rounded text-[10px] font-bold border border-brand-500/50 text-brand-400 bg-zinc-900 whitespace-nowrap tracking-widest uppercase"
+            className="absolute -top-14 px-3 py-1 rounded text-[10px] font-bold border border-brand-500/50 text-slate-300 bg-zinc-900 whitespace-nowrap tracking-widest uppercase"
           >
             {isAck ? 'ACK RECEIVED' : 'DATA SIGNAL'}
           </motion.div>
@@ -309,15 +309,15 @@ const Topology: React.FC = () => {
            <h3 className="text-white/80 font-bold mb-4 font-mono tracking-widest text-sm uppercase">Quick Start</h3>
            <ul className="space-y-4 text-xs md:text-sm text-slate-400">
              <li className="flex gap-3 items-start">
-               <span className="w-6 h-6 rounded-full bg-brand-500/20 text-brand-400 flex items-center justify-center shrink-0 border border-brand-500/30 font-mono text-[10px] mt-0.5">1</span>
-               <p>Click on the <strong className="text-brand-400 font-normal">PC</strong> you want to send a message from.</p>
+               <span className="w-6 h-6 rounded-full bg-slate-800 text-slate-300 flex items-center justify-center shrink-0 border border-brand-500/30 font-mono text-[10px] mt-0.5">1</span>
+               <p>Click on the <strong className="text-slate-300 font-normal">PC</strong> you want to send a message from.</p>
              </li>
              <li className="flex gap-3 items-start">
-               <span className="w-6 h-6 rounded-full bg-brand-500/20 text-brand-400 flex items-center justify-center shrink-0 border border-brand-500/30 font-mono text-[10px] mt-0.5">2</span>
-               <p>Click on the destination <strong className="text-brand-400 font-normal">PC</strong> to send the message.</p>
+               <span className="w-6 h-6 rounded-full bg-slate-800 text-slate-300 flex items-center justify-center shrink-0 border border-brand-500/30 font-mono text-[10px] mt-0.5">2</span>
+               <p>Click on the destination <strong className="text-slate-300 font-normal">PC</strong> to send the message.</p>
              </li>
              <li className="flex gap-3 items-start">
-               <span className="w-6 h-6 rounded-full bg-brand-500/20 text-brand-400 flex items-center justify-center shrink-0 border border-brand-500/30 font-mono text-[10px] mt-0.5">3</span>
+               <span className="w-6 h-6 rounded-full bg-slate-800 text-slate-300 flex items-center justify-center shrink-0 border border-brand-500/30 font-mono text-[10px] mt-0.5">3</span>
                <p>Watch the terminal to see the packets travel through switches and routers.</p>
              </li>
            </ul>
@@ -351,17 +351,17 @@ const Topology: React.FC = () => {
             >
               <div className="flex items-center gap-3">
                 <div className="flex gap-1.5">
-                  <div className="w-2.5 h-2.5 rounded-full bg-brand-500/20 border border-brand-500/50" />
+                  <div className="w-2.5 h-2.5 rounded-full bg-slate-800 border border-brand-500/50" />
                   <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/20 border border-yellow-500/50" />
-                  <div className="w-2.5 h-2.5 rounded-full bg-brand-500/20 border border-brand-500/50" />
+                  <div className="w-2.5 h-2.5 rounded-full bg-slate-800 border border-brand-500/50" />
                 </div>
                 <div className="flex flex-col">
-                  <span className="text-[11px] font-bold text-brand-400 uppercase tracking-widest leading-none">Net-Watcher</span>
+                  <span className="text-[11px] font-bold text-slate-300 uppercase tracking-widest leading-none">Net-Watcher</span>
                 </div>
               </div>
               <div className="flex items-center gap-2">
                 <div className="w-2 h-2 rounded-full bg-brand-500" />
-                <span className="text-[10px] text-brand-500/60 font-mono">LIVE</span>
+                <span className="text-[10px] text-slate-400 font-mono">LIVE</span>
               </div>
             </div>
 
@@ -377,8 +377,8 @@ const Topology: React.FC = () => {
                   key={i} 
                   className="flex gap-2 text-[11px] md:text-[12px] leading-tight"
                 >
-                  <span className="text-brand-500/40 select-none">{'>'}</span>
-                  <span className={`${i === 0 ? 'text-brand-300 font-bold' : 'text-brand-500/70'}`}>
+                  <span className="text-slate-400 select-none">{'>'}</span>
+                  <span className={`${i === 0 ? 'text-slate-400 font-bold' : 'text-slate-400'}`}>
                     {log}
                   </span>
                 </motion.div>
@@ -387,7 +387,7 @@ const Topology: React.FC = () => {
             </div>
 
             {/* Terminal Footer */}
-            <div className="px-4 py-2 border-t border-brand-500/10 bg-brand-950/30 flex justify-between items-center text-[10px] text-brand-600/50 font-mono uppercase">
+            <div className="px-4 py-2 border-t border-brand-500/10 bg-brand-950/30 flex justify-between items-center text-[10px] text-slate-400 font-mono uppercase">
               <span>root@portfolio:~#</span>
               <span className="animate-pulse">_</span>
             </div>

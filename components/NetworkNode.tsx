@@ -120,12 +120,12 @@ const NetworkNode: React.FC<NetworkNodeProps> = ({ node, isHovered, onHover, onC
 
       <div className="mt-3 text-center pointer-events-none">
         <p className={`text-[12px] font-bold transition-all duration-300 tracking-wider ${
-          isActive ? 'text-brand-400' : isSelected ? 'text-brand-400' : 'text-slate-300'
-        } group-hover:text-brand-300`}>
+          isActive ? 'text-slate-100' : isSelected ? 'text-slate-100' : 'text-slate-300'
+        } group-hover:text-slate-100`}>
           {node.name}
         </p>
         <p className={`text-[10px] font-mono tracking-wider transition-all duration-500 ${
-          isActive ? 'opacity-100 text-brand-500' : 'opacity-0 group-hover:opacity-100 text-brand-500/60'
+          isActive ? 'opacity-100 text-slate-400' : 'opacity-0 group-hover:opacity-100 text-slate-400/60'
         }`}>
           {node.ip}
         </p>

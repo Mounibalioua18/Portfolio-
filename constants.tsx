@@ -93,7 +93,7 @@ export const CONTENT = {
         title: 'Interactive Network Topology',
         description: 'An interactive packet tracer and visual networking sandbox. Experience how packets route and navigate through switches and routers in real time.',
         tags: ['Networks', 'React', 'Simulation', 'GSAP'],
-        imageUrl: 'https://images.unsplash.com/photo-1544197150-b99a580bb7a8?q=80&w=800&auto=format&fit=crop',
+        imageUrl: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=800&auto=format&fit=crop',
         link: '#topology',
         github: '#'
       },

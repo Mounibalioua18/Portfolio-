@@ -74,7 +74,7 @@ export default function Hero({ content, isReady }: HeroProps & { isReady: boolea
   }, { scope: containerRef, dependencies: [isReady] });
 
   return (
-    <section id="home" className="relative w-full min-h-screen bg-white flex flex-col justify-center text-brand-900 selection:bg-accent-200/50 overflow-hidden" ref={containerRef}>
+    <section id="home" className="relative w-full min-h-screen bg-[#FBFBFD] flex flex-col justify-center text-brand-900 selection:bg-accent-200/50 overflow-hidden" ref={containerRef}>
       
       {/* Dramatic Cinematic Background Elements */}
       <div className="absolute top-[-10%] right-[-5%] w-[800px] h-[800px] rounded-full border-[1px] border-brand-200/40 opacity-50 pointer-events-none hero-deco scale-0"></div>
@@ -83,7 +83,7 @@ export default function Hero({ content, isReady }: HeroProps & { isReady: boolea
       <FloatingElements />
 
       {/* Starting Overlay */}
-      <div className="hero-overlay absolute inset-0 z-50 bg-white pointer-events-none"></div>
+      <div className="hero-overlay absolute inset-0 z-50 bg-[#FBFBFD] pointer-events-none"></div>
 
       <div className="w-full max-w-[1500px] mx-auto px-6 md:px-12 xl:px-16 pt-32 pb-20 relative z-10 flex-grow flex flex-col justify-center">
         

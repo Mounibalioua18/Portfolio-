@@ -31,14 +31,14 @@ const NetworkNode: React.FC<NetworkNodeProps> = ({ node, isHovered, onHover, onC
       return (
         <>
           <motion.div
-            className="absolute inset-0 rounded-full border-4 border-emerald-400/50"
+            className="absolute inset-0 rounded-full border-4 border-brand-400/50"
             initial={{ scale: 0.8, opacity: 1 }}
             animate={{ scale: 2, opacity: 0 }}
             transition={{ duration: 0.8, repeat: Infinity, ease: "easeOut" }}
           />
           {node.type === 'ROUTER' && (
             <motion.div
-              className="absolute inset-0 rounded-full border-2 border-dashed border-emerald-400"
+              className="absolute inset-0 rounded-full border-2 border-dashed border-brand-400"
               animate={{ rotate: 360 }}
               transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
             />
@@ -51,7 +51,7 @@ const NetworkNode: React.FC<NetworkNodeProps> = ({ node, isHovered, onHover, onC
       if (node.type === 'PC') {
         return (
           <motion.div
-            className="absolute inset-0 rounded-full border-2 border-teal-400"
+            className="absolute inset-0 rounded-full border-2 border-brand-400"
             initial={{ scale: 1, opacity: 0.8 }}
             animate={{ scale: 1.8, opacity: 0 }}
             transition={{ duration: 1.5, repeat: Infinity, ease: "easeOut" }}
@@ -62,7 +62,7 @@ const NetworkNode: React.FC<NetworkNodeProps> = ({ node, isHovered, onHover, onC
       if (node.type === 'ROUTER') {
         return (
           <motion.div
-            className="absolute inset-0 rounded-full border-2 border-dashed border-teal-500"
+            className="absolute inset-0 rounded-full border-2 border-dashed border-brand-500"
             initial={{ rotate: 0 }}
             animate={{ rotate: 360 }}
             transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
@@ -74,7 +74,7 @@ const NetworkNode: React.FC<NetworkNodeProps> = ({ node, isHovered, onHover, onC
           return (
               <div className="absolute inset-0 flex justify-center items-center">
                   <motion.div 
-                      className="w-16 h-16 bg-teal-500/10 rounded-lg"
+                      className="w-16 h-16 bg-brand-500/10 rounded-lg"
                       animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.6, 0.3] }}
                       transition={{ duration: 2, repeat: Infinity }}
                   />
@@ -107,9 +107,9 @@ const NetworkNode: React.FC<NetworkNodeProps> = ({ node, isHovered, onHover, onC
         
         <motion.div
           className={`relative z-10 p-5 rounded-2xl transition-all duration-500 ${
-            isActive ? 'bg-emerald-500/20 scale-125' :
-            isSelected ? 'bg-red-500/20 scale-110' : 
-            isHovered ? 'bg-teal-500/10 scale-110 border-teal-500/50' : 'bg-white/5 border-white/5'
+            isActive ? 'bg-brand-500/20 scale-125' :
+            isSelected ? 'bg-brand-500/20 scale-110' : 
+            isHovered ? 'bg-brand-500/10 scale-110 border-brand-500/50' : 'bg-white/5 border-white/5'
           } border`}
           whileHover={{ scale: 1.15 }}
           whileTap={{ scale: 0.95 }}
@@ -120,12 +120,12 @@ const NetworkNode: React.FC<NetworkNodeProps> = ({ node, isHovered, onHover, onC
 
       <div className="mt-3 text-center pointer-events-none">
         <p className={`text-[12px] font-bold transition-all duration-300 tracking-wider ${
-          isActive ? 'text-emerald-400' : isSelected ? 'text-red-400' : 'text-slate-300'
-        } group-hover:text-teal-300`}>
+          isActive ? 'text-brand-400' : isSelected ? 'text-brand-400' : 'text-slate-300'
+        } group-hover:text-brand-300`}>
           {node.name}
         </p>
         <p className={`text-[10px] font-mono tracking-wider transition-all duration-500 ${
-          isActive ? 'opacity-100 text-emerald-500' : 'opacity-0 group-hover:opacity-100 text-teal-500/60'
+          isActive ? 'opacity-100 text-brand-500' : 'opacity-0 group-hover:opacity-100 text-brand-500/60'
         }`}>
           {node.ip}
         </p>

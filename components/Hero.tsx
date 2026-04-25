@@ -74,7 +74,7 @@ export default function Hero({ content, isReady }: HeroProps & { isReady: boolea
   }, { scope: containerRef, dependencies: [isReady] });
 
   return (
-    <section id="home" className="relative w-full min-h-screen bg-[#FBFBFD] flex flex-col justify-center text-brand-900 selection:bg-accent-200/50 overflow-hidden" ref={containerRef}>
+    <section id="home" className="relative w-full min-h-screen bg-white flex flex-col justify-center text-brand-900 selection:bg-accent-200/50 overflow-hidden" ref={containerRef}>
       
       {/* Dramatic Cinematic Background Elements */}
       <div className="absolute top-[-10%] right-[-5%] w-[800px] h-[800px] rounded-full border-[1px] border-brand-200/40 opacity-50 pointer-events-none hero-deco scale-0"></div>
@@ -83,7 +83,7 @@ export default function Hero({ content, isReady }: HeroProps & { isReady: boolea
       <FloatingElements />
 
       {/* Starting Overlay */}
-      <div className="hero-overlay absolute inset-0 z-50 bg-[#FBFBFD] pointer-events-none"></div>
+      <div className="hero-overlay absolute inset-0 z-50 bg-white pointer-events-none"></div>
 
       <div className="w-full max-w-[1500px] mx-auto px-6 md:px-12 xl:px-16 pt-32 pb-20 relative z-10 flex-grow flex flex-col justify-center">
         
@@ -92,8 +92,8 @@ export default function Hero({ content, isReady }: HeroProps & { isReady: boolea
           {/* Left Side: Dramatic Typography */}
           <div className="lg:col-span-7 flex flex-col items-start md:items-center lg:items-start relative z-20 text-left md:text-center lg:text-left">
             <div className="hero-badge flex items-center justify-start md:justify-center lg:justify-start gap-4 mb-8 md:mb-12">
-               <div className="w-16 h-[2px] bg-accent-500 hidden sm:block"></div>
-               <span className="text-xs font-bold uppercase tracking-[0.3em] text-accent-600">{content.role}</span>
+               <div className="w-16 h-[2px] bg-brand-800 hidden sm:block"></div>
+               <span className="text-xs font-bold uppercase tracking-[0.3em] text-brand-800">{content.role}</span>
             </div>
 
             <h1 className="flex flex-col leading-[0.85] mb-8 w-full relative items-start md:items-center lg:items-start">
@@ -106,8 +106,8 @@ export default function Hero({ content, isReady }: HeroProps & { isReady: boolea
             </h1>
 
             <div className="hero-title-word w-full max-w-xl mb-12 mt-4 md:mt-8">
-              <p className="text-brand-600 font-medium text-xl md:text-2xl leading-relaxed">
-                I am a passionate <strong className="text-brand-950 font-bold border-b-2 border-accent-400">Software Engineer</strong> focused on creating elegant, high-performance web experiences. 
+              <p className="text-brand-800 font-medium text-xl md:text-2xl leading-relaxed">
+                I am a passionate <strong className="text-brand-950 font-bold border-b-2 border-brand-800">Software Engineer</strong> focused on creating elegant, high-performance web experiences. 
                 <br className="hidden md:block" /> Deep systemic architecture meets digital art.
               </p>
             </div>
@@ -115,14 +115,14 @@ export default function Hero({ content, isReady }: HeroProps & { isReady: boolea
             {/* Minimalist Data Point */}
             <div className="hero-bento flex items-center gap-6 mt-4 group">
                <div className="w-16 h-16 rounded-full border border-brand-200 flex items-center justify-center relative overflow-hidden shrink-0">
-                 <div className="absolute inset-0 bg-accent-50 scale-0 group-hover:scale-100 transition-transform duration-500 rounded-full"></div>
-                 <Server size={20} className="text-accent-600 relative z-10 group-hover:rotate-12 transition-transform duration-500" />
+                 <div className="absolute inset-0 bg-brand-50 scale-0 group-hover:scale-100 transition-transform duration-500 rounded-full"></div>
+                 <Server size={20} className="text-brand-600 relative z-10 group-hover:rotate-12 transition-transform duration-500" />
                </div>
                <div>
-                 <p className="text-[10px] font-bold text-brand-400 uppercase tracking-[0.25em] mb-1 group-hover:text-accent-600 transition-colors">
+                 <p className="text-[10px] font-bold text-brand-500 uppercase tracking-[0.25em] mb-1 group-hover:text-brand-800 transition-colors">
                    Current Focus
                  </p>
-                 <p className="text-brand-800 font-serif italic text-lg md:text-xl leading-snug max-w-[280px]">
+                 <p className="text-brand-900 font-serif italic text-lg md:text-xl leading-snug max-w-[280px]">
                    Master's in Networks & Distributed Systems.
                  </p>
                </div>
@@ -138,20 +138,20 @@ export default function Hero({ content, isReady }: HeroProps & { isReady: boolea
                
                {/* Data Node 1 */}
                <div className="hero-bento relative group">
-                 <div className="absolute -left-8 lg:-left-[5.35rem] top-2 w-3 h-3 bg-white border-2 border-accent-500 rounded-full hidden lg:block group-hover:scale-150 transition-transform duration-500"></div>
-                 <span className="text-accent-500 font-mono text-sm tracking-widest block mb-4 hover:text-accent-600 transition-colors">01 // INFRASTRUCTURE</span>
+                 <div className="absolute -left-8 lg:-left-[5.35rem] top-2 w-3 h-3 bg-white border-2 border-brand-800 rounded-full hidden lg:block group-hover:scale-150 transition-transform duration-500"></div>
+                 <span className="text-brand-600 font-mono text-sm tracking-widest block mb-4 group-hover:text-brand-800 transition-colors">01 // INFRASTRUCTURE</span>
                  <h4 className="text-3xl md:text-4xl font-display font-light text-brand-950 tracking-tight mb-4 group-hover:-translate-y-1 transition-transform duration-500">
                    {content.infra}
                  </h4>
-                 <p className="text-brand-600 leading-relaxed font-medium text-lg">
+                 <p className="text-brand-700 leading-relaxed font-medium text-lg">
                    Designing reliable backend architectures and data systems to ensure your application can handle scale effortlessly.
                  </p>
                </div>
 
                {/* Data Node 2 */}
                <div className="hero-bento relative group">
-                 <div className="absolute -left-8 lg:-left-[5.35rem] top-2 w-3 h-3 bg-white border-2 border-brand-300 rounded-full hidden lg:block group-hover:bg-brand-300 transition-colors duration-500"></div>
-                 <span className="text-brand-400 font-mono text-sm tracking-widest block mb-4 group-hover:text-brand-600 transition-colors">02 // DEVELOPMENT STACK</span>
+                 <div className="absolute -left-8 lg:-left-[5.35rem] top-2 w-3 h-3 bg-white border-2 border-brand-400 rounded-full hidden lg:block group-hover:bg-brand-400 transition-colors duration-500"></div>
+                 <span className="text-brand-500 font-mono text-sm tracking-widest block mb-4 group-hover:text-brand-700 transition-colors">02 // DEVELOPMENT STACK</span>
                  <h4 className="text-3xl md:text-4xl font-display font-light text-brand-950 tracking-tight mb-6 group-hover:-translate-y-1 transition-transform duration-500">
                    {content.system}
                  </h4>
@@ -166,12 +166,12 @@ export default function Hero({ content, isReady }: HeroProps & { isReady: boolea
 
                {/* Data Node 3 - Philosophy node */}
                <div className="hero-bento relative group pt-2">
-                 <div className="absolute -left-8 lg:-left-[5.35rem] top-4 w-3 h-3 bg-white border-2 border-accent-600 rounded-full hidden lg:block group-hover:scale-150 transition-transform duration-500"></div>
-                 <span className="text-accent-600 font-mono text-sm tracking-widest block mb-4 group-hover:text-accent-500 transition-colors">03 // PHILOSOPHY</span>
+                 <div className="absolute -left-8 lg:-left-[5.35rem] top-4 w-3 h-3 bg-white border-2 border-brand-800 rounded-full hidden lg:block group-hover:scale-150 transition-transform duration-500"></div>
+                 <span className="text-brand-600 font-mono text-sm tracking-widest block mb-4 group-hover:text-brand-800 transition-colors">03 // PHILOSOPHY</span>
                  <h4 className="text-3xl md:text-4xl font-display font-light text-brand-950 tracking-tight mb-4 group-hover:-translate-y-1 transition-transform duration-500">
                    Precision & Logic
                  </h4>
-                 <p className="text-brand-600 leading-relaxed font-medium text-lg">
+                 <p className="text-brand-700 leading-relaxed font-medium text-lg">
                    {content.subtitlePrefix} {content.subtitleSuffix}
                  </p>
                </div>

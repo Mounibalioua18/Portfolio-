@@ -85,7 +85,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, visitBtnText,
                <Github size={20} />
              </a>
            )}
-           <button onClick={handleClick} className="p-4 bg-brand-500 hover:bg-amber-400 rounded-full text-white shadow-xl transition-all transform hover:-translate-y-1 hover:scale-110">
+           <button onClick={handleClick} className="p-4 bg-brand-500 hover:bg-brand-400 rounded-full text-white shadow-xl transition-all transform hover:-translate-y-1 hover:scale-110">
              {isTopology ? <Play size={20} /> : <ExternalLink size={20} />}
            </button>
         </div>

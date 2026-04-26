@@ -79,18 +79,19 @@ const Navbar: React.FC<NavBarProps> = ({ items, className }) => {
           className
         )}
       >
-        <div className="flex items-center justify-center gap-1 lg:gap-3 bg-white/90 backdrop-blur-xl border border-slate-900 shadow-md py-1.5 px-2 rounded-full">
+        <div className="flex items-center justify-center gap-1 lg:gap-3 bg-white/90 backdrop-blur-xl border border-slate-900/10 shadow-[0_8px_30px_rgb(0,0,0,0.12)] py-1.5 px-2 rounded-full">
           
           {/* Logo */}
           <a 
             href="#home"
             onClick={() => setActiveTab('')}
             className={cn(
-              "px-3 py-1.5 ml-1 rounded-full flex items-center justify-center transition-all duration-300 relative group font-bold tracking-tight text-sm md:text-base cursor-pointer",
+              "px-3 py-1.5 ml-1 rounded-full flex items-center justify-center transition-all duration-300 relative group font-serif italic font-bold tracking-tight text-xl cursor-pointer",
               activeTab === '' ? 'text-brand-600' : 'text-slate-900 hover:text-brand-600'
             )}
           >
-             <span>mounib.dev</span>
+            <span>Mounib</span>
+            <span className="text-sm text-slate-400 font-sans not-italic group-hover:text-brand-500 transition-colors">.dev</span>
              
              {activeTab === '' && (
                <motion.div
@@ -150,16 +151,16 @@ const Navbar: React.FC<NavBarProps> = ({ items, className }) => {
       {/* 
         Mobile Header & Hamburger (below md)
       */}
-      <div className="fixed top-4 left-4 right-4 z-[100] flex items-center justify-between bg-white/95 backdrop-blur-xl border border-slate-900 shadow-md rounded-2xl p-2 md:hidden pointer-events-auto">
+      <div className="fixed top-4 left-4 right-4 z-[100] flex items-center justify-between bg-white/95 backdrop-blur-xl border border-slate-900/10 shadow-[0_8px_30px_rgb(0,0,0,0.12)] rounded-2xl p-2 md:hidden pointer-events-auto">
         
         {/* Mobile Logo */}
         <a 
           href="#home"
           onClick={() => handleMobileNavClick('')}
-          className="px-3 py-2 font-mono font-bold text-xl tracking-tight group flex items-baseline"
+          className="px-3 py-2 font-serif italic font-bold text-2xl tracking-tight group flex items-baseline"
         >
-          <span className="text-brand-600">mounib</span>
-          <span className="text-slate-400 text-lg transition-colors group-hover:text-brand-500">.dev</span>
+          <span className="text-brand-600">Mounib</span>
+          <span className="text-slate-400 text-lg transition-colors group-hover:text-brand-500 font-sans not-italic">.dev</span>
         </a>
 
         {/* Hamburger Toggle */}
@@ -193,7 +194,7 @@ const Navbar: React.FC<NavBarProps> = ({ items, className }) => {
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
               transition={{ duration: 0.2, ease: "easeOut" }}
-              className="fixed top-20 right-4 z-[100] w-56 bg-white/95 backdrop-blur-xl border border-slate-900 rounded-2xl shadow-2xl p-2 flex flex-col md:hidden"
+              className="fixed top-20 right-4 z-[100] w-56 bg-white/95 backdrop-blur-xl border border-slate-900/10 rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] p-2 flex flex-col md:hidden"
             >
               {items.map((item) => {
                 const Icon = item.icon;

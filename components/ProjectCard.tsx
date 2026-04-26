@@ -102,7 +102,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, visitBtnText,
           ))}
         </div>
         
-        <h3 className="text-2xl font-display mb-3 text-brand-900 group-hover:text-slate-950 transition-colors duration-300 tracking-tight" style={{ transform: "translateZ(30px)" }}>
+        <h3 className="text-2xl font-display mb-3 text-slate-900 group-hover:text-slate-950 transition-colors duration-300 tracking-tight" style={{ transform: "translateZ(30px)" }}>
           {project.title}
         </h3>
         

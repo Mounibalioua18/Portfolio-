@@ -74,7 +74,7 @@ export default function Hero({ content, isReady }: HeroProps & { isReady: boolea
   }, { scope: containerRef, dependencies: [isReady] });
 
   return (
-    <section id="home" className="relative w-full min-h-screen bg-white flex flex-col justify-center text-brand-900 selection:bg-slate-200/50 overflow-hidden" ref={containerRef}>
+    <section id="home" className="relative w-full min-h-screen bg-white flex flex-col justify-center text-slate-900 selection:bg-slate-200/50 overflow-hidden" ref={containerRef}>
       
       {/* Dramatic Cinematic Background Elements */}
       <div className="absolute top-[-10%] right-[-5%] w-[800px] h-[800px] rounded-full border-[1px] border-brand-200/40 opacity-50 pointer-events-none hero-deco scale-0"></div>
@@ -100,29 +100,29 @@ export default function Hero({ content, isReady }: HeroProps & { isReady: boolea
               <span className="hero-title-word font-serif italic text-[5.5rem] md:text-[8rem] lg:text-[10rem] xl:text-[11rem] tracking-tight text-blue-950 drop-shadow-sm self-start md:self-auto lg:self-start z-10">
                 Mounib
               </span>
-              <span className="hero-title-word font-display font-bold text-[5.5rem] md:text-[8rem] lg:text-[10rem] xl:text-[11.5rem] tracking-tighter text-brand-950 -mt-1 md:-mt-2 lg:-mt-3 drop-shadow-sm self-start md:self-auto lg:self-start lg:ml-12 md:mr-2 z-0">
+              <span className="hero-title-word font-display font-bold text-[5.5rem] md:text-[8rem] lg:text-[10rem] xl:text-[11.5rem] tracking-tighter text-slate-950 -mt-1 md:-mt-2 lg:-mt-3 drop-shadow-sm self-start md:self-auto lg:self-start lg:ml-12 md:mr-2 z-0">
                 Alioua
               </span>
             </h1>
 
             <div className="hero-title-word w-full max-w-xl mb-12 mt-4 md:mt-8">
               <p className="text-blue-950 font-medium text-xl md:text-2xl leading-relaxed">
-                I am a passionate <strong className="text-brand-950 font-bold border-b-2 border-blue-950">Software Engineer</strong> focused on creating elegant, high-performance web experiences. 
+                I am a passionate <strong className="text-slate-950 font-bold border-b-2 border-blue-950">Software Engineer</strong> focused on creating elegant, high-performance web experiences. 
                 <br className="hidden md:block" /> Deep systemic architecture meets digital art.
               </p>
             </div>
             
             {/* Minimalist Data Point */}
             <div className="hero-bento flex items-center gap-6 mt-4 group">
-               <div className="w-16 h-16 rounded-full border border-brand-200 flex items-center justify-center relative overflow-hidden shrink-0">
-                 <div className="absolute inset-0 bg-brand-50 scale-0 group-hover:scale-100 transition-transform duration-500 rounded-full"></div>
+               <div className="w-16 h-16 rounded-full border border-blue-950/20 flex items-center justify-center relative overflow-hidden shrink-0">
+                 <div className="absolute inset-0 bg-blue-950/5 scale-0 group-hover:scale-100 transition-transform duration-500 rounded-full"></div>
                  <Server size={20} className="text-blue-950 relative z-10 group-hover:rotate-12 transition-transform duration-500" />
                </div>
                <div>
                  <p className="text-[10px] font-bold text-blue-950 uppercase tracking-[0.25em] mb-1 group-hover:text-blue-950 transition-colors">
                    Current Focus
                  </p>
-                 <p className="text-brand-900 font-serif italic text-lg md:text-xl leading-snug max-w-[280px]">
+                 <p className="text-slate-900 font-serif italic text-lg md:text-xl leading-snug max-w-[280px]">
                    Master's in Networks & Distributed Systems.
                  </p>
                </div>
@@ -132,7 +132,7 @@ export default function Hero({ content, isReady }: HeroProps & { isReady: boolea
           {/* Right Side: Abstract Structural Information */}
           <div className="lg:col-span-5 relative h-full flex flex-col justify-center mt-16 lg:mt-0">
             {/* Dramatic vertical line separator on Desktop */}
-            <div className="hidden lg:block absolute left-[2rem] top-8 bottom-8 w-[1px] bg-gradient-to-b from-brand-200 via-brand-200 to-transparent hero-line origin-top transform scale-y-0"></div>
+            <div className="hidden lg:block absolute left-[2rem] top-8 bottom-8 w-[1px] bg-gradient-to-b from-blue-950 via-blue-900\/50 to-transparent hero-line origin-top transform scale-y-0"></div>
             
             <div className="space-y-16 lg:pl-20 relative">
                
@@ -140,7 +140,7 @@ export default function Hero({ content, isReady }: HeroProps & { isReady: boolea
                <div className="hero-bento relative group">
                  <div className="absolute -left-8 lg:-left-[5.35rem] top-2 w-3 h-3 bg-white border-2 border-blue-950 rounded-full hidden lg:block group-hover:scale-150 transition-transform duration-500"></div>
                  <span className="text-blue-950 font-mono text-sm tracking-widest block mb-4 group-hover:text-blue-950 transition-colors">01 // INFRASTRUCTURE</span>
-                 <h4 className="text-3xl md:text-4xl font-display font-light text-brand-950 tracking-tight mb-4 group-hover:-translate-y-1 transition-transform duration-500">
+                 <h4 className="text-3xl md:text-4xl font-display font-light text-slate-950 tracking-tight mb-4 group-hover:-translate-y-1 transition-transform duration-500">
                    {content.infra}
                  </h4>
                  <p className="text-blue-950 leading-relaxed font-medium text-lg">
@@ -152,7 +152,7 @@ export default function Hero({ content, isReady }: HeroProps & { isReady: boolea
                <div className="hero-bento relative group">
                  <div className="absolute -left-8 lg:-left-[5.35rem] top-2 w-3 h-3 bg-white border-2 border-blue-950 rounded-full hidden lg:block group-hover:bg-blue-950 transition-colors duration-500"></div>
                  <span className="text-blue-950 font-mono text-sm tracking-widest block mb-4 group-hover:text-blue-950 transition-colors">02 // DEVELOPMENT STACK</span>
-                 <h4 className="text-3xl md:text-4xl font-display font-light text-brand-950 tracking-tight mb-6 group-hover:-translate-y-1 transition-transform duration-500">
+                 <h4 className="text-3xl md:text-4xl font-display font-light text-slate-950 tracking-tight mb-6 group-hover:-translate-y-1 transition-transform duration-500">
                    {content.system}
                  </h4>
                  <div className="flex flex-wrap gap-3">
@@ -168,7 +168,7 @@ export default function Hero({ content, isReady }: HeroProps & { isReady: boolea
                <div className="hero-bento relative group pt-2">
                  <div className="absolute -left-8 lg:-left-[5.35rem] top-4 w-3 h-3 bg-white border-2 border-blue-950 rounded-full hidden lg:block group-hover:scale-150 transition-transform duration-500"></div>
                  <span className="text-blue-950 font-mono text-sm tracking-widest block mb-4 group-hover:text-blue-950 transition-colors">03 // PHILOSOPHY</span>
-                 <h4 className="text-3xl md:text-4xl font-display font-light text-brand-950 tracking-tight mb-4 group-hover:-translate-y-1 transition-transform duration-500">
+                 <h4 className="text-3xl md:text-4xl font-display font-light text-slate-950 tracking-tight mb-4 group-hover:-translate-y-1 transition-transform duration-500">
                    Precision & Logic
                  </h4>
                  <p className="text-blue-950 leading-relaxed font-medium text-lg">

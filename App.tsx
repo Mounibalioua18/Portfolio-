@@ -29,6 +29,8 @@ import ContactForm from './components/ContactForm';
 import Expertise from './components/Expertise';
 import Topology from './components/Topology';
 import { LoadingScreen } from './components/LoadingScreen';
+import Insights from './components/Insights';
+import TechTicker from './components/TechTicker';
 import { SKILLS, CONTENT, SOCIALS } from './constants';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -175,13 +177,14 @@ const App: React.FC = () => {
         <div className="w-full h-px border-b border-brand-100" />
 
                 <Expertise />
+        <TechTicker />
 
         <section id="projects" className="relative py-32 overflow-visible bg-slate-50 z-10 border-t border-brand-100">
           <div className="max-w-7xl mx-auto px-6 relative z-20">
             <div className="flex flex-col md:flex-row md:items-end justify-between mb-20 gap-8">
               <div className="max-w-xl">
                 <h2 className="text-sm font-bold tracking-[0.3em] uppercase text-slate-950 mb-6">{content.projects.badge}</h2>
-                <h3 className="font-display text-5xl md:text-6xl text-brand-900 tracking-tight">
+                <h3 className="font-display text-5xl md:text-6xl text-slate-900 tracking-tight">
                   {content.projects.title} <span className="text-slate-950 italic">{content.projects.titleHighlight}</span>
                 </h3>
               </div>
@@ -203,13 +206,15 @@ const App: React.FC = () => {
           </div>
         </section>
 
+        <Insights />
+        
         <Testimonials content={content.testimonials} />
 
         <section id="experience" className="py-32 bg-white">
           <div className="max-w-4xl mx-auto px-6 md:px-12 lg:px-8">
             <div className="max-w-3xl mb-20 text-center md:text-left">
               <h2 className="text-sm font-bold tracking-[0.3em] uppercase text-slate-950 mb-6">{content.experience.badge}</h2>
-              <h3 className="font-display text-4xl md:text-5xl lg:text-6xl text-brand-900 tracking-tight">
+              <h3 className="font-display text-4xl md:text-5xl lg:text-6xl text-slate-900 tracking-tight">
                 {content.experience.title} <span className="text-slate-950 italic">{content.experience.titleHighlight}</span>
               </h3>
             </div>
@@ -223,7 +228,7 @@ const App: React.FC = () => {
           <div className="max-w-3xl mx-auto px-4 md:px-6 relative z-10">
             <div className="text-center max-w-2xl mx-auto mb-16">
               <h2 className="text-sm font-bold tracking-[0.3em] uppercase text-slate-950 mb-6">{content.services.badge}</h2>
-              <h3 className="font-display text-4xl text-brand-900 mb-6 tracking-tight">
+              <h3 className="font-display text-4xl text-slate-900 mb-6 tracking-tight">
                 {content.services.title} <span className="text-slate-950 italic">{content.services.titleHighlight}</span>
               </h3>
               <p className="text-slate-950 font-medium md:text-lg leading-relaxed">
@@ -244,7 +249,7 @@ const App: React.FC = () => {
                       <div className="w-12 h-12 rounded-full bg-white shadow-sm border border-brand-100 flex items-center justify-center group-hover:scale-110 transition-transform shrink-0">
                         <Icon className="text-slate-950" size={24} />
                       </div>
-                      <h4 className="text-xl md:text-2xl lg:text-3xl font-display text-brand-800/50 group-hover:text-brand-900 transition-colors">{service.title}</h4>
+                      <h4 className="text-xl md:text-2xl lg:text-3xl font-display text-slate-400 group-hover:text-slate-900 transition-colors">{service.title}</h4>
                     </div>
                     <p className="text-slate-950 font-medium text-sm md:text-base leading-relaxed md:w-1/2">{service.description}</p>
                   </div>
@@ -277,7 +282,7 @@ const App: React.FC = () => {
           <div className="max-w-2xl mx-auto">
             <div className="bg-white rounded-[2rem] md:rounded-[2.5rem] p-6 sm:p-10 md:p-14 text-center relative overflow-hidden border border-brand-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)]">
               <div className="contact-animate relative z-10">
-                <h3 className="font-display text-3xl sm:text-4xl md:text-5xl mb-4 md:mb-6 tracking-tight leading-tight text-brand-900">
+                <h3 className="font-display text-3xl sm:text-4xl md:text-5xl mb-4 md:mb-6 tracking-tight leading-tight text-slate-900">
                   {content.contact.title} <br /> <span className="text-slate-950 italic">{content.contact.titleHighlight}</span>
                 </h3>
                 <p className="text-slate-950 font-medium text-sm sm:text-base md:text-lg mb-8 max-w-xl mx-auto leading-relaxed">

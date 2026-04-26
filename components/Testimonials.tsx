@@ -44,9 +44,9 @@ export default function Testimonials({ content }: TestimonialsProps) {
     if (!trackRef.current) return;
     
     // We scroll exactly 50% since we duplicate the list once perfectly
-    tweenRef.current = gsap.to(trackRef.current, {
+     tweenRef.current = gsap.to(trackRef.current, {
       xPercent: -50,
-      duration: 35,
+      duration: 25, // Make scroll faster
       ease: "none",
       repeat: -1,
     });

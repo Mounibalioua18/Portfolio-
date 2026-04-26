@@ -60,7 +60,7 @@ const Navbar: React.FC<NavBarProps> = ({ items, className }) => {
         className
       )}
     >
-      <div className="flex items-center justify-center gap-1 sm:gap-3 bg-white/80 backdrop-blur-lg border border-brand-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] py-1.5 px-1.5 sm:px-2 rounded-full overflow-x-auto no-scrollbar">
+      <div className="flex items-center justify-center gap-1 md:gap-2 lg:gap-3 bg-white/80 backdrop-blur-lg border border-brand-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] py-1.5 px-1.5 sm:px-2 rounded-full overflow-x-auto no-scrollbar">
         
         {/* Logo */}
         <a 
@@ -90,7 +90,7 @@ const Navbar: React.FC<NavBarProps> = ({ items, className }) => {
               href={item.url}
               onClick={() => setActiveTab(item.name)}
               className={cn(
-                "relative cursor-pointer text-xs sm:text-sm font-bold px-2.5 sm:px-6 py-2 sm:py-2 rounded-full transition-all duration-300 flex items-center justify-center min-w-[2.5rem]",
+                "relative cursor-pointer text-xs lg:text-sm font-bold px-2.5 sm:px-3 md:px-4 lg:px-6 py-2 rounded-full transition-all duration-300 flex items-center justify-center min-w-[2.5rem]",
                 "text-slate-950 hover:text-slate-950",
                 isActive && "text-slate-950"
               )}

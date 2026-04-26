@@ -7,7 +7,6 @@ import {
   Mail,
   MessageSquare,
   Home,
-  User,
   Briefcase,
   Layers,
   GraduationCap,
@@ -120,7 +119,7 @@ const App: React.FC = () => {
   }, { scope: containerRef });
 
   const navItems = [
-    { name: content.nav.about, url: '#about', icon: User },
+    { name: content.nav.about, url: '#about', icon: Code2 },
     { name: content.nav.services, url: '#services', icon: Globe },
     { name: content.nav.projects, url: '#projects', icon: Layers },
     { name: content.nav.experience, url: '#experience', icon: Briefcase },

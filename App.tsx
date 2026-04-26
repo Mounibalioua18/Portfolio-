@@ -236,7 +236,7 @@ const App: React.FC = () => {
   );
 
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-950 font-sans selection:bg-brand-500/30" ref={containerRef}>
+    <div className="min-h-screen w-full overflow-x-hidden bg-slate-50 text-slate-950 font-sans selection:bg-brand-500/30" ref={containerRef}>
       {!isReady && <LoadingScreen onComplete={() => setIsReady(true)} />}
       <Navbar items={navItems} />
       

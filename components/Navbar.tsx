@@ -79,7 +79,7 @@ const Navbar: React.FC<NavBarProps> = ({ items, className }) => {
           className
         )}
       >
-        <div className="flex items-center justify-center gap-1 lg:gap-3 bg-white/80 backdrop-blur-lg border border-brand-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] py-1.5 px-2 rounded-full">
+        <div className="flex items-center justify-center gap-1 lg:gap-3 bg-white/90 backdrop-blur-xl border border-slate-900 shadow-md py-1.5 px-2 rounded-full">
           
           {/* Logo */}
           <a 
@@ -150,15 +150,16 @@ const Navbar: React.FC<NavBarProps> = ({ items, className }) => {
       {/* 
         Mobile Header & Hamburger (below md)
       */}
-      <div className="fixed top-4 left-4 right-4 z-[100] flex items-center justify-between bg-white/95 backdrop-blur-xl border border-brand-100 shadow-sm rounded-2xl p-2 md:hidden pointer-events-auto">
+      <div className="fixed top-4 left-4 right-4 z-[100] flex items-center justify-between bg-white/95 backdrop-blur-xl border border-slate-900 shadow-md rounded-2xl p-2 md:hidden pointer-events-auto">
         
         {/* Mobile Logo */}
         <a 
           href="#home"
           onClick={() => handleMobileNavClick('')}
-          className="px-4 py-2 font-bold text-lg tracking-tight text-slate-900 group"
+          className="px-3 py-2 font-mono font-bold text-xl tracking-tight group flex items-baseline"
         >
-          mounib<span className="text-brand-500 transition-colors group-hover:text-brand-600">.dev</span>
+          <span className="text-brand-600">mounib</span>
+          <span className="text-slate-400 text-lg transition-colors group-hover:text-brand-500">.dev</span>
         </a>
 
         {/* Hamburger Toggle */}
@@ -192,7 +193,7 @@ const Navbar: React.FC<NavBarProps> = ({ items, className }) => {
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
               transition={{ duration: 0.2, ease: "easeOut" }}
-              className="fixed top-20 right-4 z-[100] w-56 bg-white/95 backdrop-blur-xl border border-brand-100/80 rounded-2xl shadow-2xl p-2 flex flex-col md:hidden"
+              className="fixed top-20 right-4 z-[100] w-56 bg-white/95 backdrop-blur-xl border border-slate-900 rounded-2xl shadow-2xl p-2 flex flex-col md:hidden"
             >
               {items.map((item) => {
                 const Icon = item.icon;
@@ -204,19 +205,24 @@ const Navbar: React.FC<NavBarProps> = ({ items, className }) => {
                     href={item.url}
                     onClick={() => handleMobileNavClick(item.name)}
                     className={cn(
-                      "flex items-center gap-3 text-base font-semibold p-3 w-full rounded-xl transition-all",
+                      "flex items-center justify-between p-3 w-full rounded-xl transition-all group",
                       isActive 
-                        ? "bg-brand-500 text-white shadow-md shadow-brand-500/20" 
-                        : "text-slate-600 active:bg-slate-50 hover:bg-slate-50"
+                        ? "bg-brand-600 text-white font-bold shadow-lg shadow-brand-600/20" 
+                        : "text-slate-600 font-medium active:bg-slate-100 hover:bg-slate-50"
                     )}
                   >
-                    <div className={cn(
-                      "p-1.5 rounded-lg",
-                      isActive ? "bg-white/20 text-white" : "bg-slate-100/50 text-slate-500"
-                    )}>
-                      <Icon size={18} strokeWidth={2.5} />
+                    <div className="flex items-center gap-3">
+                      <div className={cn(
+                        "p-2 rounded-lg transition-colors flex items-center justify-center",
+                        isActive ? "bg-white/20 text-white" : "bg-slate-100 text-slate-500 group-hover:text-brand-600 group-hover:bg-brand-50"
+                      )}>
+                        <Icon size={18} strokeWidth={isActive ? 3 : 2} />
+                      </div>
+                      <span className="text-[15px]">{item.name}</span>
                     </div>
-                    {item.name}
+                    {isActive && (
+                      <div className="w-2 h-2 rounded-full bg-white mr-1 shadow-sm"></div>
+                    )}
                   </a>
                 );
               })}

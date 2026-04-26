@@ -20,6 +20,26 @@ export default function Expertise() {
   const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0]);
 
   useGSAP(() => {
+    gsap.fromTo(containerRef.current,
+      {
+        opacity: 0,
+        y: 100,
+        clipPath: 'inset(10% 0% 10% 0%)'
+      },
+      {
+        opacity: 1,
+        y: 0,
+        clipPath: 'inset(0% 0% 0% 0%)',
+        duration: 1.8,
+        ease: 'expo.out',
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: 'top 90%',
+          toggleActions: 'play none none reverse',
+        }
+      }
+    );
+
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: containerRef.current,

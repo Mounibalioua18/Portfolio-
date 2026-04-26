@@ -125,7 +125,7 @@ export default function Hero({ content, isReady }: HeroProps & { isReady: boolea
                      Current Focus
                    </p>
                    <p className="text-slate-900 font-serif italic text-lg leading-snug">
-                     Master's in Networks.
+                     Master's in Networks and distributed systems.
                    </p>
                  </div>
                </div>

@@ -111,7 +111,7 @@ const App: React.FC = () => {
             ease = 'power1.inOut'; // Less easing at the start so it moves right away
             
             // Add enough offset so the form starts properly under the navbar
-            offsetY = 120;
+            offsetY = 160;
             
             // Set the SVG filter on the middle sections
             gsap.set('#scroll-blur-content', { filter: 'url(#vertical-motion-blur)', willChange: 'filter' });

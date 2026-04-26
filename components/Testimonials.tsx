@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { Quote } from 'lucide-react';
@@ -21,6 +21,9 @@ export default function Testimonials({ content }: TestimonialsProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
   const tweenRef = useRef<gsap.core.Tween | null>(null);
+  const [isDragging, setIsDragging] = useState(false);
+  const startX = useRef(0);
+  const startProgress = useRef(0);
 
   useGSAP(() => {
     // Reveal animation for section header
@@ -46,8 +49,54 @@ export default function Testimonials({ content }: TestimonialsProps) {
     });
   }, { scope: containerRef });
 
-  const handleMouseEnter = () => tweenRef.current?.pause();
-  const handleMouseLeave = () => tweenRef.current?.play();
+  const handleMouseEnter = () => {
+    if (!isDragging) tweenRef.current?.pause();
+  };
+  
+  const handleMouseLeave = () => {
+    if (!isDragging) tweenRef.current?.play();
+    else handlePointerUp(); // End drag if mouse leaves
+  };
+
+  const handlePointerDown = (e: React.PointerEvent) => {
+    setIsDragging(true);
+    startX.current = e.clientX || (e as any).touches?.[0]?.clientX;
+    startProgress.current = tweenRef.current?.progress() || 0;
+    tweenRef.current?.pause();
+    
+    // Stop event from bubbling or doing default touch behavior (like scrolling vertically)
+    (e.target as HTMLElement).setPointerCapture(e.pointerId);
+  };
+
+  const handlePointerMove = (e: React.PointerEvent) => {
+    if (!isDragging || !trackRef.current || !tweenRef.current) return;
+    
+    const clientX = e.clientX || (e as any).touches?.[0]?.clientX;
+    const deltaX = clientX - startX.current;
+    
+    // Our track consists of duplicated content, so full width is double the "scroll" width
+    // Actually the track shifts by xPercent: -50, which equates to offsetWidth / 2.
+    const scrollableWidth = trackRef.current.offsetWidth / 2;
+    
+    // Calculate progress delta (reverse direction: drag right = go backwards in progress)
+    const progressDelta = -deltaX / scrollableWidth;
+    
+    let newProgress = startProgress.current + progressDelta;
+    // Wrap around 0 and 1
+    newProgress = newProgress - Math.floor(newProgress);
+    
+    tweenRef.current.progress(newProgress);
+  };
+
+  const handlePointerUp = (e?: React.PointerEvent) => {
+    if (isDragging) {
+      setIsDragging(false);
+      tweenRef.current?.play();
+      if (e) {
+        (e.target as HTMLElement).releasePointerCapture(e.pointerId);
+      }
+    }
+  };
 
   // Duplicate list once to allow smooth infinite scrolling
   const duplicatedList = [...content.list, ...content.list];
@@ -65,13 +114,17 @@ export default function Testimonials({ content }: TestimonialsProps) {
         </h3>
       </div>
 
-      <div className="relative flex overflow-x-hidden group mt-10 z-20">
+      <div className="relative flex overflow-x-hidden mt-10 z-20">
         <div 
           ref={trackRef}
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
-          className="flex whitespace-nowrap items-stretch gap-6 pl-6 cursor-grab active:cursor-grabbing"
-          style={{ width: "max-content" }}
+          onPointerDown={handlePointerDown}
+          onPointerMove={handlePointerMove}
+          onPointerUp={handlePointerUp}
+          onPointerCancel={handlePointerUp}
+          className={`flex whitespace-nowrap items-stretch gap-6 pl-6 ${isDragging ? "cursor-grabbing" : "cursor-grab"} select-none`}
+          style={{ width: "max-content", touchAction: 'pan-y' }}
         >
           {duplicatedList.map((item, index) => (
             <div 
@@ -90,6 +143,7 @@ export default function Testimonials({ content }: TestimonialsProps) {
                   alt={item.by.split(',')[0]}
                   className="w-10 h-10 md:w-12 md:h-12 rounded-full object-cover ring-2 ring-brand-100"
                   loading="lazy"
+                  draggable={false}
                 />
                 <div className="flex flex-col">
                   <h4 className="font-display font-bold text-slate-900 text-sm md:text-base leading-snug">

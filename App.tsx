@@ -5,6 +5,7 @@ import {
   Code2, 
   ChevronRight,
   Mail,
+  MessageSquare,
   Home,
   User,
   Briefcase,
@@ -119,11 +120,11 @@ const App: React.FC = () => {
   }, { scope: containerRef });
 
   const navItems = [
-    { name: content.nav.home, url: '#home', icon: Home },
     { name: content.nav.about, url: '#about', icon: User },
+    { name: content.nav.services, url: '#services', icon: Globe },
     { name: content.nav.projects, url: '#projects', icon: Layers },
     { name: content.nav.experience, url: '#experience', icon: Briefcase },
-    { name: content.nav.services, url: '#services', icon: Globe },
+    { name: content.nav.endorsements, url: '#testimonials', icon: MessageSquare },
     { name: content.nav.contact, url: '#contact', icon: Mail },
   ];
 
@@ -178,49 +179,6 @@ const App: React.FC = () => {
                 <Expertise />
         <TechTicker />
 
-        <section id="projects" className="relative py-32 overflow-visible bg-slate-50 z-10 border-t border-brand-100">
-          <div className="max-w-7xl mx-auto px-6 relative z-20">
-            <div className="flex flex-col md:flex-row md:items-end justify-between mb-20 gap-8">
-              <div className="max-w-xl">
-                <h2 className="text-sm font-bold tracking-[0.3em] uppercase text-slate-950 mb-6">{content.projects.badge}</h2>
-                <h3 className="font-display text-5xl md:text-6xl text-slate-900 tracking-tight">
-                  {content.projects.title} <span className="text-slate-950 italic">{content.projects.titleHighlight}</span>
-                </h3>
-              </div>
-              <p className="text-slate-950 text-lg leading-relaxed max-w-sm font-medium">
-                {content.projects.description}
-              </p>
-            </div>
-            <div className="grid grid-cols-1 gap-8 max-w-4xl mx-auto">
-              {content.projects.list.map((project, i) => (
-                <ProjectCard 
-                  key={project.id} 
-                  project={project} 
-                  index={i} 
-                  visitBtnText={content.projects.visitBtn} 
-                  onOpenTopology={() => setIsTopologyOpen(true)}
-                />
-              ))}
-            </div>
-          </div>
-        </section>
-        
-        <Testimonials content={content.testimonials} />
-
-        <section id="experience" className="py-32 bg-white">
-          <div className="max-w-4xl mx-auto px-6 md:px-12 lg:px-8">
-            <div className="max-w-3xl mb-20 text-center md:text-left">
-              <h2 className="text-sm font-bold tracking-[0.3em] uppercase text-slate-950 mb-6">{content.experience.badge}</h2>
-              <h3 className="font-display text-4xl md:text-5xl lg:text-6xl text-slate-900 tracking-tight">
-                {content.experience.title} <span className="text-slate-950 italic">{content.experience.titleHighlight}</span>
-              </h3>
-            </div>
-            {/* Updating timeline design colors inside TimelineSection (which needs to be updated but it's defined above) */}
-            <TimelineSection title={content.experience.educationTitle} items={content.experience.education} icon={GraduationCap} />
-            <TimelineSection title={content.experience.workTitle} items={content.experience.work} icon={Briefcase} />
-          </div>
-        </section>
-
         <section id="services" className="py-20 bg-brand-50/50 border-t border-brand-100 perspective-1000">
           <div className="max-w-3xl mx-auto px-4 md:px-6 relative z-10">
             <div className="text-center max-w-2xl mx-auto mb-16">
@@ -255,6 +213,51 @@ const App: React.FC = () => {
             </div>
           </div>
         </section>
+
+        <section id="projects" className="relative py-32 overflow-visible bg-slate-50 z-10 border-t border-brand-100">
+          <div className="max-w-7xl mx-auto px-6 relative z-20">
+            <div className="flex flex-col md:flex-row md:items-end justify-between mb-20 gap-8">
+              <div className="max-w-xl">
+                <h2 className="text-sm font-bold tracking-[0.3em] uppercase text-slate-950 mb-6">{content.projects.badge}</h2>
+                <h3 className="font-display text-5xl md:text-6xl text-slate-900 tracking-tight">
+                  {content.projects.title} <span className="text-slate-950 italic">{content.projects.titleHighlight}</span>
+                </h3>
+              </div>
+              <p className="text-slate-950 text-lg leading-relaxed max-w-sm font-medium">
+                {content.projects.description}
+              </p>
+            </div>
+            <div className="grid grid-cols-1 gap-8 max-w-4xl mx-auto">
+              {content.projects.list.map((project, i) => (
+                <ProjectCard 
+                  key={project.id} 
+                  project={project} 
+                  index={i} 
+                  visitBtnText={content.projects.visitBtn} 
+                  onOpenTopology={() => setIsTopologyOpen(true)}
+                />
+              ))}
+            </div>
+          </div>
+        </section>
+        
+        <section id="experience" className="py-32 bg-white">
+          <div className="max-w-4xl mx-auto px-6 md:px-12 lg:px-8">
+            <div className="max-w-3xl mb-20 text-center md:text-left">
+              <h2 className="text-sm font-bold tracking-[0.3em] uppercase text-slate-950 mb-6">{content.experience.badge}</h2>
+              <h3 className="font-display text-4xl md:text-5xl lg:text-6xl text-slate-900 tracking-tight">
+                {content.experience.title} <span className="text-slate-950 italic">{content.experience.titleHighlight}</span>
+              </h3>
+            </div>
+            {/* Updating timeline design colors inside TimelineSection (which needs to be updated but it's defined above) */}
+            <TimelineSection title={content.experience.educationTitle} items={content.experience.education} icon={GraduationCap} />
+            <TimelineSection title={content.experience.workTitle} items={content.experience.work} icon={Briefcase} />
+          </div>
+        </section>
+        
+        <div id="testimonials">
+          <Testimonials content={content.testimonials} />
+        </div>
 
         {/* Topology Sandbox Full Screen */}
         {isTopologyOpen && (
@@ -298,7 +301,7 @@ const App: React.FC = () => {
           <div 
             className="flex items-center justify-center md:justify-start gap-3 cursor-pointer select-none group"
           >
-             <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-500/20 to-brand-600/5 flex items-center justify-center text-white group-hover:bg-brand-500 group-hover:text-white transition-all duration-300 shadow-[0_0_15px_-3px_rgba(20,184,166,0.2)] border border-brand-500/20 group-hover:border-brand-500 relative overflow-hidden">
+             <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-500/20 to-brand-600/5 flex items-center justify-center text-slate-950 bg-white group-hover:bg-brand-500 group-hover:text-white transition-all duration-300 shadow-[0_0_15px_-3px_rgba(20,184,166,0.2)] border border-brand-500/20 relative overflow-hidden">
                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" className="transform group-hover:scale-110 transition-transform duration-300 relative z-10">
                  <path d="M4 21V4L12 14L20 4V21H16V9.5L12 14.5L8 9.5V21H4Z" />
                </svg>

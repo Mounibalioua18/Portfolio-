@@ -15,7 +15,7 @@ interface NavBarProps {
 }
 
 const Navbar: React.FC<NavBarProps> = ({ items, className }) => {
-  const [activeTab, setActiveTab] = useState(items[0].name);
+  const [activeTab, setActiveTab] = useState('');
 
   useEffect(() => {
     const handleScroll = () => {
@@ -24,7 +24,7 @@ const Navbar: React.FC<NavBarProps> = ({ items, className }) => {
 
       // Special case for top of page
       if (window.scrollY < 100) {
-        setActiveTab(items[0].name);
+        setActiveTab('');
         return;
       }
 
@@ -65,8 +65,12 @@ const Navbar: React.FC<NavBarProps> = ({ items, className }) => {
         {/* Logo */}
         <a 
           href="#home"
-          onClick={() => setActiveTab(items[0].name)}
-          className="w-8 h-8 sm:w-10 sm:h-10 ml-1 rounded-full bg-gradient-to-br from-brand-500/20 to-brand-600/5 flex items-center justify-center text-slate-950 border border-brand-500/20 shadow-[0_0_10px_-3px_rgba(20,184,166,0.2)] hover:border-brand-500 relative overflow-hidden group"
+          onClick={() => setActiveTab('')}
+          className={`w-8 h-8 sm:w-10 sm:h-10 ml-1 rounded-full flex items-center justify-center border transition-all duration-300 relative overflow-hidden group ${
+            activeTab === '' 
+              ? 'bg-brand-500 text-white border-brand-500 shadow-[0_0_15px_-3px_rgba(20,184,166,0.5)]' 
+              : 'bg-gradient-to-br from-brand-500/20 to-brand-600/5 text-slate-950 border-brand-500/20 hover:border-brand-500 hover:text-brand-600 shadow-[0_0_10px_-3px_rgba(20,184,166,0.2)]'
+          }`}
         >
            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" className="transform group-hover:scale-110 transition-transform duration-300 relative z-10">
              <path d="M4 21V4L12 14L20 4V21H16V9.5L12 14.5L8 9.5V21H4Z" />

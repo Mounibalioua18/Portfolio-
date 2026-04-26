@@ -56,10 +56,11 @@ export const SOCIALS = [
 export const CONTENT = {
   nav: {
     home: 'Home',
-    about: 'About',
+    about: 'Expertise',
     projects: 'Projects',
     experience: 'Experience',
     services: 'Services',
+    endorsements: 'Endorsements',
     contact: 'Contact',
   },
   hero: {

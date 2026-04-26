@@ -168,15 +168,15 @@ const App: React.FC = () => {
       { opacity: 1, clipPath: 'inset(0% 0% 0% 0% round 0px)', scale: 1, duration: 1.8, ease: 'expo.out', scrollTrigger: { trigger: '#projects', start: 'top 85%', toggleActions: 'play none none reverse' } }
     );
     
-    // Experience Section Reveal (3D Fold Down)
+    // Experience Section Reveal (Bottom Up Wipe)
     gsap.fromTo('#experience',
-      { opacity: 0, rotateX: -20, y: 120, transformPerspective: 1200 },
-      { opacity: 1, rotateX: 0, y: 0, duration: 1.6, ease: 'power4.out', scrollTrigger: { trigger: '#experience', start: 'top 85%', toggleActions: 'play none none reverse' } }
+      { opacity: 0, y: 60, clipPath: 'inset(100% 0% 0% 0%)' },
+      { opacity: 1, y: 0, clipPath: 'inset(0% 0% 0% 0%)', duration: 1.5, ease: 'power3.inOut', scrollTrigger: { trigger: '#experience', start: 'top 85%', toggleActions: 'play none none reverse' } }
     );
     
     // Testimonials Section Reveal (Elegant Side Slide)
     gsap.fromTo('#testimonials',
-      { opacity: 0, x: 80, clipPath: 'inset(0% 0% 0% 100%)' },
+      { opacity: 0, x: -50, clipPath: 'inset(0% 100% 0% 0%)' },
       { opacity: 1, x: 0, clipPath: 'inset(0% 0% 0% 0%)', duration: 1.5, ease: 'power3.inOut', scrollTrigger: { trigger: '#testimonials', start: 'top 85%', toggleActions: 'play none none reverse' } }
     );
     

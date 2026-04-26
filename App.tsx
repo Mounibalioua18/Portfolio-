@@ -22,6 +22,7 @@ import {
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
 import { motion } from 'framer-motion';
 
 import Navbar from './components/Navbar';
@@ -36,7 +37,7 @@ import TechTicker from './components/TechTicker';
 import { ScrollToTop } from './components/ScrollToTop';
 import { SKILLS, CONTENT, SOCIALS } from './constants';
 
-gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
 const App: React.FC = () => {
   const [isTopologyOpen, setIsTopologyOpen] = useState(false);
@@ -90,6 +91,58 @@ const App: React.FC = () => {
   }, [isTopologyOpen]);
 
   useGSAP(() => {
+    // Smooth scrolling for all anchor links
+    const handleAnchorClick = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      const anchor = target.closest('a');
+      if (anchor && anchor.hash && anchor.hash.startsWith('#') && anchor.hash !== '#') {
+        const targetElement = document.querySelector(anchor.hash);
+        if (targetElement) {
+          e.preventDefault();
+          
+          let duration = 0.8;
+          let ease = 'power2.inOut';
+          
+          // "Race" effect for Contact section
+          if (anchor.hash === '#contact') {
+            duration = 0.3; // Much faster! Scroll immediately
+            ease = 'power1.inOut'; // Less easing at the start so it moves right away
+            
+            // Set the SVG filter on the middle sections
+            gsap.set('#scroll-blur-content', { filter: 'url(#vertical-motion-blur)', willChange: 'filter' });
+            
+            const blurObj = { y: 0 };
+            const feBlur = document.querySelector('#blur-fe');
+            
+            // Animate the vertical blur
+            gsap.to(blurObj, {
+              y: 80, // Max vertical stretch (speed lines)
+              duration: duration / 2,
+              yoyo: true,
+              repeat: 1,
+              ease: "power1.inOut",
+              onUpdate: () => {
+                if (feBlur) {
+                  feBlur.setAttribute('stdDeviation', `0 ${blurObj.y}`);
+                }
+              },
+              onComplete: () => {
+                gsap.set('#scroll-blur-content', { filter: 'none', clearProps: 'willChange' });
+              }
+            });
+          }
+          
+          gsap.to(window, {
+            duration: duration,
+            scrollTo: { y: targetElement, offsetY: 0 },
+            ease: ease
+          });
+        }
+      }
+    };
+
+    document.addEventListener('click', handleAnchorClick);
+
     // Timeline animations
     const timelineItems = gsap.utils.toArray('.timeline-item');
     timelineItems.forEach((item: any) => {
@@ -186,6 +239,9 @@ const App: React.FC = () => {
       { opacity: 1, scale: 1, y: 0, duration: 1.5, ease: 'back.out(2)', scrollTrigger: { trigger: '#contact', start: 'top 90%', toggleActions: 'play none none reverse' } }
     );
 
+    return () => {
+      document.removeEventListener('click', handleAnchorClick);
+    };
   }, { scope: containerRef });
 
   const navItems = [
@@ -237,12 +293,20 @@ const App: React.FC = () => {
 
   return (
     <div className="min-h-screen w-full overflow-x-hidden bg-slate-50 text-slate-950 font-sans selection:bg-brand-500/30" ref={containerRef}>
+      {/* SVG Filter for hyper-speed vertical blur */}
+      <svg style={{ width: 0, height: 0, position: 'absolute', pointerEvents: 'none' }} aria-hidden="true">
+        <filter id="vertical-motion-blur" x="-50%" y="-50%" width="200%" height="200%">
+          <feGaussianBlur id="blur-fe" in="SourceGraphic" stdDeviation="0 0" />
+        </filter>
+      </svg>
+      
       {!isReady && <LoadingScreen onComplete={() => setIsReady(true)} />}
       <Navbar items={navItems} />
       
       <main>
         <Hero content={content.hero} isReady={isReady} />
-
+        
+        <div id="scroll-blur-content">
         <div className="w-full h-px border-b border-brand-100" />
 
                 <Expertise />
@@ -346,6 +410,7 @@ const App: React.FC = () => {
             </div>
           </div>
         )}
+        </div>
 
         <section id="contact" className="py-20 md:py-24 px-4 sm:px-6 bg-brand-50 border-t border-brand-100">
           <div className="max-w-2xl mx-auto">

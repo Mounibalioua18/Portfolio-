@@ -304,23 +304,27 @@ const Topology: React.FC = () => {
       </AnimatePresence>
 
       {/* INSTRUCTIONS CARD */}
-      <div className="absolute top-1/2 -translate-y-1/2 left-6 z-40 w-[280px] md:w-[320px] pointer-events-auto hidden md:block">
-        <div className="bg-zinc-950/80 backdrop-blur-md border border-white/5 rounded-2xl p-6 shadow-2xl">
-           <h3 className="text-white/80 font-bold mb-4 font-mono tracking-widest text-sm uppercase">Quick Start</h3>
-           <ul className="space-y-4 text-xs md:text-sm text-slate-400">
-             <li className="flex gap-3 items-start">
-               <span className="w-6 h-6 rounded-full bg-slate-800 text-slate-300 flex items-center justify-center shrink-0 border border-brand-500/30 font-mono text-[10px] mt-0.5">1</span>
-               <p>Click on the <strong className="text-slate-300 font-normal">PC</strong> you want to send a message from.</p>
-             </li>
-             <li className="flex gap-3 items-start">
-               <span className="w-6 h-6 rounded-full bg-slate-800 text-slate-300 flex items-center justify-center shrink-0 border border-brand-500/30 font-mono text-[10px] mt-0.5">2</span>
-               <p>Click on the destination <strong className="text-slate-300 font-normal">PC</strong> to send the message.</p>
-             </li>
-             <li className="flex gap-3 items-start">
-               <span className="w-6 h-6 rounded-full bg-slate-800 text-slate-300 flex items-center justify-center shrink-0 border border-brand-500/30 font-mono text-[10px] mt-0.5">3</span>
-               <p>Watch the terminal to see the packets travel through switches and routers.</p>
-             </li>
-           </ul>
+      <div className="absolute bottom-6 left-4 right-4 md:bottom-10 md:left-6 md:right-auto lg:top-1/2 lg:-translate-y-1/2 lg:bottom-auto z-40 md:w-[360px] pointer-events-auto">
+        <div className="bg-zinc-950/80 backdrop-blur-xl border border-white/10 rounded-2xl p-6 md:p-8 shadow-2xl flex flex-col justify-center min-h-[350px] lg:min-h-[450px]">
+           <h3 className="text-white/90 font-bold mb-6 md:mb-8 font-mono tracking-widest text-sm uppercase border-b border-white/10 pb-4">Simulation Guide</h3>
+           <div className="space-y-6 text-xs md:text-sm text-slate-400">
+             <div className="flex gap-4 items-start">
+               <span className="w-7 h-7 md:w-8 md:h-8 rounded-full bg-slate-800 text-slate-300 flex items-center justify-center shrink-0 border border-blue-900/40 font-mono text-[10px] md:text-xs mt-0.5">1</span>
+               <p className="leading-relaxed"><strong>Observe Subnets:</strong> Notice how <strong>VLAN 10</strong>, <strong>VLAN 20</strong>, and <strong>VLAN 30</strong> are isolated environments on the network map.</p>
+             </div>
+             <div className="flex gap-4 items-start">
+               <span className="w-7 h-7 md:w-8 md:h-8 rounded-full bg-slate-800 text-slate-300 flex items-center justify-center shrink-0 border border-blue-900/40 font-mono text-[10px] md:text-xs mt-0.5">2</span>
+               <p className="leading-relaxed"><strong>Initiate:</strong> Select the <strong className="text-slate-300 font-normal">Source PC</strong> to begin preparing a message transfer sequence.</p>
+             </div>
+             <div className="flex gap-4 items-start">
+               <span className="w-7 h-7 md:w-8 md:h-8 rounded-full bg-slate-800 text-slate-300 flex items-center justify-center shrink-0 border border-blue-900/40 font-mono text-[10px] md:text-xs mt-0.5">3</span>
+               <p className="leading-relaxed"><strong>Dispatch:</strong> Select the <strong className="text-slate-300 font-normal">Destination PC</strong> to dispatch an ICMP request across the devices.</p>
+             </div>
+             <div className="flex gap-4 items-start">
+               <span className="w-7 h-7 md:w-8 md:h-8 rounded-full bg-slate-800 text-slate-300 flex items-center justify-center shrink-0 border border-blue-900/40 font-mono text-[10px] md:text-xs mt-0.5">4</span>
+               <p className="leading-relaxed"><strong>Monitor:</strong> Watch the live terminal to see how switches forward MAC addresses and routers route between IP subnets.</p>
+             </div>
+           </div>
         </div>
       </div>
 

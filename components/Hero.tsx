@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { Code2, Activity, Server, Layers } from 'lucide-react';
+import { Code2, Activity, Server, Layers, Globe } from 'lucide-react';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { FloatingElements } from './ui/FloatingElements';
@@ -112,20 +112,48 @@ export default function Hero({ content, isReady }: HeroProps & { isReady: boolea
               </p>
             </div>
             
-            {/* Minimalist Data Point */}
-            <div className="hero-bento flex items-center gap-6 mt-4 group">
-               <div className="w-16 h-16 rounded-full border border-blue-950/20 flex items-center justify-center relative overflow-hidden shrink-0">
-                 <div className="absolute inset-0 bg-blue-950/5 scale-0 group-hover:scale-100 transition-transform duration-500 rounded-full"></div>
-                 <Server size={20} className="text-blue-950 relative z-10 group-hover:rotate-12 transition-transform duration-500" />
+            {/* Stats & Actions */}
+            <div className="hero-bento flex flex-col md:flex-row items-start md:items-center gap-8 mt-4 w-full">
+               {/* Minimalist Data Point */}
+               <div className="flex items-center gap-5 group">
+                 <div className="w-14 h-14 rounded-full border border-blue-950/20 flex items-center justify-center relative overflow-hidden shrink-0">
+                   <div className="absolute inset-0 bg-blue-950/5 scale-0 group-hover:scale-100 transition-transform duration-500 rounded-full"></div>
+                   <Server size={18} className="text-blue-950 relative z-10 group-hover:rotate-12 transition-transform duration-500" />
+                 </div>
+                 <div>
+                   <p className="text-[10px] font-bold text-blue-950 uppercase tracking-[0.25em] mb-1 group-hover:text-blue-950 transition-colors">
+                     Current Focus
+                   </p>
+                   <p className="text-slate-900 font-serif italic text-lg leading-snug">
+                     Master's in Networks.
+                   </p>
+                 </div>
                </div>
-               <div>
-                 <p className="text-[10px] font-bold text-blue-950 uppercase tracking-[0.25em] mb-1 group-hover:text-blue-950 transition-colors">
-                   Current Focus
-                 </p>
-                 <p className="text-slate-900 font-serif italic text-lg md:text-xl leading-snug max-w-[280px]">
-                   Master's in Networks & Distributed Systems.
-                 </p>
+
+               <div className="w-[1px] h-12 bg-blue-950/20 hidden md:block"></div>
+
+               {/* Languages */}
+               <div className="flex items-center gap-5 group">
+                 <div className="w-14 h-14 rounded-full border border-blue-950/20 flex items-center justify-center relative overflow-hidden shrink-0">
+                   <div className="absolute inset-0 bg-blue-950/5 scale-0 group-hover:scale-100 transition-transform duration-500 rounded-full"></div>
+                   <Globe size={18} className="text-blue-950 relative z-10 group-hover:-rotate-12 transition-transform duration-500" />
+                 </div>
+                 <div className="flex flex-col">
+                   <p className="text-[10px] font-bold text-blue-950 uppercase tracking-[0.25em] mb-1 group-hover:text-blue-950 transition-colors">
+                     Languages
+                   </p>
+                   <p className="text-slate-900 font-serif italic text-lg leading-snug">
+                     Arabic, French <span className="font-sans text-xs mx-1 text-slate-400 not-italic">&</span> English.
+                   </p>
+                 </div>
                </div>
+            </div>
+
+            <div className="hero-bento mt-10 w-full flex items-center gap-6">
+               <a href="#contact" className="inline-flex items-center justify-center px-10 py-4 bg-blue-950 text-white font-bold tracking-widest uppercase text-sm hover:bg-slate-900 transition-colors relative overflow-hidden group">
+                 <span className="relative z-10 text-white">Contact Me</span>
+                 <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out"></div>
+               </a>
             </div>
           </div>
 

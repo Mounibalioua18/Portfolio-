@@ -33,6 +33,7 @@ import Expertise from './components/Expertise';
 import Topology from './components/Topology';
 import { LoadingScreen } from './components/LoadingScreen';
 import TechTicker from './components/TechTicker';
+import { ScrollToTop } from './components/ScrollToTop';
 import { SKILLS, CONTENT, SOCIALS } from './constants';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -369,6 +370,7 @@ const App: React.FC = () => {
           
         </div>
       </footer>
+      <ScrollToTop />
     </div>
   );
 };

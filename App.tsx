@@ -29,7 +29,6 @@ import ContactForm from './components/ContactForm';
 import Expertise from './components/Expertise';
 import Topology from './components/Topology';
 import { LoadingScreen } from './components/LoadingScreen';
-import Insights from './components/Insights';
 import TechTicker from './components/TechTicker';
 import { SKILLS, CONTENT, SOCIALS } from './constants';
 
@@ -205,8 +204,6 @@ const App: React.FC = () => {
             </div>
           </div>
         </section>
-
-        <Insights />
         
         <Testimonials content={content.testimonials} />
 

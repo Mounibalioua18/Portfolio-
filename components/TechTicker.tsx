@@ -31,18 +31,18 @@ export default function TechTicker() {
   const tickerItems = [...TECHNOLOGIES, ...TECHNOLOGIES];
 
   return (
-    <section className="py-4 md:py-6 border-y border-brand-100 bg-white overflow-hidden" ref={tickerRef}>
+    <section className="py-3 border-y border-brand-100 bg-white overflow-hidden" ref={tickerRef}>
       <div className="ticker-track flex w-max items-center gap-8 md:gap-16 opacity-90 pl-8">
         {tickerItems.map((tech, i) => (
           <div 
             key={`${tech}-${i}`} 
             className="flex items-center gap-6 md:gap-8 min-w-max"
           >
-            <span className="font-display text-xl md:text-3xl lg:text-4xl font-medium tracking-tight text-slate-950 pointer-events-none select-none uppercase">
+            <span className="font-display text-sm md:text-base lg:text-lg font-bold tracking-widest text-black pointer-events-none select-none uppercase">
               {tech}
             </span>
             {/* Minimal decorator dot instead of an icon for high-end look */}
-            <div className="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-blue-950"></div>
+            <div className="w-1.5 h-1.5 rounded-full bg-black"></div>
           </div>
         ))}
       </div>

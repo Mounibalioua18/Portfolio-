@@ -14,7 +14,10 @@ import {
   Globe,
   Zap,
   Server,
-  X
+  X,
+  Boxes,
+  Monitor,
+  Award
 } from 'lucide-react';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
@@ -120,9 +123,9 @@ const App: React.FC = () => {
 
   const navItems = [
     { name: content.nav.about, url: '#about', icon: Code2 },
-    { name: content.nav.services, url: '#services', icon: Globe },
-    { name: content.nav.projects, url: '#projects', icon: Layers },
-    { name: content.nav.experience, url: '#experience', icon: Briefcase },
+    { name: content.nav.services, url: '#services', icon: Layers },
+    { name: content.nav.projects, url: '#projects', icon: Monitor },
+    { name: content.nav.experience, url: '#experience', icon: Award },
     { name: content.nav.endorsements, url: '#testimonials', icon: MessageSquare },
     { name: content.nav.contact, url: '#contact', icon: Mail },
   ];

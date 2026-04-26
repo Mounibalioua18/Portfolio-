@@ -42,6 +42,14 @@ const Topology: React.FC = () => {
     setLogs(prev => [`[${timestamp}] ${msg}`, ...prev].slice(0, 100));
   };
 
+  const [isGuideOpen, setIsGuideOpen] = useState(true);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined' && window.innerWidth < 1024) {
+      setIsGuideOpen(false);
+    }
+  }, []);
+
   useEffect(() => {
     // Initialization Sequence
     const bootSequence = [
@@ -304,32 +312,64 @@ const Topology: React.FC = () => {
       </AnimatePresence>
 
       {/* INSTRUCTIONS CARD */}
-      <div className="absolute bottom-6 left-4 right-4 md:bottom-10 md:left-6 md:right-auto lg:top-1/2 lg:-translate-y-1/2 lg:bottom-auto z-40 md:w-[360px] pointer-events-auto">
-        <div className="bg-zinc-950/80 backdrop-blur-xl border border-white/10 rounded-2xl p-6 md:p-8 shadow-2xl flex flex-col justify-center min-h-[350px] lg:min-h-[450px]">
-           <h3 className="text-white/90 font-bold mb-6 md:mb-8 font-mono tracking-widest text-sm uppercase border-b border-white/10 pb-4">Simulation Guide</h3>
-           <div className="space-y-6 text-xs md:text-sm text-slate-400">
-             <div className="flex gap-4 items-start">
-               <span className="w-7 h-7 md:w-8 md:h-8 rounded-full bg-slate-800 text-slate-300 flex items-center justify-center shrink-0 border border-blue-900/40 font-mono text-[10px] md:text-xs mt-0.5">1</span>
-               <p className="leading-relaxed"><strong>Observe Subnets:</strong> Notice how <strong>VLAN 10</strong>, <strong>VLAN 20</strong>, and <strong>VLAN 30</strong> are isolated environments on the network map.</p>
-             </div>
-             <div className="flex gap-4 items-start">
-               <span className="w-7 h-7 md:w-8 md:h-8 rounded-full bg-slate-800 text-slate-300 flex items-center justify-center shrink-0 border border-blue-900/40 font-mono text-[10px] md:text-xs mt-0.5">2</span>
-               <p className="leading-relaxed"><strong>Initiate:</strong> Select the <strong className="text-slate-300 font-normal">Source PC</strong> to begin preparing a message transfer sequence.</p>
-             </div>
-             <div className="flex gap-4 items-start">
-               <span className="w-7 h-7 md:w-8 md:h-8 rounded-full bg-slate-800 text-slate-300 flex items-center justify-center shrink-0 border border-blue-900/40 font-mono text-[10px] md:text-xs mt-0.5">3</span>
-               <p className="leading-relaxed"><strong>Dispatch:</strong> Select the <strong className="text-slate-300 font-normal">Destination PC</strong> to dispatch an ICMP request across the devices.</p>
-             </div>
-             <div className="flex gap-4 items-start">
-               <span className="w-7 h-7 md:w-8 md:h-8 rounded-full bg-slate-800 text-slate-300 flex items-center justify-center shrink-0 border border-blue-900/40 font-mono text-[10px] md:text-xs mt-0.5">4</span>
-               <p className="leading-relaxed"><strong>Monitor:</strong> Watch the live terminal to see how switches forward MAC addresses and routers route between IP subnets.</p>
-             </div>
-           </div>
-        </div>
+      <div className={`absolute z-40 pointer-events-auto ${isGuideOpen ? 'bottom-6 left-4 right-4 md:bottom-10 md:left-6 md:right-auto lg:top-1/2 lg:-translate-y-1/2 lg:bottom-auto md:w-[360px]' : 'bottom-6 left-4 md:bottom-10 md:left-6'}`}>
+        <AnimatePresence mode="wait">
+          {isGuideOpen ? (
+            <motion.div 
+               initial={{ opacity: 0, y: 20 }}
+               animate={{ opacity: 1, y: 0 }}
+               exit={{ opacity: 0, y: 20, scale: 0.95 }}
+               className="bg-zinc-950/80 backdrop-blur-xl border border-white/10 rounded-2xl p-6 md:p-8 shadow-2xl flex flex-col justify-center min-h-[350px] lg:min-h-[450px] relative"
+            >
+               <button 
+                 onClick={() => setIsGuideOpen(false)}
+                 className="absolute top-4 right-4 text-slate-400 hover:text-white z-10"
+               >
+                 <div className="w-8 h-8 flex items-center justify-center bg-white/5 rounded-full hover:bg-white/10 transition-colors">
+                   <span className="sr-only">Close</span>
+                   <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                     <path d="M1 1L11 11M11 1L1 11" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+                   </svg>
+                 </div>
+               </button>
+               <h3 className="text-white/90 font-bold mb-6 md:mb-8 font-mono tracking-widest text-sm uppercase border-b border-white/10 pb-4 pr-10">Simulation Guide</h3>
+               <div className="space-y-6 text-xs md:text-sm text-slate-400">
+                 <div className="flex gap-4 items-start">
+                   <span className="w-7 h-7 md:w-8 md:h-8 rounded-full bg-slate-800 text-slate-300 flex items-center justify-center shrink-0 border border-blue-900/40 font-mono text-[10px] md:text-xs mt-0.5">1</span>
+                   <p className="leading-relaxed"><strong>Observe Subnets:</strong> Notice how <strong>VLAN 10</strong>, <strong>VLAN 20</strong>, and <strong>VLAN 30</strong> are isolated environments on the network map.</p>
+                 </div>
+                 <div className="flex gap-4 items-start">
+                   <span className="w-7 h-7 md:w-8 md:h-8 rounded-full bg-slate-800 text-slate-300 flex items-center justify-center shrink-0 border border-blue-900/40 font-mono text-[10px] md:text-xs mt-0.5">2</span>
+                   <p className="leading-relaxed"><strong>Initiate:</strong> Select the <strong className="text-slate-300 font-normal">Source PC</strong> to begin preparing a message transfer sequence.</p>
+                 </div>
+                 <div className="flex gap-4 items-start">
+                   <span className="w-7 h-7 md:w-8 md:h-8 rounded-full bg-slate-800 text-slate-300 flex items-center justify-center shrink-0 border border-blue-900/40 font-mono text-[10px] md:text-xs mt-0.5">3</span>
+                   <p className="leading-relaxed"><strong>Dispatch:</strong> Select the <strong className="text-slate-300 font-normal">Destination PC</strong> to dispatch an ICMP request across the devices.</p>
+                 </div>
+                 <div className="flex gap-4 items-start">
+                   <span className="w-7 h-7 md:w-8 md:h-8 rounded-full bg-slate-800 text-slate-300 flex items-center justify-center shrink-0 border border-blue-900/40 font-mono text-[10px] md:text-xs mt-0.5">4</span>
+                   <p className="leading-relaxed"><strong>Monitor:</strong> Watch the live terminal to see how switches forward MAC addresses and routers route between IP subnets.</p>
+                 </div>
+               </div>
+            </motion.div>
+          ) : (
+            <motion.button
+               key="show-guide-btn"
+               initial={{ opacity: 0, scale: 0.9 }}
+               animate={{ opacity: 1, scale: 1 }}
+               exit={{ opacity: 0, scale: 0.9 }}
+               onClick={() => setIsGuideOpen(true)}
+               className="bg-brand-600 hover:bg-brand-500 text-white shadow-[0_0_20px_rgba(37,99,235,0.4)] flex items-center gap-2 px-5 py-3 rounded-full font-bold uppercase tracking-widest text-[10px] sm:text-xs transition-colors border border-brand-400/30 backdrop-blur-md"
+            >
+               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="currentColor" strokeWidth="2"/><path d="M12 16V12" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/><path d="M12 8H12.01" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/></svg>
+               Show Guide
+            </motion.button>
+          )}
+        </AnimatePresence>
       </div>
 
       {/* DRAGGABLE TERMINAL */}
-      <div className="absolute top-20 right-6 z-50 w-[280px] md:w-[340px] pointer-events-none">
+      <div className="absolute top-16 right-4 md:top-20 md:right-6 z-50 w-[240px] sm:w-[280px] md:w-[340px] pointer-events-none">
         <motion.div 
           drag
           dragConstraints={{

@@ -197,9 +197,11 @@ export default function Hero({ content, isReady }: HeroProps & { isReady: boolea
                       </span>
                     ))}
                  </div>
-                 <p className="text-blue-950 leading-relaxed font-medium text-sm mt-5">
-                   * Also manipulating <strong className="font-bold">Python</strong> to a decent level for scripting and logic.
-                 </p>
+                 <div className="mt-10">
+                   <p className="text-slate-800 font-display text-2xl md:text-3xl leading-snug tracking-tight font-light transition-colors duration-300">
+                     I write <strong className="font-bold text-slate-950">Python</strong> to a decent level, exploring <span className="italic font-serif text-slate-600">pixel manipulation</span> by compressing pictures and videos.
+                   </p>
+                 </div>
                </div>
 
                {/* Data Node 3 - Philosophy node */}

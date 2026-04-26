@@ -25,6 +25,9 @@ export default function Testimonials({ content }: TestimonialsProps) {
   const startX = useRef(0);
   const startProgress = useRef(0);
 
+  const lastX = useRef(0);
+  const directionData = useRef(1);
+
   useGSAP(() => {
     // Reveal animation for section header
     gsap.from('.testimonial-header', {
@@ -54,13 +57,17 @@ export default function Testimonials({ content }: TestimonialsProps) {
   };
   
   const handleMouseLeave = () => {
-    if (!isDragging) tweenRef.current?.play();
+    if (!isDragging) {
+      tweenRef.current?.paused(false);
+      tweenRef.current?.timeScale(directionData.current);
+    }
     else handlePointerUp(); // End drag if mouse leaves
   };
 
   const handlePointerDown = (e: React.PointerEvent) => {
     setIsDragging(true);
     startX.current = e.clientX || (e as any).touches?.[0]?.clientX;
+    lastX.current = startX.current;
     startProgress.current = tweenRef.current?.progress() || 0;
     tweenRef.current?.pause();
     
@@ -73,6 +80,14 @@ export default function Testimonials({ content }: TestimonialsProps) {
     
     const clientX = e.clientX || (e as any).touches?.[0]?.clientX;
     const deltaX = clientX - startX.current;
+    
+    const currentFrameDelta = clientX - lastX.current;
+    if (currentFrameDelta > 0) {
+      directionData.current = -1; // moving right
+    } else if (currentFrameDelta < 0) {
+      directionData.current = 1; // moving left
+    }
+    lastX.current = clientX;
     
     // Our track consists of duplicated content, so full width is double the "scroll" width
     // Actually the track shifts by xPercent: -50, which equates to offsetWidth / 2.
@@ -91,7 +106,8 @@ export default function Testimonials({ content }: TestimonialsProps) {
   const handlePointerUp = (e?: React.PointerEvent) => {
     if (isDragging) {
       setIsDragging(false);
-      tweenRef.current?.play();
+      tweenRef.current?.paused(false);
+      tweenRef.current?.timeScale(directionData.current);
       if (e) {
         (e.target as HTMLElement).releasePointerCapture(e.pointerId);
       }

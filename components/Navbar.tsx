@@ -79,21 +79,33 @@ const Navbar: React.FC<NavBarProps> = ({ items, className }) => {
           className
         )}
       >
-        <div className="flex items-center justify-center gap-2 lg:gap-3 bg-white/80 backdrop-blur-lg border border-brand-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] py-1.5 px-2 rounded-full overflow-hidden">
+        <div className="flex items-center justify-center gap-1 lg:gap-3 bg-white/80 backdrop-blur-lg border border-brand-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] py-1.5 px-2 rounded-full">
           
           {/* Logo */}
           <a 
             href="#home"
             onClick={() => setActiveTab('')}
-            className={`w-10 h-10 ml-1 rounded-full flex items-center justify-center border transition-all duration-300 relative overflow-hidden group ${
-              activeTab === '' 
-                ? 'bg-brand-500 text-white border-brand-500 shadow-[0_0_15px_-3px_rgba(20,184,166,0.5)]' 
-                : 'bg-gradient-to-br from-brand-500/20 to-brand-600/5 text-slate-950 border-brand-500/20 hover:border-brand-500 hover:text-brand-600 shadow-[0_0_10px_-3px_rgba(20,184,166,0.2)]'
-            }`}
+            className={cn(
+              "px-3 py-1.5 ml-1 rounded-full flex items-center justify-center transition-all duration-300 relative group font-bold tracking-tight text-sm md:text-base cursor-pointer",
+              activeTab === '' ? 'text-brand-600' : 'text-slate-900 hover:text-brand-600'
+            )}
           >
-             <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" className="transform group-hover:scale-110 transition-transform duration-300 relative z-10">
-               <path d="M4 21V4L12 14L20 4V21H16V9.5L12 14.5L8 9.5V21H4Z" />
-             </svg>
+             <span>mounib.dev</span>
+             
+             {activeTab === '' && (
+               <motion.div
+                 layoutId="lamp"
+                 className="absolute inset-0 w-full bg-brand-50 rounded-full -z-10"
+                 initial={false}
+                 transition={{
+                   type: "spring",
+                   stiffness: 300,
+                   damping: 30,
+                 }}
+               >
+                 <div className="absolute -top-2 left-1/2 -translate-x-1/2 w-8 h-1 bg-brand-500 rounded-full shadow-[0_2px_8px_rgba(20,184,166,0.3)]" />
+               </motion.div>
+             )}
           </a>
           
           {/* Divider */}
@@ -108,7 +120,7 @@ const Navbar: React.FC<NavBarProps> = ({ items, className }) => {
                 href={item.url}
                 onClick={() => setActiveTab(item.name)}
                 className={cn(
-                  "relative cursor-pointer text-sm font-bold px-4 lg:px-6 py-2 rounded-full transition-all duration-300 flex items-center justify-center min-w-[2.5rem]",
+                  "relative cursor-pointer text-xs lg:text-sm font-bold px-2 lg:px-6 py-2 rounded-full transition-all duration-300 flex items-center justify-center min-w-[2.5rem]",
                   "text-slate-950 hover:text-slate-950",
                   isActive && "text-slate-950"
                 )}
@@ -140,19 +152,20 @@ const Navbar: React.FC<NavBarProps> = ({ items, className }) => {
       */}
       <div className="fixed top-0 left-0 w-full p-4 z-[100] flex items-center justify-between md:hidden pointer-events-none">
         
-        {/* Mobile Logo */}
+        {/* Placeholder to balance flex-between */}
+        <div className="w-10"></div>
+
+        {/* Mobile Logo Centered */}
         <a 
           href="#home"
           onClick={() => handleMobileNavClick('')}
-          className={`w-10 h-10 rounded-full flex items-center justify-center border transition-all duration-300 pointer-events-auto backdrop-blur-sm ${
+          className={`absolute left-1/2 -translate-x-1/2 px-4 py-2 rounded-full flex items-center justify-center border transition-all duration-300 pointer-events-auto backdrop-blur-sm font-bold tracking-tight text-sm ${
             activeTab === '' 
               ? 'bg-brand-500 text-white border-brand-500 shadow-[0_0_15px_-3px_rgba(20,184,166,0.5)]' 
               : 'bg-white/80 text-brand-600 border-brand-200 shadow-sm'
           }`}
         >
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-              <path d="M4 21V4L12 14L20 4V21H16V9.5L12 14.5L8 9.5V21H4Z" />
-            </svg>
+            mounib.dev
         </a>
 
         {/* Hamburger Toggle */}

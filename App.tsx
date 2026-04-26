@@ -44,6 +44,20 @@ const App: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    // Prevent scroll restoration on page reload
+    if ('scrollRestoration' in history) {
+      history.scrollRestoration = 'manual';
+    }
+    
+    // Clear hash if present to start fresh
+    if (window.location.hash) {
+      window.history.replaceState(null, '', window.location.pathname + window.location.search);
+    }
+    
+    window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
     if (isTopologyOpen) {
       document.body.style.overflow = 'hidden';
     } else {

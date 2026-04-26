@@ -342,7 +342,10 @@ const App: React.FC = () => {
                  <path d="M4 21V4L12 14L20 4V21H16V9.5L12 14.5L8 9.5V21H4Z" />
                </svg>
              </div>
-             <span className="font-display font-semibold tracking-tight text-xl text-white lowercase">mounib.dev</span>
+             <div className="font-serif italic font-bold text-xl tracking-tight flex items-baseline">
+               <span className="text-white">Mounib</span>
+               <span className="text-slate-400 text-sm font-sans not-italic transition-colors group-hover:text-brand-500 ml-0.5">.dev</span>
+             </div>
           </div>
 
           <p className="text-[10px] text-slate-400 font-medium tracking-wide text-center">

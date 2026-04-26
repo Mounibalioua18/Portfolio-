@@ -194,7 +194,7 @@ const Navbar: React.FC<NavBarProps> = ({ items, className }) => {
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
               transition={{ duration: 0.2, ease: "easeOut" }}
-              className="fixed top-20 right-4 z-[100] w-56 bg-white/95 backdrop-blur-xl border border-slate-900/10 rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] p-2 flex flex-col md:hidden"
+              className="fixed top-[5.25rem] right-4 z-[100] w-56 bg-white/95 backdrop-blur-xl border border-slate-900/10 rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] p-2 flex flex-col md:hidden"
             >
               {items.map((item) => {
                 const Icon = item.icon;

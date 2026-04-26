@@ -110,8 +110,8 @@ const App: React.FC = () => {
             duration = 0.3; // Much faster! Scroll immediately
             ease = 'power1.inOut'; // Less easing at the start so it moves right away
             
-            // Stop a bit before the form to clearly see the "Ready to engineer..." title
-            offsetY = 80;
+            // Add enough offset so the form starts properly under the navbar
+            offsetY = window.innerWidth < 768 ? 60 : 100;
             
             // Set the SVG filter on the middle sections
             gsap.set('#scroll-blur-content', { filter: 'url(#vertical-motion-blur)', willChange: 'filter' });

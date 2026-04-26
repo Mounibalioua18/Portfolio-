@@ -191,12 +191,15 @@ export default function Hero({ content, isReady }: HeroProps & { isReady: boolea
                    {content.system}
                  </h4>
                  <div className="flex flex-wrap gap-3">
-                    {['React', 'TypeScript', 'Node.js', 'Next.js'].map((tech) => (
+                    {['React', 'TypeScript', 'Node.js', 'Next.js', 'Java', 'JavaScript'].map((tech) => (
                       <span key={tech} className="px-5 py-2.5 bg-white text-blue-950 text-[10px] sm:text-xs font-bold tracking-[0.15em] uppercase border border-brand-200 hover:border-blue-950 hover:bg-brand-50 transition-colors shadow-sm cursor-default">
                         {tech}
                       </span>
                     ))}
                  </div>
+                 <p className="text-blue-950 leading-relaxed font-medium text-sm mt-5">
+                   * Also manipulating <strong className="font-bold">Python</strong> to a decent level for scripting and logic.
+                 </p>
                </div>
 
                {/* Data Node 3 - Philosophy node */}

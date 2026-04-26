@@ -99,7 +99,7 @@ export default function Expertise() {
                 whileHover={{ scale: 1.05, x: 10 }}
                 className="border-l-4 border-brand-500 pl-6 cursor-default"
               >
-                <h4 className="text-5xl font-black text-white drop-shadow-lg">4+</h4>
+                <h4 className="text-5xl font-black text-white drop-shadow-lg">5+</h4>
                 <p className="text-sm text-slate-400 uppercase tracking-widest mt-2 font-bold">Years Coding</p>
               </motion.div>
               <motion.div 

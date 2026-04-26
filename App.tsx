@@ -110,9 +110,8 @@ const App: React.FC = () => {
             duration = 0.3; // Much faster! Scroll immediately
             ease = 'power1.inOut'; // Less easing at the start so it moves right away
             
-            // Center the contact section on the screen
-            const targetHeight = (targetElement as HTMLElement).offsetHeight;
-            offsetY = (window.innerHeight / 2) - (targetHeight / 2);
+            // Stop a bit before the form to clearly see the "Ready to engineer..." title
+            offsetY = 80;
             
             // Set the SVG filter on the middle sections
             gsap.set('#scroll-blur-content', { filter: 'url(#vertical-motion-blur)', willChange: 'filter' });

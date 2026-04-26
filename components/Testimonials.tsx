@@ -59,9 +59,9 @@ export default function Testimonials({ content }: TestimonialsProps) {
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-brand-200/30 rounded-full blur-[120px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-6 relative z-10 mb-16 testimonial-header text-center">
-        <h2 className="text-sm font-bold tracking-[0.3em] uppercase text-slate-800 mb-4">{content.badge}</h2>
+        <h2 className="text-sm font-bold tracking-[0.3em] uppercase text-slate-950 mb-4">{content.badge}</h2>
         <h3 className="font-display text-4xl md:text-5xl lg:text-6xl font-black tracking-tight text-slate-900">
-          {content.title} <br className="md:hidden" /><span className="text-slate-800">{content.titleHighlight}</span>
+          {content.title} <br className="md:hidden" /><span className="text-slate-950">{content.titleHighlight}</span>
         </h3>
       </div>
 
@@ -80,7 +80,7 @@ export default function Testimonials({ content }: TestimonialsProps) {
             >
               <div>
                 <Quote className="text-brand-200 mb-4 group-hover/card:text-brand-400 group-hover/card:scale-110 transition-all duration-300 transform origin-left w-6 h-6 md:w-8 md:h-8" />
-                <p className="text-slate-800 text-sm md:text-base font-medium leading-relaxed mb-6 italic">
+                <p className="text-slate-950 text-sm md:text-base font-medium leading-relaxed mb-6 italic">
                   "{item.testimonial}"
                 </p>
               </div>
@@ -96,7 +96,7 @@ export default function Testimonials({ content }: TestimonialsProps) {
                     {item.by.split(',')[0]}
                   </h4>
                   {item.by.includes(',') && (
-                    <span className="text-[10px] md:text-xs font-bold text-slate-800 uppercase tracking-wider mt-0.5">
+                    <span className="text-[10px] md:text-xs font-bold text-slate-950 uppercase tracking-wider mt-0.5">
                       {item.by.split(',')[1].trim()}
                     </span>
                   )}

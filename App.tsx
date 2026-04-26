@@ -129,7 +129,7 @@ const App: React.FC = () => {
   const TimelineSection = ({ title, items, icon: Icon }: { title: string, items: any[], icon: any }) => (
     <div className="mb-20">
       <div className="flex flex-col md:flex-row items-center md:items-start gap-4 md:gap-6 mb-12 text-center md:text-left">
-        <div className="w-16 h-16 rounded-2xl bg-brand-50 shadow-sm border border-brand-100 flex items-center justify-center text-slate-800 shrink-0 mx-auto md:mx-0">
+        <div className="w-16 h-16 rounded-2xl bg-brand-50 shadow-sm border border-brand-100 flex items-center justify-center text-slate-950 shrink-0 mx-auto md:mx-0">
           <Icon size={32} />
         </div>
         <h4 className="text-3xl md:text-4xl font-display font-bold text-slate-900 tracking-tight">{title}</h4>
@@ -143,15 +143,15 @@ const App: React.FC = () => {
             <div className="absolute left-[-6px] top-2 w-3 h-3 rounded-full bg-brand-500 ring-4 ring-brand-50" />
             <div className="grid md:grid-cols-12 gap-4 md:gap-10">
               <div className="md:col-span-5 lg:col-span-4 lg:pr-4">
-                <p className="text-slate-800 font-bold mb-2 tracking-widest uppercase text-xs">{exp.period}</p>
+                <p className="text-slate-950 font-bold mb-2 tracking-widest uppercase text-xs">{exp.period}</p>
                 <h4 className="text-xl md:text-2xl font-display font-black text-slate-900 mb-1 md:mb-2">{exp.role}</h4>
-                <p className="text-slate-800 font-medium text-base md:text-lg">{exp.company}</p>
+                <p className="text-slate-950 font-medium text-base md:text-lg">{exp.company}</p>
               </div>
               <div className="md:col-span-7 lg:col-span-8">
                 <ul className="space-y-3 md:space-y-4">
                   {exp.description.map((item: string, idx: number) => (
-                    <li key={idx} className="flex items-start space-x-3 md:space-x-4 text-slate-800 font-medium text-sm md:text-base lg:text-lg leading-relaxed">
-                      <ChevronRight size={18} className="text-slate-800 mt-0.5 md:mt-1.5 flex-shrink-0" />
+                    <li key={idx} className="flex items-start space-x-3 md:space-x-4 text-slate-950 font-medium text-sm md:text-base lg:text-lg leading-relaxed">
+                      <ChevronRight size={18} className="text-slate-950 mt-0.5 md:mt-1.5 flex-shrink-0" />
                       <span>{item}</span>
                     </li>
                   ))}
@@ -165,7 +165,7 @@ const App: React.FC = () => {
   );
 
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-800 font-sans selection:bg-brand-500/30" ref={containerRef}>
+    <div className="min-h-screen bg-slate-50 text-slate-950 font-sans selection:bg-brand-500/30" ref={containerRef}>
       {!isReady && <LoadingScreen onComplete={() => setIsReady(true)} />}
       <Navbar items={navItems} />
       
@@ -180,12 +180,12 @@ const App: React.FC = () => {
           <div className="max-w-7xl mx-auto px-6 relative z-20">
             <div className="flex flex-col md:flex-row md:items-end justify-between mb-20 gap-8">
               <div className="max-w-xl">
-                <h2 className="text-sm font-bold tracking-[0.3em] uppercase text-slate-800 mb-6">{content.projects.badge}</h2>
+                <h2 className="text-sm font-bold tracking-[0.3em] uppercase text-slate-950 mb-6">{content.projects.badge}</h2>
                 <h3 className="font-display text-5xl md:text-6xl text-brand-900 tracking-tight">
-                  {content.projects.title} <span className="text-slate-800 italic">{content.projects.titleHighlight}</span>
+                  {content.projects.title} <span className="text-slate-950 italic">{content.projects.titleHighlight}</span>
                 </h3>
               </div>
-              <p className="text-slate-800 text-lg leading-relaxed max-w-sm font-medium">
+              <p className="text-slate-950 text-lg leading-relaxed max-w-sm font-medium">
                 {content.projects.description}
               </p>
             </div>
@@ -208,9 +208,9 @@ const App: React.FC = () => {
         <section id="experience" className="py-32 bg-white">
           <div className="max-w-4xl mx-auto px-6 md:px-12 lg:px-8">
             <div className="max-w-3xl mb-20 text-center md:text-left">
-              <h2 className="text-sm font-bold tracking-[0.3em] uppercase text-slate-800 mb-6">{content.experience.badge}</h2>
+              <h2 className="text-sm font-bold tracking-[0.3em] uppercase text-slate-950 mb-6">{content.experience.badge}</h2>
               <h3 className="font-display text-4xl md:text-5xl lg:text-6xl text-brand-900 tracking-tight">
-                {content.experience.title} <span className="text-slate-800 italic">{content.experience.titleHighlight}</span>
+                {content.experience.title} <span className="text-slate-950 italic">{content.experience.titleHighlight}</span>
               </h3>
             </div>
             {/* Updating timeline design colors inside TimelineSection (which needs to be updated but it's defined above) */}
@@ -222,11 +222,11 @@ const App: React.FC = () => {
         <section id="services" className="py-20 bg-brand-50/50 border-t border-brand-100 perspective-1000">
           <div className="max-w-3xl mx-auto px-4 md:px-6 relative z-10">
             <div className="text-center max-w-2xl mx-auto mb-16">
-              <h2 className="text-sm font-bold tracking-[0.3em] uppercase text-slate-800 mb-6">{content.services.badge}</h2>
+              <h2 className="text-sm font-bold tracking-[0.3em] uppercase text-slate-950 mb-6">{content.services.badge}</h2>
               <h3 className="font-display text-4xl text-brand-900 mb-6 tracking-tight">
-                {content.services.title} <span className="text-slate-800 italic">{content.services.titleHighlight}</span>
+                {content.services.title} <span className="text-slate-950 italic">{content.services.titleHighlight}</span>
               </h3>
-              <p className="text-slate-800 font-medium md:text-lg leading-relaxed">
+              <p className="text-slate-950 font-medium md:text-lg leading-relaxed">
                 {content.services.description}
               </p>
             </div>
@@ -242,11 +242,11 @@ const App: React.FC = () => {
                   >
                     <div className="flex items-center gap-4 md:gap-6 md:w-1/2">
                       <div className="w-12 h-12 rounded-full bg-white shadow-sm border border-brand-100 flex items-center justify-center group-hover:scale-110 transition-transform shrink-0">
-                        <Icon className="text-slate-800" size={24} />
+                        <Icon className="text-slate-950" size={24} />
                       </div>
                       <h4 className="text-xl md:text-2xl lg:text-3xl font-display text-brand-800/50 group-hover:text-brand-900 transition-colors">{service.title}</h4>
                     </div>
-                    <p className="text-slate-800 font-medium text-sm md:text-base leading-relaxed md:w-1/2">{service.description}</p>
+                    <p className="text-slate-950 font-medium text-sm md:text-base leading-relaxed md:w-1/2">{service.description}</p>
                   </div>
                 );
               })}
@@ -278,9 +278,9 @@ const App: React.FC = () => {
             <div className="bg-white rounded-[2rem] md:rounded-[2.5rem] p-6 sm:p-10 md:p-14 text-center relative overflow-hidden border border-brand-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)]">
               <div className="contact-animate relative z-10">
                 <h3 className="font-display text-3xl sm:text-4xl md:text-5xl mb-4 md:mb-6 tracking-tight leading-tight text-brand-900">
-                  {content.contact.title} <br /> <span className="text-slate-800 italic">{content.contact.titleHighlight}</span>
+                  {content.contact.title} <br /> <span className="text-slate-950 italic">{content.contact.titleHighlight}</span>
                 </h3>
-                <p className="text-slate-800 font-medium text-sm sm:text-base md:text-lg mb-8 max-w-xl mx-auto leading-relaxed">
+                <p className="text-slate-950 font-medium text-sm sm:text-base md:text-lg mb-8 max-w-xl mx-auto leading-relaxed">
                   {content.contact.description}
                 </p>
                 <ContactForm content={content.contact.form} />
@@ -296,7 +296,7 @@ const App: React.FC = () => {
           <div 
             className="flex items-center justify-center md:justify-start gap-3 cursor-pointer select-none group"
           >
-             <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-500/20 to-brand-600/5 flex items-center justify-center text-slate-800 group-hover:bg-brand-500 group-hover:text-white transition-all duration-300 shadow-[0_0_15px_-3px_rgba(20,184,166,0.2)] border border-brand-500/20 group-hover:border-brand-500 relative overflow-hidden">
+             <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-500/20 to-brand-600/5 flex items-center justify-center text-slate-950 group-hover:bg-brand-500 group-hover:text-white transition-all duration-300 shadow-[0_0_15px_-3px_rgba(20,184,166,0.2)] border border-brand-500/20 group-hover:border-brand-500 relative overflow-hidden">
                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" className="transform group-hover:scale-110 transition-transform duration-300 relative z-10">
                  <path d="M4 21V4L12 14L20 4V21H16V9.5L12 14.5L8 9.5V21H4Z" />
                </svg>

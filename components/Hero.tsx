@@ -92,12 +92,12 @@ export default function Hero({ content, isReady }: HeroProps & { isReady: boolea
           {/* Left Side: Dramatic Typography */}
           <div className="lg:col-span-7 flex flex-col items-start md:items-center lg:items-start relative z-20 text-left md:text-center lg:text-left">
             <div className="hero-badge flex items-center justify-start md:justify-center lg:justify-start gap-4 mb-8 md:mb-12">
-               <div className="w-16 h-[2px] bg-brand-800 hidden sm:block"></div>
-               <span className="text-xs font-bold uppercase tracking-[0.3em] text-slate-800">{content.role}</span>
+               <div className="w-16 h-[2px] bg-blue-950 hidden sm:block"></div>
+               <span className="text-xs font-bold uppercase tracking-[0.3em] text-blue-950">{content.role}</span>
             </div>
 
             <h1 className="flex flex-col leading-[0.85] mb-8 w-full relative items-start md:items-center lg:items-start">
-              <span className="hero-title-word font-serif italic text-[5.5rem] md:text-[8rem] lg:text-[10rem] xl:text-[11rem] tracking-tight text-slate-950 drop-shadow-sm self-start md:self-auto lg:self-start z-10">
+              <span className="hero-title-word font-serif italic text-[5.5rem] md:text-[8rem] lg:text-[10rem] xl:text-[11rem] tracking-tight text-blue-950 drop-shadow-sm self-start md:self-auto lg:self-start z-10">
                 Mounib
               </span>
               <span className="hero-title-word font-display font-bold text-[5.5rem] md:text-[8rem] lg:text-[10rem] xl:text-[11.5rem] tracking-tighter text-brand-950 -mt-1 md:-mt-2 lg:-mt-3 drop-shadow-sm self-start md:self-auto lg:self-start lg:ml-12 md:mr-2 z-0">
@@ -106,8 +106,8 @@ export default function Hero({ content, isReady }: HeroProps & { isReady: boolea
             </h1>
 
             <div className="hero-title-word w-full max-w-xl mb-12 mt-4 md:mt-8">
-              <p className="text-slate-800 font-medium text-xl md:text-2xl leading-relaxed">
-                I am a passionate <strong className="text-brand-950 font-bold border-b-2 border-brand-800">Software Engineer</strong> focused on creating elegant, high-performance web experiences. 
+              <p className="text-blue-950 font-medium text-xl md:text-2xl leading-relaxed">
+                I am a passionate <strong className="text-brand-950 font-bold border-b-2 border-blue-950">Software Engineer</strong> focused on creating elegant, high-performance web experiences. 
                 <br className="hidden md:block" /> Deep systemic architecture meets digital art.
               </p>
             </div>
@@ -116,10 +116,10 @@ export default function Hero({ content, isReady }: HeroProps & { isReady: boolea
             <div className="hero-bento flex items-center gap-6 mt-4 group">
                <div className="w-16 h-16 rounded-full border border-brand-200 flex items-center justify-center relative overflow-hidden shrink-0">
                  <div className="absolute inset-0 bg-brand-50 scale-0 group-hover:scale-100 transition-transform duration-500 rounded-full"></div>
-                 <Server size={20} className="text-slate-800 relative z-10 group-hover:rotate-12 transition-transform duration-500" />
+                 <Server size={20} className="text-blue-950 relative z-10 group-hover:rotate-12 transition-transform duration-500" />
                </div>
                <div>
-                 <p className="text-[10px] font-bold text-slate-800 uppercase tracking-[0.25em] mb-1 group-hover:text-slate-800 transition-colors">
+                 <p className="text-[10px] font-bold text-blue-950 uppercase tracking-[0.25em] mb-1 group-hover:text-blue-950 transition-colors">
                    Current Focus
                  </p>
                  <p className="text-brand-900 font-serif italic text-lg md:text-xl leading-snug max-w-[280px]">
@@ -138,26 +138,26 @@ export default function Hero({ content, isReady }: HeroProps & { isReady: boolea
                
                {/* Data Node 1 */}
                <div className="hero-bento relative group">
-                 <div className="absolute -left-8 lg:-left-[5.35rem] top-2 w-3 h-3 bg-white border-2 border-brand-800 rounded-full hidden lg:block group-hover:scale-150 transition-transform duration-500"></div>
-                 <span className="text-slate-800 font-mono text-sm tracking-widest block mb-4 group-hover:text-slate-800 transition-colors">01 // INFRASTRUCTURE</span>
+                 <div className="absolute -left-8 lg:-left-[5.35rem] top-2 w-3 h-3 bg-white border-2 border-blue-950 rounded-full hidden lg:block group-hover:scale-150 transition-transform duration-500"></div>
+                 <span className="text-blue-950 font-mono text-sm tracking-widest block mb-4 group-hover:text-blue-950 transition-colors">01 // INFRASTRUCTURE</span>
                  <h4 className="text-3xl md:text-4xl font-display font-light text-brand-950 tracking-tight mb-4 group-hover:-translate-y-1 transition-transform duration-500">
                    {content.infra}
                  </h4>
-                 <p className="text-slate-800 leading-relaxed font-medium text-lg">
+                 <p className="text-blue-950 leading-relaxed font-medium text-lg">
                    Designing reliable backend architectures and data systems to ensure your application can handle scale effortlessly.
                  </p>
                </div>
 
                {/* Data Node 2 */}
                <div className="hero-bento relative group">
-                 <div className="absolute -left-8 lg:-left-[5.35rem] top-2 w-3 h-3 bg-white border-2 border-brand-400 rounded-full hidden lg:block group-hover:bg-brand-400 transition-colors duration-500"></div>
-                 <span className="text-slate-800 font-mono text-sm tracking-widest block mb-4 group-hover:text-slate-800 transition-colors">02 // DEVELOPMENT STACK</span>
+                 <div className="absolute -left-8 lg:-left-[5.35rem] top-2 w-3 h-3 bg-white border-2 border-blue-950 rounded-full hidden lg:block group-hover:bg-blue-950 transition-colors duration-500"></div>
+                 <span className="text-blue-950 font-mono text-sm tracking-widest block mb-4 group-hover:text-blue-950 transition-colors">02 // DEVELOPMENT STACK</span>
                  <h4 className="text-3xl md:text-4xl font-display font-light text-brand-950 tracking-tight mb-6 group-hover:-translate-y-1 transition-transform duration-500">
                    {content.system}
                  </h4>
                  <div className="flex flex-wrap gap-3">
                     {['React', 'TypeScript', 'Node.js', 'Next.js'].map((tech) => (
-                      <span key={tech} className="px-5 py-2.5 bg-white text-slate-800 text-[10px] sm:text-xs font-bold tracking-[0.15em] uppercase border border-brand-200 hover:border-brand-400 hover:bg-brand-50 transition-colors shadow-sm cursor-default">
+                      <span key={tech} className="px-5 py-2.5 bg-white text-blue-950 text-[10px] sm:text-xs font-bold tracking-[0.15em] uppercase border border-brand-200 hover:border-blue-950 hover:bg-brand-50 transition-colors shadow-sm cursor-default">
                         {tech}
                       </span>
                     ))}
@@ -166,12 +166,12 @@ export default function Hero({ content, isReady }: HeroProps & { isReady: boolea
 
                {/* Data Node 3 - Philosophy node */}
                <div className="hero-bento relative group pt-2">
-                 <div className="absolute -left-8 lg:-left-[5.35rem] top-4 w-3 h-3 bg-white border-2 border-brand-800 rounded-full hidden lg:block group-hover:scale-150 transition-transform duration-500"></div>
-                 <span className="text-slate-800 font-mono text-sm tracking-widest block mb-4 group-hover:text-slate-800 transition-colors">03 // PHILOSOPHY</span>
+                 <div className="absolute -left-8 lg:-left-[5.35rem] top-4 w-3 h-3 bg-white border-2 border-blue-950 rounded-full hidden lg:block group-hover:scale-150 transition-transform duration-500"></div>
+                 <span className="text-blue-950 font-mono text-sm tracking-widest block mb-4 group-hover:text-blue-950 transition-colors">03 // PHILOSOPHY</span>
                  <h4 className="text-3xl md:text-4xl font-display font-light text-brand-950 tracking-tight mb-4 group-hover:-translate-y-1 transition-transform duration-500">
                    Precision & Logic
                  </h4>
-                 <p className="text-slate-800 leading-relaxed font-medium text-lg">
+                 <p className="text-blue-950 leading-relaxed font-medium text-lg">
                    {content.subtitlePrefix} {content.subtitleSuffix}
                  </p>
                </div>

@@ -146,7 +146,7 @@ const ContactForm: React.FC<ContactFormProps> = ({ content }) => {
       <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-4 text-left">
         <div className="grid md:grid-cols-2 gap-3 sm:gap-4">
           <div className="space-y-1">
-            <label className="text-[10px] font-bold uppercase tracking-widest text-slate-800 ml-1">{content.name}</label>
+            <label className="text-[10px] font-bold uppercase tracking-widest text-slate-950 ml-1">{content.name}</label>
             <input
               required
               type="text"
@@ -159,7 +159,7 @@ const ContactForm: React.FC<ContactFormProps> = ({ content }) => {
             />
           </div>
           <div className="space-y-1">
-            <label className="text-[10px] font-bold uppercase tracking-widest text-slate-800 ml-1">{content.email}</label>
+            <label className="text-[10px] font-bold uppercase tracking-widest text-slate-950 ml-1">{content.email}</label>
             <input
               required
               type="email"
@@ -174,7 +174,7 @@ const ContactForm: React.FC<ContactFormProps> = ({ content }) => {
         </div>
         
         <div className="space-y-1">
-          <label className="text-[10px] font-bold uppercase tracking-widest text-slate-800 ml-1">{content.subject}</label>
+          <label className="text-[10px] font-bold uppercase tracking-widest text-slate-950 ml-1">{content.subject}</label>
           <input
             required
             type="text"
@@ -188,7 +188,7 @@ const ContactForm: React.FC<ContactFormProps> = ({ content }) => {
         </div>
 
         <div className="space-y-1">
-          <label className="text-[10px] font-bold uppercase tracking-widest text-slate-800 ml-1">{content.message}</label>
+          <label className="text-[10px] font-bold uppercase tracking-widest text-slate-950 ml-1">{content.message}</label>
           <textarea
             required
             name="message"

@@ -87,7 +87,7 @@ const Navbar: React.FC<NavBarProps> = ({ items, className }) => {
               onClick={() => setActiveTab(item.name)}
               className={cn(
                 "relative cursor-pointer text-xs sm:text-sm font-bold px-2.5 sm:px-6 py-2 sm:py-2 rounded-full transition-all duration-300 flex items-center justify-center min-w-[2.5rem]",
-                "text-slate-800 hover:text-slate-950",
+                "text-slate-950 hover:text-slate-950",
                 isActive && "text-slate-950"
               )}
             >

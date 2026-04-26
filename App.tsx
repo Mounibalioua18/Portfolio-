@@ -44,6 +44,15 @@ const App: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    if (isReady) {
+      window.scrollTo(0, 0);
+      ScrollTrigger.refresh();
+      // Ensure we hit the top in case of rendering delays
+      setTimeout(() => window.scrollTo(0, 0), 50);
+    }
+  }, [isReady]);
+
+  useEffect(() => {
     // Prevent scroll restoration on page reload
     if ('scrollRestoration' in history) {
       history.scrollRestoration = 'manual';
@@ -55,6 +64,17 @@ const App: React.FC = () => {
     }
     
     window.scrollTo(0, 0);
+    window.onbeforeunload = function () {
+      window.scrollTo(0, 0);
+    };
+    
+    // Force scroll to top after a short delay to override browser native behaviors
+    const timer = setTimeout(() => {
+      window.scrollTo(0, 0);
+      ScrollTrigger.refresh();
+    }, 100);
+    
+    return () => clearTimeout(timer);
   }, []);
 
   useEffect(() => {

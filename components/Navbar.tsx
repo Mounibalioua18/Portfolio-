@@ -150,28 +150,21 @@ const Navbar: React.FC<NavBarProps> = ({ items, className }) => {
       {/* 
         Mobile Header & Hamburger (below md)
       */}
-      <div className="fixed top-0 left-0 w-full p-4 z-[100] flex items-center justify-between md:hidden pointer-events-none">
+      <div className="fixed top-4 left-4 right-4 z-[100] flex items-center justify-between bg-white/95 backdrop-blur-xl border border-brand-100 shadow-sm rounded-2xl p-2 md:hidden pointer-events-auto">
         
-        {/* Placeholder to balance flex-between */}
-        <div className="w-10"></div>
-
-        {/* Mobile Logo Centered */}
+        {/* Mobile Logo */}
         <a 
           href="#home"
           onClick={() => handleMobileNavClick('')}
-          className={`absolute left-1/2 -translate-x-1/2 px-4 py-2 rounded-full flex items-center justify-center border transition-all duration-300 pointer-events-auto backdrop-blur-sm font-bold tracking-tight text-sm ${
-            activeTab === '' 
-              ? 'bg-brand-500 text-white border-brand-500 shadow-[0_0_15px_-3px_rgba(20,184,166,0.5)]' 
-              : 'bg-white/80 text-brand-600 border-brand-200 shadow-sm'
-          }`}
+          className="px-4 py-2 font-bold text-lg tracking-tight text-slate-900 group"
         >
-            mounib.dev
+          mounib<span className="text-brand-500 transition-colors group-hover:text-brand-600">.dev</span>
         </a>
 
         {/* Hamburger Toggle */}
         <button
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          className="w-10 h-10 rounded-full shrink-0 flex items-center justify-center border border-brand-200 bg-white/80 text-brand-600 backdrop-blur-sm shadow-sm pointer-events-auto active:scale-95 transition-transform"
+          className="w-10 h-10 mr-1 rounded-xl shrink-0 flex items-center justify-center bg-brand-50 text-brand-600 active:scale-95 transition-transform"
         >
           {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
         </button>
@@ -189,7 +182,7 @@ const Navbar: React.FC<NavBarProps> = ({ items, className }) => {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.15 }}
-              className="fixed inset-0 z-[90] bg-slate-900/10 backdrop-blur-sm md:hidden"
+              className="fixed inset-0 z-[90] bg-slate-900/20 backdrop-blur-sm md:hidden"
               onClick={() => setIsMobileMenuOpen(false)}
             />
             
@@ -199,7 +192,7 @@ const Navbar: React.FC<NavBarProps> = ({ items, className }) => {
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
               transition={{ duration: 0.2, ease: "easeOut" }}
-              className="fixed top-16 right-4 z-[100] w-56 bg-white/95 backdrop-blur-xl border border-brand-100/80 rounded-2xl shadow-2xl p-2 flex flex-col md:hidden"
+              className="fixed top-20 right-4 z-[100] w-56 bg-white/95 backdrop-blur-xl border border-brand-100/80 rounded-2xl shadow-2xl p-2 flex flex-col md:hidden"
             >
               {items.map((item) => {
                 const Icon = item.icon;
@@ -211,17 +204,17 @@ const Navbar: React.FC<NavBarProps> = ({ items, className }) => {
                     href={item.url}
                     onClick={() => handleMobileNavClick(item.name)}
                     className={cn(
-                      "flex items-center gap-3 text-sm font-semibold p-2.5 w-full rounded-xl transition-all",
+                      "flex items-center gap-3 text-base font-semibold p-3 w-full rounded-xl transition-all",
                       isActive 
-                        ? "bg-brand-50 text-brand-600" 
+                        ? "bg-brand-500 text-white shadow-md shadow-brand-500/20" 
                         : "text-slate-600 active:bg-slate-50 hover:bg-slate-50"
                     )}
                   >
                     <div className={cn(
                       "p-1.5 rounded-lg",
-                      isActive ? "bg-brand-100/50 text-brand-600" : "bg-slate-100/50 text-slate-500"
+                      isActive ? "bg-white/20 text-white" : "bg-slate-100/50 text-slate-500"
                     )}>
-                      <Icon size={16} strokeWidth={2.5} />
+                      <Icon size={18} strokeWidth={2.5} />
                     </div>
                     {item.name}
                   </a>

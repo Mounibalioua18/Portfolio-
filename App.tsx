@@ -156,34 +156,34 @@ const App: React.FC = () => {
 
     // --- SECTION REVEALS ---
     
-    // Services Section Reveal (Scale up)
+    // Services Section Reveal (Blur & Gentle Float)
     gsap.fromTo('#services',
-      { opacity: 0, scale: 0.95, y: 60 },
-      { opacity: 1, scale: 1, y: 0, duration: 1.5, ease: 'power3.out', scrollTrigger: { trigger: '#services', start: 'top 85%', toggleActions: 'play none none reverse' } }
+      { opacity: 0, filter: 'blur(15px)', y: 80 },
+      { opacity: 1, filter: 'blur(0px)', y: 0, duration: 1.8, ease: 'power3.out', scrollTrigger: { trigger: '#services', start: 'top 85%', toggleActions: 'play none none reverse' } }
     );
     
-    // Projects Section Reveal (3D Fold)
+    // Projects Section Reveal (Heavy Mask/Curtain Expansion)
     gsap.fromTo('#projects',
-      { opacity: 0, rotateX: 10, y: 100, transformPerspective: 1000 },
-      { opacity: 1, rotateX: 0, y: 0, duration: 1.6, ease: 'expo.out', scrollTrigger: { trigger: '#projects', start: 'top 85%', toggleActions: 'play none none reverse' } }
+      { opacity: 0, clipPath: 'inset(20% 10% 20% 10% round 30px)', scale: 1.05 },
+      { opacity: 1, clipPath: 'inset(0% 0% 0% 0% round 0px)', scale: 1, duration: 1.8, ease: 'expo.out', scrollTrigger: { trigger: '#projects', start: 'top 85%', toggleActions: 'play none none reverse' } }
     );
     
-    // Experience Section Reveal (Skew slide up)
+    // Experience Section Reveal (3D Fold Down)
     gsap.fromTo('#experience',
-      { opacity: 0, skewY: 2, y: 100 },
-      { opacity: 1, skewY: 0, y: 0, duration: 1.4, ease: 'power4.out', scrollTrigger: { trigger: '#experience', start: 'top 85%', toggleActions: 'play none none reverse' } }
+      { opacity: 0, rotateX: -20, y: 120, transformPerspective: 1200 },
+      { opacity: 1, rotateX: 0, y: 0, duration: 1.6, ease: 'power4.out', scrollTrigger: { trigger: '#experience', start: 'top 85%', toggleActions: 'play none none reverse' } }
     );
     
-    // Testimonials Section Reveal (Horizontal wipe)
+    // Testimonials Section Reveal (Elegant Side Slide)
     gsap.fromTo('#testimonials',
-      { opacity: 0, x: -50, clipPath: 'inset(0% 100% 0% 0%)' },
+      { opacity: 0, x: 80, clipPath: 'inset(0% 0% 0% 100%)' },
       { opacity: 1, x: 0, clipPath: 'inset(0% 0% 0% 0%)', duration: 1.5, ease: 'power3.inOut', scrollTrigger: { trigger: '#testimonials', start: 'top 85%', toggleActions: 'play none none reverse' } }
     );
     
-    // Contact Section Reveal (Elastic pop)
+    // Contact Section Reveal (Spring Pop)
     gsap.fromTo('#contact',
-      { opacity: 0, scale: 0.9, y: 120 },
-      { opacity: 1, scale: 1, y: 0, duration: 1.8, ease: 'back.out(1.2)', scrollTrigger: { trigger: '#contact', start: 'top 90%', toggleActions: 'play none none reverse' } }
+      { opacity: 0, scale: 0.85, y: 80 },
+      { opacity: 1, scale: 1, y: 0, duration: 1.5, ease: 'back.out(2)', scrollTrigger: { trigger: '#contact', start: 'top 90%', toggleActions: 'play none none reverse' } }
     );
 
   }, { scope: containerRef });

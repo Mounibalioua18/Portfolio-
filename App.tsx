@@ -298,7 +298,7 @@ const App: React.FC = () => {
           <div 
             className="flex items-center justify-center md:justify-start gap-3 cursor-pointer select-none group"
           >
-             <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-500/20 to-brand-600/5 flex items-center justify-center text-slate-950 group-hover:bg-brand-500 group-hover:text-white transition-all duration-300 shadow-[0_0_15px_-3px_rgba(20,184,166,0.2)] border border-brand-500/20 group-hover:border-brand-500 relative overflow-hidden">
+             <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-500/20 to-brand-600/5 flex items-center justify-center text-white group-hover:bg-brand-500 group-hover:text-white transition-all duration-300 shadow-[0_0_15px_-3px_rgba(20,184,166,0.2)] border border-brand-500/20 group-hover:border-brand-500 relative overflow-hidden">
                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" className="transform group-hover:scale-110 transition-transform duration-300 relative z-10">
                  <path d="M4 21V4L12 14L20 4V21H16V9.5L12 14.5L8 9.5V21H4Z" />
                </svg>

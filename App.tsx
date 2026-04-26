@@ -103,10 +103,16 @@ const App: React.FC = () => {
           let duration = 0.8;
           let ease = 'power2.inOut';
           
+          let offsetY = 0;
+          
           // "Race" effect for Contact section
           if (anchor.hash === '#contact') {
             duration = 0.3; // Much faster! Scroll immediately
             ease = 'power1.inOut'; // Less easing at the start so it moves right away
+            
+            // Center the contact section on the screen
+            const targetHeight = (targetElement as HTMLElement).offsetHeight;
+            offsetY = (window.innerHeight / 2) - (targetHeight / 2);
             
             // Set the SVG filter on the middle sections
             gsap.set('#scroll-blur-content', { filter: 'url(#vertical-motion-blur)', willChange: 'filter' });
@@ -134,7 +140,7 @@ const App: React.FC = () => {
           
           gsap.to(window, {
             duration: duration,
-            scrollTo: { y: targetElement, offsetY: 0 },
+            scrollTo: { y: targetElement, offsetY: offsetY },
             ease: ease
           });
         }

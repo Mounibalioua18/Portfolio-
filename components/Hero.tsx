@@ -24,33 +24,10 @@ export default function Hero({ content, isReady }: HeroProps & { isReady: boolea
 
     tl.to('.hero-overlay', {
       opacity: 0,
-      duration: 0.6,
-      ease: 'power2.inOut'
+      duration: 0.2,
+      ease: 'power2.out'
     })
-    .to('.hero-deco', {
-      scale: 1,
-      duration: 1.5,
-      opacity: 1,
-      stagger: 0.2,
-      ease: 'expo.out'
-    }, "-=0.2")
-    .to('.hero-line', {
-      scaleY: 1,
-      duration: 1.2,
-      ease: 'expo.out'
-    }, "-=1.0")
-    .fromTo('.hero-badge', {
-      scale: 0.95,
-      y: 10,
-      opacity: 0,
-    }, {
-      scale: 1,
-      y: 0,
-      opacity: 1,
-      duration: 0.8,
-      ease: 'power3.out',
-    }, "-=0.8")
-    .fromTo('.hero-title-word', {
+    .fromTo('.hero-name-word', {
       y: 40,
       opacity: 0,
     }, {
@@ -59,17 +36,47 @@ export default function Hero({ content, isReady }: HeroProps & { isReady: boolea
       duration: 1,
       stagger: 0.1,
       ease: 'power4.out',
-    }, "-=0.6")
-    .fromTo('.hero-bento', {
-      x: 30,
+    }, "-=0.1")
+    .fromTo('.hero-desc-word', {
+      y: 20,
       opacity: 0,
     }, {
-      x: 0,
+      y: 0,
       opacity: 1,
       duration: 0.8,
-      stagger: 0.15,
-      ease: 'power3.out',
+      ease: 'power4.out',
+    }, "-=0.8")
+    .to('.hero-deco', {
+      scale: 1,
+      duration: 0.8,
+      opacity: 0.8,
+      stagger: 0.1,
+      ease: 'power4.out'
+    }, "-=0.7")
+    .to('.hero-line', {
+      scaleY: 1,
+      duration: 0.6,
+      ease: 'expo.out'
+    }, "-=0.7")
+    .fromTo('.hero-badge', {
+      y: 10,
+      opacity: 0,
+    }, {
+      y: 0,
+      opacity: 1,
+      duration: 0.6,
+      ease: 'power4.out',
     }, "-=0.6")
+    .fromTo('.hero-bento', {
+      y: 20,
+      opacity: 0,
+    }, {
+      y: 0,
+      opacity: 1,
+      duration: 0.8,
+      stagger: 0.05,
+      ease: 'power4.out',
+    }, "-=0.6");
 
   }, { scope: containerRef, dependencies: [isReady] });
 
@@ -97,15 +104,15 @@ export default function Hero({ content, isReady }: HeroProps & { isReady: boolea
             </div>
 
             <h1 className="flex flex-col leading-[0.85] mb-8 w-full relative items-start md:items-center lg:items-start">
-              <span className="hero-title-word font-serif italic text-[5.5rem] md:text-[8rem] lg:text-[10rem] xl:text-[11rem] tracking-tight text-blue-950 drop-shadow-sm self-start md:self-auto lg:self-start z-10">
+              <span className="hero-name-word font-serif italic text-[5.5rem] md:text-[8rem] lg:text-[10rem] xl:text-[11rem] tracking-tight text-blue-950 drop-shadow-sm self-start md:self-auto lg:self-start z-10">
                 Mounib
               </span>
-              <span className="hero-title-word font-display font-bold text-[5.5rem] md:text-[8rem] lg:text-[10rem] xl:text-[11.5rem] tracking-tighter text-slate-950 -mt-1 md:-mt-2 lg:-mt-3 drop-shadow-sm self-start md:self-auto lg:self-start lg:ml-12 md:mr-2 z-0">
+              <span className="hero-name-word font-display font-bold text-[5.5rem] md:text-[8rem] lg:text-[10rem] xl:text-[11.5rem] tracking-tighter text-slate-950 -mt-1 md:-mt-2 lg:-mt-3 drop-shadow-sm self-start md:self-auto lg:self-start lg:ml-12 md:mr-2 z-0">
                 Alioua
               </span>
             </h1>
 
-            <div className="hero-title-word w-full max-w-xl mb-12 mt-4 md:mt-8">
+            <div className="hero-desc-word w-full max-w-xl mb-12 mt-4 md:mt-8">
               <p className="text-blue-950 font-medium text-xl md:text-2xl leading-relaxed">
                 I am a passionate <strong className="text-slate-950 font-bold border-b-2 border-blue-950">Software Engineer</strong> focused on creating elegant, high-performance web experiences. 
                 <br className="hidden md:block" /> Deep systemic architecture meets digital art.

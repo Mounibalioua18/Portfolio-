@@ -2,39 +2,55 @@ import React, { useRef } from 'react';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Terminal, Brain, Gamepad2, Briefcase, Zap, Cpu } from 'lucide-react';
+import { Terminal, Brain, Briefcase, Zap, Cpu, Crosshair } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
 
-export default function AboutMe() {
+export default function AboutMe({ isReady }: { isReady?: boolean }) {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useGSAP(() => {
-    const tl = gsap.timeline({
+    if (!isReady) return;
+
+    // Reveal Header
+    gsap.from('.about-header', {
       scrollTrigger: {
-        trigger: containerRef.current,
-        start: 'top 80%',
+        trigger: '.about-header',
+        start: 'top 85%',
         toggleActions: 'play none none reverse',
-      }
+      },
+      opacity: 0,
+      y: 30,
+      duration: 0.6,
+      ease: 'power2.out'
     });
 
-    tl.from('.about-header', {
-      y: 30,
-      opacity: 0,
-      duration: 0.6,
-      ease: 'power3.out'
-    })
-    .from('.about-card', {
-      y: 40,
-      opacity: 0,
-      duration: 0.6,
-      stagger: 0.15,
-      ease: 'back.out(1.2)'
-    }, "-=0.2");
-  }, { scope: containerRef });
+    // Faster reveal for cards
+    gsap.fromTo('.about-card', 
+      { opacity: 0, y: 30 },
+      {
+        scrollTrigger: {
+          trigger: '.about-card-grid',
+          start: 'top 88%',
+          toggleActions: 'play none none reverse',
+        },
+        opacity: 1,
+        y: 0,
+        duration: 0.4,
+        stagger: 0.05,
+        ease: 'power2.out',
+        clearProps: 'opacity,transform'
+      }
+    );
+
+    // Ensure ScrollTrigger is ready
+    setTimeout(() => {
+      ScrollTrigger.refresh();
+    }, 150);
+  }, { scope: containerRef, dependencies: [isReady] });
 
   return (
-    <section id="mindset" className="py-24 md:py-32 bg-white border-t border-brand-100" ref={containerRef}>
+    <section id="mindset" className="relative z-10 py-24 md:py-32 bg-white border-t border-brand-100" ref={containerRef}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="about-header text-center mb-16 md:mb-20">
           <h2 className="text-sm font-bold tracking-[0.2em] uppercase text-brand-600 mb-3">Behind the Code</h2>
@@ -43,10 +59,10 @@ export default function AboutMe() {
           </h3>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
+        <div className="about-card-grid grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 max-w-[88%] sm:max-w-[80%] mx-auto md:max-w-none">
           
           {/* Card 1: Problem Solver Engine */}
-          <div className="about-card bg-slate-50 rounded-3xl p-8 md:p-10 border border-slate-200 shadow-sm relative overflow-hidden group hover:border-brand-300 transition-colors">
+          <div className="about-card bg-slate-50 rounded-2xl md:rounded-3xl p-8 md:p-10 border border-slate-200 shadow-sm relative overflow-hidden group hover:border-brand-300 hover:-translate-y-2 hover:shadow-xl transition-all duration-300">
             <div className="absolute -right-4 -top-4 text-slate-100 group-hover:text-brand-50 transition-colors">
               <Terminal size={120} strokeWidth={1} />
             </div>
@@ -62,8 +78,8 @@ export default function AboutMe() {
           </div>
 
           {/* Card 2: AI Power User */}
-          <div className="about-card bg-brand-900 rounded-3xl p-8 md:p-10 border border-brand-800 shadow-sm relative overflow-hidden group">
-            <div className="absolute -right-4 -top-4 text-brand-800/50 group-hover:text-brand-800 transition-colors">
+          <div className="about-card bg-brand-900 rounded-2xl md:rounded-3xl p-8 md:p-10 border border-brand-800 shadow-sm relative overflow-hidden group hover:-translate-y-2 hover:shadow-brand-900/20 hover:shadow-xl transition-all duration-300">
+            <div className="absolute -right-4 -top-4 text-brand-800/30 group-hover:text-brand-800 transition-colors">
               <Cpu size={120} strokeWidth={1} />
             </div>
             <div className="relative z-10">
@@ -78,23 +94,23 @@ export default function AboutMe() {
           </div>
 
           {/* Card 3: The Gamer's Edge */}
-          <div className="about-card bg-slate-900 rounded-3xl p-8 md:p-10 border border-slate-800 shadow-sm relative overflow-hidden group">
-            <div className="absolute -right-4 -top-4 text-slate-800/50 group-hover:text-slate-800 transition-colors">
-              <Gamepad2 size={120} strokeWidth={1} />
+          <div className="about-card bg-slate-900 rounded-2xl md:rounded-3xl p-8 md:p-10 border border-slate-800 shadow-sm relative overflow-hidden group hover:-translate-y-2 hover:shadow-black/40 hover:shadow-xl transition-all duration-300">
+            <div className="absolute -right-4 -top-4 text-slate-800/30 group-hover:text-slate-800 transition-colors">
+              <Crosshair size={120} strokeWidth={1} />
             </div>
             <div className="relative z-10">
               <div className="w-12 h-12 bg-slate-800 rounded-xl flex items-center justify-center shadow-sm border border-slate-700 mb-6 text-brand-400">
-                <Gamepad2 size={24} />
+                <Crosshair size={24} />
               </div>
-              <h4 className="text-xl md:text-2xl font-bold text-white mb-4">The Gamer's Edge (CS2)</h4>
+              <h4 className="text-xl md:text-2xl font-bold text-white mb-4">Tactical Mindset</h4>
               <p className="text-slate-400 leading-relaxed">
-                As an avid CS2 player, I firmly believe high-level gaming cultivates a powerful mindset. It has made me an incredibly <strong className="text-slate-200">fast learner</strong> and refined my <strong className="text-slate-200">critical thinking</strong> abilities under pressure. Every match is a lesson in fast adaptation and strategic execution.
+                Competitive <strong className="text-slate-200">CS player since 2015</strong> (CS:GO to CS2). Tactical FPS gaming at a high level isn't just about aim—it's about <strong className="text-slate-200">critical thinking</strong>, instant adaptation, and team synergy. This "clutch" mindset translates directly into how I solve complex engineering hurdles.
               </p>
             </div>
           </div>
 
           {/* Card 4: Why Hire Me? */}
-          <div className="about-card bg-brand-50 rounded-3xl p-8 md:p-10 border border-brand-200 shadow-sm relative overflow-hidden group hover:border-brand-300 transition-colors">
+          <div className="about-card bg-brand-50 rounded-2xl md:rounded-3xl p-8 md:p-10 border border-brand-200 shadow-sm relative overflow-hidden group hover:border-brand-300 hover:-translate-y-2 hover:shadow-xl transition-all duration-300">
             <div className="absolute -right-4 -top-4 text-brand-100 group-hover:text-brand-200/50 transition-colors">
               <Briefcase size={120} strokeWidth={1} />
             </div>
@@ -110,7 +126,7 @@ export default function AboutMe() {
                   { title: "Fast Learner", desc: "I adapt to new tech stacks swiftly." },
                   { title: "Owner's Mentality", desc: "I'll treat your project like it's mine." }
                 ].map((item, idx) => (
-                  <li key={idx} className="flex items-start gap-3">
+                  <li key={idx} className="why-hire-item flex items-start gap-3">
                     <div className="w-1.5 h-1.5 rounded-full bg-brand-500 mt-2.5 flex-shrink-0"></div>
                     <div>
                       <strong className="text-slate-900 block sm:inline">{item.title}: </strong>

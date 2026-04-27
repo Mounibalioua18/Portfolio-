@@ -314,7 +314,7 @@ const App: React.FC = () => {
         <Hero content={content.hero} isReady={isReady} />
         
         <div id="scroll-blur-content">
-        <AboutMe />
+        <AboutMe isReady={isReady} />
         <div className="w-full h-px border-b border-brand-100" />
 
                 <Expertise />

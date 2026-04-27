@@ -156,10 +156,13 @@ export default function Hero({ content, isReady }: HeroProps & { isReady: boolea
                </div>
             </div>
 
-            <div className="hero-bento mt-10 w-full flex items-center gap-6">
-               <a href="#contact" className="inline-flex items-center justify-center px-10 py-4 bg-blue-950 text-white font-bold tracking-widest uppercase text-sm hover:bg-slate-900 transition-colors relative overflow-hidden group">
+            <div className="hero-bento mt-8 md:mt-10 w-full flex flex-col sm:flex-row items-center sm:items-start gap-4 sm:gap-6">
+               <a href="#contact" className="w-full sm:w-auto inline-flex items-center justify-center px-8 py-3.5 bg-blue-950 text-white font-bold tracking-widest uppercase text-xs sm:text-sm hover:bg-slate-900 transition-colors relative overflow-hidden group">
                  <span className="relative z-10 text-white">Contact Me</span>
                  <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out"></div>
+               </a>
+               <a href="#projects" className="w-full sm:w-auto inline-flex items-center justify-center px-8 py-3.5 bg-transparent text-slate-900 font-bold tracking-widest uppercase text-xs sm:text-sm border-2 border-slate-900 hover:bg-slate-900 hover:text-white transition-colors relative overflow-hidden group group-hover:text-white">
+                 <span className="relative z-10">View Work</span>
                </a>
             </div>
           </div>

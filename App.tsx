@@ -31,6 +31,7 @@ import ProjectCard from './components/ProjectCard';
 import Testimonials from './components/Testimonials';
 import ContactForm from './components/ContactForm';
 import Expertise from './components/Expertise';
+import AboutMe from './components/AboutMe';
 import Topology from './components/Topology';
 import { LoadingScreen } from './components/LoadingScreen';
 import TechTicker from './components/TechTicker';
@@ -250,6 +251,7 @@ const App: React.FC = () => {
   }, { scope: containerRef });
 
   const navItems = [
+    { name: "Mindset", url: '#mindset', icon: BrainCircuit },
     { name: content.nav.about, url: '#about', icon: Code2 },
     { name: content.nav.services, url: '#services', icon: Layers },
     { name: content.nav.projects, url: '#projects', icon: Monitor },
@@ -312,6 +314,7 @@ const App: React.FC = () => {
         <Hero content={content.hero} isReady={isReady} />
         
         <div id="scroll-blur-content">
+        <AboutMe />
         <div className="w-full h-px border-b border-brand-100" />
 
                 <Expertise />

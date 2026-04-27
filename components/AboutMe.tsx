@@ -59,67 +59,67 @@ export default function AboutMe({ isReady }: { isReady?: boolean }) {
           </h3>
         </div>
 
-        <div className="about-card-grid grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 max-w-[88%] sm:max-w-[80%] mx-auto md:max-w-none">
+        <div className="about-card-grid grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 max-w-[95%] mx-auto md:max-w-none">
           
           {/* Card 1: Problem Solver Engine */}
-          <div className="about-card bg-slate-50 rounded-2xl md:rounded-3xl p-8 md:p-10 border border-slate-200 shadow-sm relative overflow-hidden group hover:border-brand-300 hover:-translate-y-2 hover:shadow-xl transition-all duration-300">
+          <div className="about-card h-full bg-slate-50 rounded-2xl md:rounded-3xl p-8 md:p-10 border border-slate-200 shadow-sm relative overflow-hidden group hover:border-brand-300 hover:-translate-y-2 hover:shadow-xl transition-all duration-300 flex flex-col">
             <div className="absolute -right-4 -top-4 text-slate-100 group-hover:text-brand-50 transition-colors">
               <Terminal size={120} strokeWidth={1} />
             </div>
-            <div className="relative z-10">
+            <div className="relative z-10 flex flex-col h-full">
               <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center shadow-sm border border-slate-200 mb-6 text-brand-600">
                 <Terminal size={24} />
               </div>
               <h4 className="text-xl md:text-2xl font-bold text-slate-900 mb-4">The Automation Engine</h4>
-              <p className="text-slate-600 leading-relaxed">
+              <p className="text-slate-600 leading-relaxed flex-grow">
                 What drives me? Finding inefficient problems and bypassing them. Whenever I encounter a repetitive task, I don't waste time on it—I quickly build a <strong className="text-slate-900">Python engine</strong> (using APIs like SerpApi) to solve it in seconds. I enjoy engineering solutions that save time and eliminate friction.
               </p>
             </div>
           </div>
 
           {/* Card 2: AI Power User */}
-          <div className="about-card bg-brand-900 rounded-2xl md:rounded-3xl p-8 md:p-10 border border-brand-800 shadow-sm relative overflow-hidden group hover:-translate-y-2 hover:shadow-brand-900/20 hover:shadow-xl transition-all duration-300">
+          <div className="about-card h-full bg-brand-900 rounded-2xl md:rounded-3xl p-8 md:p-10 border border-brand-800 shadow-sm relative overflow-hidden group hover:-translate-y-2 hover:shadow-brand-900/20 hover:shadow-xl transition-all duration-300 flex flex-col">
             <div className="absolute -right-4 -top-4 text-brand-800/30 group-hover:text-brand-800 transition-colors">
               <Cpu size={120} strokeWidth={1} />
             </div>
-            <div className="relative z-10">
+            <div className="relative z-10 flex flex-col h-full">
               <div className="w-12 h-12 bg-brand-800 rounded-xl flex items-center justify-center shadow-sm border border-brand-700 mb-6 text-brand-100">
                 <Brain size={24} />
               </div>
               <h4 className="text-xl md:text-2xl font-bold text-white mb-4">Smart AI Power User</h4>
-              <p className="text-brand-100/80 leading-relaxed font-light">
+              <p className="text-brand-100/80 leading-relaxed font-light flex-grow">
                 I am a heavy, daily user of AI tools, but I use them smartly. I've developed unique methodologies to extract their <strong className="text-white font-medium">maximum potential</strong> while aggressively optimizing token usage. It's not just about prompting; it's about chaining logic efficiently.
               </p>
             </div>
           </div>
 
           {/* Card 3: The Gamer's Edge */}
-          <div className="about-card bg-slate-900 rounded-2xl md:rounded-3xl p-8 md:p-10 border border-slate-800 shadow-sm relative overflow-hidden group hover:-translate-y-2 hover:shadow-black/40 hover:shadow-xl transition-all duration-300">
+          <div className="about-card h-full bg-slate-900 rounded-2xl md:rounded-3xl p-8 md:p-10 border border-slate-800 shadow-sm relative overflow-hidden group hover:-translate-y-2 hover:shadow-black/40 hover:shadow-xl transition-all duration-300 flex flex-col">
             <div className="absolute -right-4 -top-4 text-slate-800/30 group-hover:text-slate-800 transition-colors">
               <Crosshair size={120} strokeWidth={1} />
             </div>
-            <div className="relative z-10">
+            <div className="relative z-10 flex flex-col h-full">
               <div className="w-12 h-12 bg-slate-800 rounded-xl flex items-center justify-center shadow-sm border border-slate-700 mb-6 text-brand-400">
                 <Crosshair size={24} />
               </div>
               <h4 className="text-xl md:text-2xl font-bold text-white mb-4">Tactical Mindset</h4>
-              <p className="text-slate-400 leading-relaxed">
+              <p className="text-slate-400 leading-relaxed flex-grow text-sm sm:text-base">
                 Competitive <strong className="text-slate-200">CS player since 2015</strong> (CS:GO to CS2). Tactical FPS gaming at a high level isn't just about aim—it's about <strong className="text-slate-200">critical thinking</strong>, instant adaptation, and team synergy. This "clutch" mindset translates directly into how I solve complex engineering hurdles.
               </p>
             </div>
           </div>
 
           {/* Card 4: Why Hire Me? */}
-          <div className="about-card bg-brand-50 rounded-2xl md:rounded-3xl p-8 md:p-10 border border-brand-200 shadow-sm relative overflow-hidden group hover:border-brand-300 hover:-translate-y-2 hover:shadow-xl transition-all duration-300">
+          <div className="about-card h-full bg-brand-50 rounded-2xl md:rounded-3xl p-8 md:p-10 border border-brand-200 shadow-sm relative overflow-hidden group hover:border-brand-300 hover:-translate-y-2 hover:shadow-xl transition-all duration-300 flex flex-col">
             <div className="absolute -right-4 -top-4 text-brand-100 group-hover:text-brand-200/50 transition-colors">
               <Briefcase size={120} strokeWidth={1} />
             </div>
-            <div className="relative z-10">
+            <div className="relative z-10 flex flex-col h-full">
               <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center shadow-sm border border-brand-200 mb-6 text-brand-600">
                 <Zap size={24} />
               </div>
               <h4 className="text-xl md:text-2xl font-bold text-slate-900 mb-4">Why Hire Me?</h4>
-              <ul className="space-y-3">
+              <ul className="space-y-3 flex-grow">
                 {[
                   { title: "Strong Communication", desc: "Clear, transparent, and proactive." },
                   { title: "Business Mindset", desc: "I code for ROI and user impact." },
@@ -128,7 +128,7 @@ export default function AboutMe({ isReady }: { isReady?: boolean }) {
                 ].map((item, idx) => (
                   <li key={idx} className="why-hire-item flex items-start gap-3">
                     <div className="w-1.5 h-1.5 rounded-full bg-brand-500 mt-2.5 flex-shrink-0"></div>
-                    <div>
+                    <div className="text-sm sm:text-base">
                       <strong className="text-slate-900 block sm:inline">{item.title}: </strong>
                       <span className="text-slate-600">{item.desc}</span>
                     </div>
